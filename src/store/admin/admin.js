@@ -3,55 +3,55 @@ const db = require("../db");
 async function getAdminById(adminId) {
     const query = "SELECT * FROM admin WHERE id = ?";
     try {
-      const queryResult = await new Promise((resolve, reject) => {
-        db.query(query, [adminId], (err, results) => {
-          if (err) {
-            reject(err);
-          } else {
-            resolve(results);
-          }
+        const queryResult = await new Promise((resolve, reject) => {
+            db.query(query, [adminId], (err, results) => {
+                if (err) {
+                    reject(err);
+                } else {
+                    resolve(results);
+                }
+            });
         });
-      });
-      return queryResult;
+        return queryResult;
     } catch (error) {
-      console.log(error);
+        console.log(error);
     }
-  }
-  
-  async function updateAdmin(adminId, updatedAdminData) {
+}
+
+async function updateAdmin(adminId, updatedAdminData) {
     const query = "UPDATE admin SET ? WHERE id = ?";
     try {
-      const queryResult = await new Promise((resolve, reject) => {
-        db.query(query, [updatedAdminData, adminId], (err, results) => {
-          if (err) {
-            reject(err);
-          }
-          resolve(results.affectedRows > 0);
+        const queryResult = await new Promise((resolve, reject) => {
+            db.query(query, [updatedAdminData, adminId], (err, results) => {
+                if (err) {
+                    reject(err);
+                }
+                resolve(results.affectedRows > 0);
+            });
         });
-      });
-      return queryResult;
+        return queryResult;
     } catch (error) {
-      console.log(error);
+        console.log(error);
     }
-  }
-  
-  async function deleteAdmin(adminId) {
+}
+
+async function deleteAdmin(adminId) {
     const query = "DELETE FROM admin WHERE id = ?";
     try {
-      const queryResult = await new Promise((resolve, reject) => {
-        db.query(query, [adminId], (err, results) => {
-          if (err) reject(err);
-          resolve(results.affectedRows > 0);
+        const queryResult = await new Promise((resolve, reject) => {
+            db.query(query, [adminId], (err, results) => {
+                if (err) reject(err);
+                resolve(results.affectedRows > 0);
+            });
         });
-      });
-      return queryResult;
+        return queryResult;
     } catch (error) {
-      console.log(error);
+        console.log(error);
     }
-  }
+}
 
-  module.exports = {
+module.exports = {
     getAdminById,
     updateAdmin,
     deleteAdmin
-  }
+}
