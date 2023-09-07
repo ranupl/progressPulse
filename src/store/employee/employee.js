@@ -1,17 +1,15 @@
 const db = require("../db");
 
 async function createEmployee(employeeData) {
-  const now = new Date();
-  const formattedDate = now.toISOString().slice(0, 19).replace('T', ' ');
   const { id,first_name, middle_name, last_name, email, username, password } = employeeData;
   const query =
-    "INSERT INTO employee (id,first_name, middle_name, last_name, email, username, password, created, modified) VALUES ( ?,?, ?, ?, ?, ?, ?, ?, ?)";
+    "INSERT INTO employee (id,first_name, middle_name, last_name, email, username, password) VALUES ( ?,?, ?, ?, ?, ?, ?)";
 
   try {
     const results = await new Promise((resolve, reject) => {
       db.query(
         query,
-        [id,first_name, middle_name, last_name, email, username, password, formattedDate, formattedDate],
+        [id,first_name, middle_name, last_name, email, username, password],
         (err, results) => {
           if (err) {
             reject(err);
