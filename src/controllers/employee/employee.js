@@ -13,7 +13,7 @@ async function createEmployee(req, res) {
       username,
       password,
     });
-    res.redirect("/");
+    res.json(employee);
   } catch (error) {
     console.error("Error creating employee:", error);
     res
@@ -22,6 +22,17 @@ async function createEmployee(req, res) {
   }
 }
 
+async function getAllEmployee(req, res) {
+  try {
+    const employee = await employeeService.getAllEmployee();
+    res.json(employee);
+  } catch (error) {
+    console.error("Error fetching users:", error);
+    res.status(500).json({ error: "An error occurred while fetching users" });
+  }
+}
+
 module.exports = {
-  createEmployee
+  createEmployee,
+  getAllEmployee
 }

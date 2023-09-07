@@ -10,6 +10,8 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 app.post("/createEmployee", employeeController.createEmployee);
+app.get("/getAllEmployee", employeeController.getAllEmployee);
+// app.get("/getEmployeeById", employeeController.getEmployeeById);
 
 app.get("/", (req, res) => {
     res.send("progress pulse");

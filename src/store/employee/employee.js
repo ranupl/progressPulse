@@ -28,23 +28,23 @@ async function createEmployee(employeeData) {
   }
 }
 
-// async function getAllUsers() {
-//   const query = "SELECT * FROM users";
-//   try {
-//     const queryResults = await new Promise((resolve, reject) => {
-//       db.query(query, (err, results) => {
-//         if (err) {
-//           reject(err);
-//         } else {
-//           resolve(results);
-//         }
-//       });
-//     });
-//     return queryResults;
-//   } catch (err) {
-//     console.log(err);
-//   }
-// }
+async function getAllEmployee() {
+  const query = "SELECT * FROM employee";
+  try {
+    const queryResults = await new Promise((resolve, reject) => {
+      db.query(query, (err, results) => {
+        if (err) {
+          reject(err);
+        } else {
+          resolve(results);
+        }
+      });
+    });
+    return queryResults;
+  } catch (err) {
+    console.log(err);
+  }
+}
 
 // async function getUserById(userId) {
 //   const query = "SELECT * FROM users WHERE id = ?";
@@ -98,6 +98,7 @@ async function createEmployee(employeeData) {
 
 module.exports = {
   createEmployee,
+  getAllEmployee
   // getAllUsers,
   // getUserById,
   // updateUser,
