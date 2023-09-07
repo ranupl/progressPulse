@@ -27,8 +27,22 @@ async function getEmployeeById(employeeId) {
   }
 }
 
+async function updateEmployee(employeeId, updatedEmployeeData) {
+  try {
+    const existingEmployee = await employeeStore.getEmployeeById(employeeId);
+    if (!existingEmployee) {
+      throw new Error("employee not found");
+    }
+    const updatedEmployee = await employeeStore.updateEmployee(employeeId, updatedEmployeeData);
+    return updatedEmployee;
+  } catch (err) {
+    console.log(err);
+  }
+}
+
 module.exports = {
   createEmployee,
   getAllEmployee,
-  getEmployeeById
+  getEmployeeById,
+  updateEmployee
 }

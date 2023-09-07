@@ -64,22 +64,22 @@ async function getEmployeeById(employeeId) {
   }
 }
 
-// async function updateUser(userId, updatedUserData) {
-//   const query = "UPDATE users SET ? WHERE id = ?";
-//   try {
-//     const queryResult = await new Promise((resolve, reject) => {
-//       db.query(query, [updatedUserData, userId], (err, results) => {
-//         if (err) {
-//           reject(err);
-//         }
-//         resolve(results.affectedRows > 0);
-//       });
-//     });
-//     return queryResult;
-//   } catch (err) {
-//     console.log(err);
-//   }
-// }
+async function updateEmployee(employeeId, updatedEmployeeData) {
+  const query = "UPDATE employee SET ? WHERE id = ?";
+  try {
+    const queryResult = await new Promise((resolve, reject) => {
+      db.query(query, [updatedEmployeeData, employeeId], (err, results) => {
+        if (err) {
+          reject(err);
+        }
+        resolve(results.affectedRows > 0);
+      });
+    });
+    return queryResult;
+  } catch (err) {
+    console.log(err);
+  }
+}
 
 // async function deleteUser(userId) {
 //   const query = "DELETE FROM users WHERE id = ?";
@@ -99,7 +99,8 @@ async function getEmployeeById(employeeId) {
 module.exports = {
   createEmployee,
   getAllEmployee,
-  getEmployeeById
+  getEmployeeById,
+  updateEmployee
   // getAllUsers,
   // getUserById,
   // updateUser,

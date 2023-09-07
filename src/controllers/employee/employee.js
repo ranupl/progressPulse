@@ -47,8 +47,22 @@ async function getEmployeeById(req, res) {
   }
 }
 
+
+async function updateEmployee(req, res) {
+  const employeeId = req.params.id;
+  const updateEmployeeData = req.body;
+
+  try {
+    const updatedEmployee = await employeeService.updateEmployee(employeeId, updateEmployeeData);
+    res.json(updatedEmployee);
+  } catch (err) {
+    console.log(err);
+  }
+}
+
 module.exports = {
   createEmployee,
   getAllEmployee,
-  getEmployeeById
+  getEmployeeById,
+  updateEmployee
 }

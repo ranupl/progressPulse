@@ -9,9 +9,11 @@ const PORT = process.env.PORT || 3000;
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
+// employee
 app.post("/createEmployee", employeeController.createEmployee);
 app.get("/getAllEmployee", employeeController.getAllEmployee);
 app.get("/getEmployeeById/:id", employeeController.getEmployeeById);
+app.put("/updateEmployee/:id", employeeController.updateEmployee);
 
 app.get("/", (req, res) => {
     res.send("progress pulse");
