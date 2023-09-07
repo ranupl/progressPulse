@@ -12,8 +12,8 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 // admin
 app.get("/getAdminById/:id", adminController.getAdminById);
-// app.get("updateAdmin/:id", adminController.updateAdmin);
-// app.get("deleteAdmin/:id", adminController.deleteAdmin);
+app.put("/updateAdmin/:id", adminController.updateAdmin);
+// app.get("/deleteAdmin/:id", adminController.deleteAdmin);
 
 
 // employee

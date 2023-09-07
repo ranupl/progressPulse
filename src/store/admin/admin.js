@@ -18,22 +18,22 @@ async function getAdminById(adminId) {
     }
   }
   
-//   async function updateEmployee(employeeId, updatedEmployeeData) {
-//     const query = "UPDATE employee SET ? WHERE id = ?";
-//     try {
-//       const queryResult = await new Promise((resolve, reject) => {
-//         db.query(query, [updatedEmployeeData, employeeId], (err, results) => {
-//           if (err) {
-//             reject(err);
-//           }
-//           resolve(results.affectedRows > 0);
-//         });
-//       });
-//       return queryResult;
-//     } catch (error) {
-//       console.log(error);
-//     }
-//   }
+  async function updateAdmin(adminId, updatedAdminData) {
+    const query = "UPDATE admin SET ? WHERE id = ?";
+    try {
+      const queryResult = await new Promise((resolve, reject) => {
+        db.query(query, [updatedAdminData, adminId], (err, results) => {
+          if (err) {
+            reject(err);
+          }
+          resolve(results.affectedRows > 0);
+        });
+      });
+      return queryResult;
+    } catch (error) {
+      console.log(error);
+    }
+  }
   
 //   async function deleteEmployee(employeeId) {
 //     const query = "DELETE FROM employee WHERE id = ?";
@@ -51,5 +51,6 @@ async function getAdminById(adminId) {
 //   }
 
   module.exports = {
-    getAdminById
+    getAdminById,
+    updateAdmin
   }

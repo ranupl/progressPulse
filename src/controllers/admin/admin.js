@@ -15,17 +15,17 @@ async function getAdminById(req, res) {
     }
   }
   
-//   async function updateEmployee(req, res) {
-//     const employeeId = req.params.id;
-//     const updateEmployeeData = req.body;
+  async function updateAdmin(req, res) {
+    const adminId = req.params.id;
+    const updateAdminData = req.body;
   
-//     try {
-//       const updatedEmployee = await employeeService.updateEmployee(employeeId, updateEmployeeData);
-//       res.json(updatedEmployee);
-//     } catch (err) {
-//       console.log(err);
-//     }
-//   }
+    try {
+      const updatedAdmin = await adminService.updateAdmin(adminId, updateAdminData);
+      res.json(updatedAdmin);
+    } catch (err) {
+      console.log(err);
+    }
+  }
   
 //   async function deleteEmployee(req, res) {
 //     const employeeId = req.params.id;
@@ -39,5 +39,6 @@ async function getAdminById(req, res) {
 //   }
 
   module.exports = {
-    getAdminById
+    getAdminById,
+    updateAdmin
   }

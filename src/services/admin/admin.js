@@ -2,26 +2,26 @@ const adminStore = require("../../store/admin/admin");
 
 async function getAdminById(adminId) {
     try {
-      const admin = await adminStore.getAdminById(adminId);
-      return admin;
+        const admin = await adminStore.getAdminById(adminId);
+        return admin;
     } catch (error) {
-      console.log(error);
+        console.log(error);
     }
-  }
-  
-//   async function updateEmployee(employeeId, updatedEmployeeData) {
-//     try {
-//       const existingEmployee = await employeeStore.getEmployeeById(employeeId);
-//       if (!existingEmployee) {
-//         throw new Error("employee not found");
-//       }
-//       const updatedEmployee = await employeeStore.updateEmployee(employeeId, updatedEmployeeData);
-//       return updatedEmployee;
-//     } catch (error) {
-//       console.log(error);
-//     }
-//   }
-  
+}
+
+async function updateAdmin(adminId, updatedAdminData) {
+    try {
+        const existingAdmin = await adminStore.getAdminById(adminId);
+        if (!existingAdmin) {
+            throw new Error("Admin not found");
+        }
+        const updatedAdmin = await adminStore.updateAdmin(adminId, updatedAdminData);
+        return updatedAdmin;
+    } catch (error) {
+        console.log(error);
+    }
+}
+
 //   async function deleteEmployee(employeeId) {
 //     try {
 //       const existingEmployee = await employeeStore.getEmployeeById(employeeId);
@@ -35,6 +35,7 @@ async function getAdminById(adminId) {
 //     }
 //   }
 
-  module.exports = {
-    getAdminById
-  }
+module.exports = {
+    getAdminById,
+    updateAdmin
+}
