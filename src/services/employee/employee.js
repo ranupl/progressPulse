@@ -18,10 +18,10 @@ async function getAllEmployee() {
   }
 }
 
-async function getUserById(userId) {
+async function getEmployeeById(employeeId) {
   try {
-    const user = await userStore.getUserById(userId);
-    return user;
+    const employee = await employeeStore.getEmployeeById(employeeId);
+    return employee;
   } catch (err) {
     console.log(err);
   }
@@ -29,5 +29,6 @@ async function getUserById(userId) {
 
 module.exports = {
   createEmployee,
-  getAllEmployee
+  getAllEmployee,
+  getEmployeeById
 }

@@ -46,23 +46,23 @@ async function getAllEmployee() {
   }
 }
 
-// async function getUserById(userId) {
-//   const query = "SELECT * FROM users WHERE id = ?";
-//   try {
-//     const queryResult = await new Promise((resolve, reject) => {
-//       db.query(query, [userId], (err, results) => {
-//         if (err) {
-//           reject(err);
-//         } else {
-//           resolve(results);
-//         }
-//       });
-//     });
-//     return queryResult;
-//   } catch (err) {
-//     console.log(err);
-//   }
-// }
+async function getEmployeeById(employeeId) {
+  const query = "SELECT * FROM employee WHERE id = ?";
+  try {
+    const queryResult = await new Promise((resolve, reject) => {
+      db.query(query, [employeeId], (err, results) => {
+        if (err) {
+          reject(err);
+        } else {
+          resolve(results);
+        }
+      });
+    });
+    return queryResult;
+  } catch (err) {
+    console.log(err);
+  }
+}
 
 // async function updateUser(userId, updatedUserData) {
 //   const query = "UPDATE users SET ? WHERE id = ?";
@@ -98,7 +98,8 @@ async function getAllEmployee() {
 
 module.exports = {
   createEmployee,
-  getAllEmployee
+  getAllEmployee,
+  getEmployeeById
   // getAllUsers,
   // getUserById,
   // updateUser,

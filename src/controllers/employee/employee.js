@@ -27,12 +27,28 @@ async function getAllEmployee(req, res) {
     const employee = await employeeService.getAllEmployee();
     res.json(employee);
   } catch (error) {
-    console.error("Error fetching users:", error);
-    res.status(500).json({ error: "An error occurred while fetching users" });
+    console.error("Error fetching employee:", error);
+    res.status(500).json({ error: "An error occurred while fetching employee" });
+  }
+}
+
+async function getEmployeeById(req, res) {
+  const employeeId = req.params.id;
+  
+  try {
+    const employee = await employeeService.getEmployeeById(employeeId);
+    if (!employee) {
+      res.status(404).json({ error: "Employee not found" });
+    } else {
+      res.json(employee);
+    }
+  } catch (err) {
+    console.log(err);
   }
 }
 
 module.exports = {
   createEmployee,
-  getAllEmployee
+  getAllEmployee,
+  getEmployeeById
 }
