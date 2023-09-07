@@ -28,15 +28,15 @@ async function getAllTeam(req, res) {
   }
 }
 
-async function getEmployeeById(req, res) {
-  const employeeId = req.params.id;
+async function getTeamById(req, res) {
+  const teamId = req.params.id;
 
   try {
-    const employee = await employeeService.getEmployeeById(employeeId);
-    if (!employee) {
-      res.status(404).json({ error: "Employee not found" });
+    const team = await teamService.getTeamById(teamId);
+    if (!team) {
+      res.status(404).json({ error: "Team not found" });
     } else {
-      res.json(employee);
+      res.json(team);
     }
   } catch (err) {
     console.log(err);
@@ -68,8 +68,8 @@ async function deleteEmployee(req, res) {
 
 module.exports = {
   createTeam,
-  getAllTeam
-  // getEmployeeById,
+  getAllTeam,
+  getTeamById
   // updateEmployee,
   // deleteEmployee
 }

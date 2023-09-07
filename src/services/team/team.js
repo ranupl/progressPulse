@@ -18,10 +18,10 @@ async function getAllTeam() {
   }
 }
 
-async function getEmployeeById(employeeId) {
+async function getTeamById(teamId) {
   try {
-    const employee = await employeeStore.getEmployeeById(employeeId);
-    return employee;
+    const team = await teamStore.getTeamById(teamId);
+    return team;
   } catch (error) {
     console.log(error);
   }
@@ -55,8 +55,8 @@ async function deleteEmployee(employeeId) {
 
 module.exports = {
   createTeam,
-  getAllTeam
-  // getEmployeeById,
+  getAllTeam,
+  getTeamById
   // updateEmployee,
   // deleteEmployee
 }
