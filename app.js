@@ -14,6 +14,7 @@ app.post("/createEmployee", employeeController.createEmployee);
 app.get("/getAllEmployee", employeeController.getAllEmployee);
 app.get("/getEmployeeById/:id", employeeController.getEmployeeById);
 app.put("/updateEmployee/:id", employeeController.updateEmployee);
+app.delete("/deleteEmployee/:id", employeeController.deleteEmployee);
 
 app.get("/", (req, res) => {
     res.send("progress pulse");

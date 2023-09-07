@@ -40,9 +40,23 @@ async function updateEmployee(employeeId, updatedEmployeeData) {
   }
 }
 
+async function deleteEmployee(employeeId) {
+  try {
+    const existingEmployee = await employeeStore.getEmployeeById(employeeId);
+    if (!existingEmployee) {
+      throw new Error("Employee not found");
+    }
+    const deletedEmployee = await employeeStore.deleteEmployee(employeeId);
+    return deletedEmployee;
+  } catch (err) {
+    console.log(err);
+  }
+}
+
 module.exports = {
   createEmployee,
   getAllEmployee,
   getEmployeeById,
-  updateEmployee
+  updateEmployee,
+  deleteEmployee
 }

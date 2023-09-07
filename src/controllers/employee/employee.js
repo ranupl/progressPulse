@@ -60,9 +60,21 @@ async function updateEmployee(req, res) {
   }
 }
 
+async function deleteEmployee(req, res) {
+  const employeeId = req.params.id;
+
+  try {
+    const deletedEmployee = await employeeService.deleteEmployee(employeeId);
+    res.json(deletedEmployee);
+  } catch (err) {
+    console.log(err);
+  }
+}
+
 module.exports = {
   createEmployee,
   getAllEmployee,
   getEmployeeById,
-  updateEmployee
+  updateEmployee,
+  deleteEmployee
 }
