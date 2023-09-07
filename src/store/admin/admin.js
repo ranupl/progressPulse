@@ -35,22 +35,23 @@ async function getAdminById(adminId) {
     }
   }
   
-//   async function deleteEmployee(employeeId) {
-//     const query = "DELETE FROM employee WHERE id = ?";
-//     try {
-//       const queryResult = await new Promise((resolve, reject) => {
-//         db.query(query, [employeeId], (err, results) => {
-//           if (err) reject(err);
-//           resolve(results.affectedRows > 0);
-//         });
-//       });
-//       return queryResult;
-//     } catch (error) {
-//       console.log(error);
-//     }
-//   }
+  async function deleteAdmin(adminId) {
+    const query = "DELETE FROM admin WHERE id = ?";
+    try {
+      const queryResult = await new Promise((resolve, reject) => {
+        db.query(query, [adminId], (err, results) => {
+          if (err) reject(err);
+          resolve(results.affectedRows > 0);
+        });
+      });
+      return queryResult;
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
   module.exports = {
     getAdminById,
-    updateAdmin
+    updateAdmin,
+    deleteAdmin
   }

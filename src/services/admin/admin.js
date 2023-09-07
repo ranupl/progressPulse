@@ -22,20 +22,21 @@ async function updateAdmin(adminId, updatedAdminData) {
     }
 }
 
-//   async function deleteEmployee(employeeId) {
-//     try {
-//       const existingEmployee = await employeeStore.getEmployeeById(employeeId);
-//       if (!existingEmployee) {
-//         throw new Error("Employee not found");
-//       }
-//       const deletedEmployee = await employeeStore.deleteEmployee(employeeId);
-//       return deletedEmployee;
-//     } catch (error) {
-//       console.log(error);
-//     }
-//   }
+  async function deleteAdmin(adminId) {
+    try {
+      const existingAdmin = await adminStore.getAdminById(adminId);
+      if (!existingAdmin) {
+        throw new Error("Admin not found");
+      }
+      const deletedAdmin = await adminStore.deleteAdmin(adminId);
+      return deletedAdmin;
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
 module.exports = {
     getAdminById,
-    updateAdmin
+    updateAdmin,
+    deleteAdmin
 }

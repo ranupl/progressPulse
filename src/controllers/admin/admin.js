@@ -27,18 +27,19 @@ async function getAdminById(req, res) {
     }
   }
   
-//   async function deleteEmployee(req, res) {
-//     const employeeId = req.params.id;
+  async function deleteAdmin(req, res) {
+    const adminId = req.params.id;
   
-//     try {
-//       const deletedEmployee = await employeeService.deleteEmployee(employeeId);
-//       res.json(deletedEmployee);
-//     } catch (err) {
-//       console.log(err);
-//     }
-//   }
+    try {
+      const deletedAdmin = await adminService.deleteAdmin(adminId);
+      res.json(deletedAdmin);
+    } catch (err) {
+      console.log(err);
+    }
+  }
 
   module.exports = {
     getAdminById,
-    updateAdmin
+    updateAdmin,
+    deleteAdmin
   }

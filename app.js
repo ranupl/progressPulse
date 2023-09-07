@@ -13,7 +13,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 // admin
 app.get("/getAdminById/:id", adminController.getAdminById);
 app.put("/updateAdmin/:id", adminController.updateAdmin);
-// app.get("/deleteAdmin/:id", adminController.deleteAdmin);
+app.delete("/deleteAdmin/:id", adminController.deleteAdmin);
 
 
 // employee
