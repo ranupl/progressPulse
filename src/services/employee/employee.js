@@ -5,7 +5,7 @@ async function createEmployee(employeeData) {
     const createdEmployee = await employeeStore.createEmployee(employeeData);
     return createdEmployee;
   } catch (error) {
-    throw error;
+    console.log(error);
   }
 }
 
@@ -14,7 +14,7 @@ async function getAllEmployee() {
     const allEmployee = await employeeStore.getAllEmployee();
     return allEmployee;
   } catch (error) {
-    throw error;
+    console.log(error);
   }
 }
 
@@ -22,8 +22,8 @@ async function getEmployeeById(employeeId) {
   try {
     const employee = await employeeStore.getEmployeeById(employeeId);
     return employee;
-  } catch (err) {
-    console.log(err);
+  } catch (error) {
+    console.log(error);
   }
 }
 
@@ -35,8 +35,8 @@ async function updateEmployee(employeeId, updatedEmployeeData) {
     }
     const updatedEmployee = await employeeStore.updateEmployee(employeeId, updatedEmployeeData);
     return updatedEmployee;
-  } catch (err) {
-    console.log(err);
+  } catch (error) {
+    console.log(error);
   }
 }
 
@@ -48,8 +48,8 @@ async function deleteEmployee(employeeId) {
     }
     const deletedEmployee = await employeeStore.deleteEmployee(employeeId);
     return deletedEmployee;
-  } catch (err) {
-    console.log(err);
+  } catch (error) {
+    console.log(error);
   }
 }
 

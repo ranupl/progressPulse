@@ -1,10 +1,9 @@
 const db = require("../db");
 
-
 async function createEmployee(employeeData) {
   const now = new Date();
   const formattedDate = now.toISOString().slice(0, 19).replace('T', ' ');
-  const {id,first_name, middle_name, last_name, email, username, password } = employeeData;
+  const { id,first_name, middle_name, last_name, email, username, password } = employeeData;
   const query =
     "INSERT INTO employee (id,first_name, middle_name, last_name, email, username, password, created, modified) VALUES ( ?,?, ?, ?, ?, ?, ?, ?, ?)";
 
@@ -24,7 +23,7 @@ async function createEmployee(employeeData) {
     });
     return results;
   } catch (error) {
-    throw error;
+    console.log(error);
   }
 }
 
@@ -41,8 +40,8 @@ async function getAllEmployee() {
       });
     });
     return queryResults;
-  } catch (err) {
-    console.log(err);
+  } catch (error) {
+    console.log(error);
   }
 }
 
@@ -59,8 +58,8 @@ async function getEmployeeById(employeeId) {
       });
     });
     return queryResult;
-  } catch (err) {
-    console.log(err);
+  } catch (error) {
+    console.log(error);
   }
 }
 
@@ -76,8 +75,8 @@ async function updateEmployee(employeeId, updatedEmployeeData) {
       });
     });
     return queryResult;
-  } catch (err) {
-    console.log(err);
+  } catch (error) {
+    console.log(error);
   }
 }
 
@@ -91,8 +90,8 @@ async function deleteEmployee(employeeId) {
       });
     });
     return queryResult;
-  } catch (err) {
-    console.log(err);
+  } catch (error) {
+    console.log(error);
   }
 }
 

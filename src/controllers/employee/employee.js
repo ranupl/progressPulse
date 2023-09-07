@@ -2,8 +2,7 @@ const employeeService = require("../../services/employee/employee");
 
 async function createEmployee(req, res) {
   try {
-    const {id,first_name, middle_name, last_name, email, username, password } = req.body;
-    
+    const { id, first_name, middle_name, last_name, email, username, password } = req.body;
     const employee = await employeeService.createEmployee({
       id,
       first_name,
@@ -34,7 +33,7 @@ async function getAllEmployee(req, res) {
 
 async function getEmployeeById(req, res) {
   const employeeId = req.params.id;
-  
+
   try {
     const employee = await employeeService.getEmployeeById(employeeId);
     if (!employee) {
@@ -46,7 +45,6 @@ async function getEmployeeById(req, res) {
     console.log(err);
   }
 }
-
 
 async function updateEmployee(req, res) {
   const employeeId = req.params.id;
