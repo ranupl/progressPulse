@@ -9,10 +9,10 @@ async function createTeam(teamData) {
   }
 }
 
-async function getAllEmployee() {
+async function getAllTeam() {
   try {
-    const allEmployee = await employeeStore.getAllEmployee();
-    return allEmployee;
+    const allTeam = await teamStore.getAllTeam();
+    return allTeam;
   } catch (error) {
     console.log(error);
   }
@@ -54,8 +54,8 @@ async function deleteEmployee(employeeId) {
 }
 
 module.exports = {
-  createTeam
-  // getAllEmployee,
+  createTeam,
+  getAllTeam
   // getEmployeeById,
   // updateEmployee,
   // deleteEmployee

@@ -25,6 +25,7 @@ app.delete("/deleteEmployee/:id", employeeController.deleteEmployee);
 
 // team
 app.post("/createTeam", teamController.createTeam);
+app.get("/getAllTeam", teamController.getAllTeam);
 
 
 app.get("/", (req, res) => {

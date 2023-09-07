@@ -18,13 +18,13 @@ async function createTeam(req, res) {
   }
 }
 
-async function getAllEmployee(req, res) {
+async function getAllTeam(req, res) {
   try {
-    const employee = await employeeService.getAllEmployee();
-    res.json(employee);
+    const team = await teamService.getAllTeam();
+    res.json(team);
   } catch (error) {
-    console.error("Error fetching employee:", error);
-    res.status(500).json({ error: "An error occurred while fetching employee" });
+    console.error("Error fetching team:", error);
+    res.status(500).json({ error: "An error occurred while fetching team" });
   }
 }
 
@@ -67,8 +67,8 @@ async function deleteEmployee(req, res) {
 }
 
 module.exports = {
-  createTeam
-  // getAllEmployee,
+  createTeam,
+  getAllTeam
   // getEmployeeById,
   // updateEmployee,
   // deleteEmployee
