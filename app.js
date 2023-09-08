@@ -5,6 +5,7 @@ const employeeController = require("./src/controllers/employee/employee");
 const adminController = require("./src/controllers/admin/admin");
 const teamController = require("./src/controllers/team/team");
 const progressController = require("./src/controllers/progress/progress");
+const leaveController = require("./src/controllers/leave/leave");
 const app = express();
 require("./src/store/db");
 
@@ -37,6 +38,9 @@ app.get("/getAllProgress", progressController.getAllProgress);
 app.get("/getProgressById/:id", progressController.getProgressById);
 app.put("/updateProgress/:id", progressController.updateProgress);
 app.delete("/deleteProgress/:id", progressController.deleteProgress);
+
+// leave
+app.post("/createLeave", leaveController.createLeave);
 
 app.get("/", (req, res) => {
     res.send("progress pulse");
