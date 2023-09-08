@@ -9,7 +9,7 @@ async function createTeam(teamData) {
     const results = await new Promise((resolve, reject) => {
       db.query(
         query,
-        [ id, title, description, release_notes ],
+        [id, title, description, release_notes],
         (err, results) => {
           if (err) {
             reject(err);
@@ -96,7 +96,7 @@ async function deleteTeam(teamId) {
 module.exports = {
   createTeam,
   getAllTeam,
-  getTeamById, 
+  getTeamById,
   updateTeam,
   deleteTeam
 };

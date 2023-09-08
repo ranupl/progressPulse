@@ -4,6 +4,7 @@ const bodyParser = require("body-parser");
 const employeeController = require("./src/controllers/employee/employee");
 const adminController = require("./src/controllers/admin/admin");
 const teamController = require("./src/controllers/team/team");
+const progressController = require("./src/controllers/progress/progress");
 const app = express();
 require("./src/store/db");
 
@@ -30,6 +31,8 @@ app.get("/getTeamById/:id", teamController.getTeamById);
 app.put("/updateTeam/:id", teamController.updateTeam);
 app.delete("/deleteTeam/:id", teamController.deleteTeam);
 
+// progress
+app.post("/createProgress", progressController.createProgress);
 
 app.get("/", (req, res) => {
     res.send("progress pulse");
