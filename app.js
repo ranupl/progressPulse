@@ -33,6 +33,7 @@ app.delete("/deleteTeam/:id", teamController.deleteTeam);
 
 // progress
 app.post("/createProgress", progressController.createProgress);
+app.get("/getAllProgress", progressController.getAllProgress);
 
 app.get("/", (req, res) => {
     res.send("progress pulse");

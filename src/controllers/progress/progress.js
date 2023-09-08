@@ -16,13 +16,13 @@ async function createProgress(req, res) {
   }
 }
 
-async function getAllTeam(req, res) {
+async function getAllProgress(req, res) {
   try {
-    const team = await teamService.getAllTeam();
-    res.json(team);
+    const progress = await progressService.getAllProgress();
+    res.json(progress);
   } catch (error) {
-    console.error("Error fetching team:", error);
-    res.status(500).json({ error: "An error occurred while fetching team" });
+    console.error("Error fetching progress:", error);
+    res.status(500).json({ error: "An error occurred while fetching progress" });
   }
 }
 
@@ -65,8 +65,8 @@ async function deleteTeam(req, res) {
 }
 
 module.exports = {
-    createProgress
-//   getAllTeam,
+    createProgress,
+    getAllProgress
 //   getTeamById,
 //   updateTeam,
 //   deleteTeam

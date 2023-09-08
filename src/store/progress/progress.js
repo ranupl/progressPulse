@@ -25,8 +25,8 @@ async function createProgress(progressData) {
   }
 }
 
-async function getAllTeam() {
-  const query = "SELECT * FROM team";
+async function getAllProgress() {
+  const query = "SELECT * FROM progress";
   try {
     const queryResults = await new Promise((resolve, reject) => {
       db.query(query, (err, results) => {
@@ -94,8 +94,8 @@ async function deleteTeam(teamId) {
 }
 
 module.exports = {
-    createProgress
-//   getAllTeam,
+    createProgress,
+    getAllProgress
 //   getTeamById,
 //   updateTeam,
 //   deleteTeam
