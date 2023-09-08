@@ -55,12 +55,12 @@ async function updateTeam(req, res) {
   }
 }
 
-async function deleteEmployee(req, res) {
-  const employeeId = req.params.id;
+async function deleteTeam(req, res) {
+  const teamId = req.params.id;
 
   try {
-    const deletedEmployee = await employeeService.deleteEmployee(employeeId);
-    res.json(deletedEmployee);
+    const deletedTeam = await teamService.deleteTeam(teamId);
+    res.json(deletedTeam);
   } catch (err) {
     console.log(err);
   }
@@ -70,6 +70,6 @@ module.exports = {
   createTeam,
   getAllTeam,
   getTeamById,
-  updateTeam
-  // deleteEmployee
+  updateTeam,
+  deleteTeam
 }

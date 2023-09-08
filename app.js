@@ -28,6 +28,7 @@ app.post("/createTeam", teamController.createTeam);
 app.get("/getAllTeam", teamController.getAllTeam);
 app.get("/getTeamById/:id", teamController.getTeamById);
 app.put("/updateTeam/:id", teamController.updateTeam);
+app.delete("/deleteTeam/:id", teamController.deleteTeam);
 
 
 app.get("/", (req, res) => {
