@@ -44,6 +44,7 @@ app.post("/createLeave", leaveController.createLeave);
 app.get("/getAllLeave", leaveController.getAllLeave);
 app.get("/getLeaveById/:id", leaveController.getLeaveById);
 app.put("/updateLeave/:id", leaveController.updateLeave);
+app.delete("/deleteLeave/:id", leaveController.deleteLeave);
 
 app.get("/", (req, res) => {
     res.send("progress pulse");

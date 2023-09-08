@@ -56,12 +56,12 @@ async function updateLeave(req, res) {
   }
 }
 
-async function deleteEmployee(req, res) {
-  const employeeId = req.params.id;
+async function deleteLeave(req, res) {
+  const leaveId = req.params.id;
 
   try {
-    const deletedEmployee = await employeeService.deleteEmployee(employeeId);
-    res.json(deletedEmployee);
+    const deletedLeave = await leaveService.deleteLeave(leaveId);
+    res.json(deletedLeave);
   } catch (err) {
     console.log(err);
   }
@@ -71,8 +71,6 @@ module.exports = {
     createLeave,
     getAllLeave,
     getLeaveById,
-    updateLeave
-//   getEmployeeById,
-//   updateEmployee,
-//   deleteEmployee
+    updateLeave,
+    deleteLeave
 }

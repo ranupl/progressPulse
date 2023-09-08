@@ -40,14 +40,14 @@ async function updateLeave(leaveId, updatedLeaveData) {
   }
 }
 
-async function deleteEmployee(employeeId) {
+async function deleteLeave(leaveId) {
   try {
-    const existingEmployee = await employeeStore.getEmployeeById(employeeId);
-    if (!existingEmployee) {
-      throw new Error("Employee not found");
+    const existingLeave = await leaveStore.getLeaveById(leaveId);
+    if (!existingLeave) {
+      throw new Error("No leaves");
     }
-    const deletedEmployee = await employeeStore.deleteEmployee(employeeId);
-    return deletedEmployee;
+    const deletedLeave = await leaveStore.deleteLeave(leaveId);
+    return deletedLeave;
   } catch (error) {
     console.log(error);
   }
@@ -57,6 +57,6 @@ module.exports = {
     createLeave,
     getAllLeave,
     getLeaveById,
-    updateLeave
-
+    updateLeave,
+    deleteLeave
 }

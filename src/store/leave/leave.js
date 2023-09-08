@@ -78,11 +78,11 @@ async function updateLeave(leaveId, updatedLeaveData) {
   }
 }
 
-async function deleteEmployee(employeeId) {
-  const query = "DELETE FROM employee WHERE id = ?";
+async function deleteLeave(leaveId) {
+  const query = "DELETE FROM leaves WHERE id = ?";
   try {
     const queryResult = await new Promise((resolve, reject) => {
-      db.query(query, [employeeId], (err, results) => {
+      db.query(query, [leaveId], (err, results) => {
         if (err) reject(err);
         resolve(results.affectedRows > 0);
       });
@@ -97,6 +97,6 @@ module.exports = {
     createLeave,
     getAllLeave,
     getLeaveById, 
-    updateLeave
-
+    updateLeave,
+    deleteLeave
 };
