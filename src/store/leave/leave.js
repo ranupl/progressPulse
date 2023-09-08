@@ -61,11 +61,11 @@ async function getLeaveById(leaveId) {
   }
 }
 
-async function updateEmployee(employeeId, updatedEmployeeData) {
-  const query = "UPDATE employee SET ? WHERE id = ?";
+async function updateLeave(leaveId, updatedLeaveData) {
+  const query = "UPDATE leaves SET ? WHERE id = ?";
   try {
     const queryResult = await new Promise((resolve, reject) => {
-      db.query(query, [updatedEmployeeData, employeeId], (err, results) => {
+      db.query(query, [updatedLeaveData, leaveId], (err, results) => {
         if (err) {
           reject(err);
         }
@@ -97,8 +97,6 @@ module.exports = {
     createLeave,
     getAllLeave,
     getLeaveById, 
-    getAllLeave
-//   getEmployeeById, 
-//   updateEmployee,
-//   deleteEmployee
+    updateLeave
+
 };

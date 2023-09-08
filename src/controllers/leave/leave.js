@@ -44,13 +44,13 @@ async function getLeaveById(req, res) {
   }
 }
 
-async function updateEmployee(req, res) {
-  const employeeId = req.params.id;
-  const updateEmployeeData = req.body;
+async function updateLeave(req, res) {
+  const leaveId = req.params.id;
+  const updateLeaveData = req.body;
 
   try {
-    const updatedEmployee = await employeeService.updateEmployee(employeeId, updateEmployeeData);
-    res.json(updatedEmployee);
+    const updatedLeave = await leaveService.updateLeave(leaveId, updateLeaveData);
+    res.json(updatedLeave);
   } catch (err) {
     console.log(err);
   }
@@ -71,7 +71,7 @@ module.exports = {
     createLeave,
     getAllLeave,
     getLeaveById,
-    getAllLeave
+    updateLeave
 //   getEmployeeById,
 //   updateEmployee,
 //   deleteEmployee
