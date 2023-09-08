@@ -27,14 +27,14 @@ async function getTeamById(teamId) {
   }
 }
 
-async function updateEmployee(employeeId, updatedEmployeeData) {
+async function updateTeam(teamId, updatedTeamData) {
   try {
-    const existingEmployee = await employeeStore.getEmployeeById(employeeId);
-    if (!existingEmployee) {
-      throw new Error("employee not found");
+    const existingTeam = await teamStore.getTeamById(teamId);
+    if (!existingTeam) {
+      throw new Error("Team not found");
     }
-    const updatedEmployee = await employeeStore.updateEmployee(employeeId, updatedEmployeeData);
-    return updatedEmployee;
+    const updatedTeam = await teamStore.updateTeam(teamId, updatedTeamData);
+    return updatedTeam;
   } catch (error) {
     console.log(error);
   }
@@ -56,7 +56,7 @@ async function deleteEmployee(employeeId) {
 module.exports = {
   createTeam,
   getAllTeam,
-  getTeamById
-  // updateEmployee,
+  getTeamById,
+  updateTeam
   // deleteEmployee
 }

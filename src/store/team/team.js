@@ -61,11 +61,11 @@ async function getTeamById(teamId) {
   }
 }
 
-async function updateEmployee(employeeId, updatedEmployeeData) {
-  const query = "UPDATE employee SET ? WHERE id = ?";
+async function updateTeam(teamId, updatedTeamData) {
+  const query = "UPDATE team SET ? WHERE id = ?";
   try {
     const queryResult = await new Promise((resolve, reject) => {
-      db.query(query, [updatedEmployeeData, employeeId], (err, results) => {
+      db.query(query, [updatedTeamData, teamId], (err, results) => {
         if (err) {
           reject(err);
         }
@@ -96,7 +96,7 @@ async function deleteEmployee(employeeId) {
 module.exports = {
   createTeam,
   getAllTeam,
-  getTeamById 
-  // updateEmployee,
+  getTeamById, 
+  updateTeam
   // deleteEmployee
 };

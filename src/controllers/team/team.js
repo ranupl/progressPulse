@@ -43,13 +43,13 @@ async function getTeamById(req, res) {
   }
 }
 
-async function updateEmployee(req, res) {
-  const employeeId = req.params.id;
-  const updateEmployeeData = req.body;
+async function updateTeam(req, res) {
+  const teamId = req.params.id;
+  const updateTeamData = req.body;
 
   try {
-    const updatedEmployee = await employeeService.updateEmployee(employeeId, updateEmployeeData);
-    res.json(updatedEmployee);
+    const updatedTeam = await teamService.updateTeam(teamId, updateTeamData);
+    res.json(updatedTeam);
   } catch (err) {
     console.log(err);
   }
@@ -69,7 +69,7 @@ async function deleteEmployee(req, res) {
 module.exports = {
   createTeam,
   getAllTeam,
-  getTeamById
-  // updateEmployee,
+  getTeamById,
+  updateTeam
   // deleteEmployee
 }
