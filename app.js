@@ -41,6 +41,7 @@ app.delete("/deleteProgress/:id", progressController.deleteProgress);
 
 // leave
 app.post("/createLeave", leaveController.createLeave);
+app.get("/getAllLeave", leaveController.getAllLeave);
 
 app.get("/", (req, res) => {
     res.send("progress pulse");

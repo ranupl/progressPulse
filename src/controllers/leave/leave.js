@@ -12,20 +12,20 @@ async function createLeave(req, res) {
     });
     res.json(leave);
   } catch (error) {
-    console.error("Error creating employee:", error);
+    console.error("Error creating leave:", error);
     res
       .status(500)
-      .json({ error: "An error occurred while creating the employee" });
+      .json({ error: "An error occurred while creating the leave" });
   }
 }
 
-async function getAllEmployee(req, res) {
+async function getAllLeave(req, res) {
   try {
-    const employee = await employeeService.getAllEmployee();
-    res.json(employee);
+    const leaves = await leaveService.getAllLeave();
+    res.json(leaves);
   } catch (error) {
-    console.error("Error fetching employee:", error);
-    res.status(500).json({ error: "An error occurred while fetching employee" });
+    console.error("Error fetching leaves:", error);
+    res.status(500).json({ error: "An error occurred while fetching leaves" });
   }
 }
 
@@ -68,8 +68,8 @@ async function deleteEmployee(req, res) {
 }
 
 module.exports = {
-    createLeave
-//   getAllEmployee,
+    createLeave,
+    getAllLeave
 //   getEmployeeById,
 //   updateEmployee,
 //   deleteEmployee
