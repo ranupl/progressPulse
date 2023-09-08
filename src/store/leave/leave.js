@@ -25,8 +25,8 @@ async function createLeave(leaveData) {
   }
 }
 
-async function getAllEmployee() {
-  const query = "SELECT * FROM employee";
+async function getAllLeave() {
+  const query = "SELECT * FROM leaves";
   try {
     const queryResults = await new Promise((resolve, reject) => {
       db.query(query, (err, results) => {
@@ -94,8 +94,8 @@ async function deleteEmployee(employeeId) {
 }
 
 module.exports = {
-    createLeave
-//   getAllEmployee,
+    createLeave,
+    getAllLeave
 //   getEmployeeById, 
 //   updateEmployee,
 //   deleteEmployee
