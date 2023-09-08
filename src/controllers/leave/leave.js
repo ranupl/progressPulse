@@ -29,15 +29,15 @@ async function getAllLeave(req, res) {
   }
 }
 
-async function getEmployeeById(req, res) {
-  const employeeId = req.params.id;
+async function getLeaveById(req, res) {
+  const leaveId = req.params.id;
 
   try {
-    const employee = await employeeService.getEmployeeById(employeeId);
-    if (!employee) {
-      res.status(404).json({ error: "Employee not found" });
+    const leave = await leaveService.getLeaveById(leaveId);
+    if (!leave) {
+      res.status(404).json({ error: "No Leaves" });
     } else {
-      res.json(employee);
+      res.json(leave);
     }
   } catch (err) {
     console.log(err);
@@ -69,8 +69,8 @@ async function deleteEmployee(req, res) {
 
 module.exports = {
     createLeave,
-    getAllLeave
-//   getEmployeeById,
+    getAllLeave,
+    getLeaveById
 //   updateEmployee,
 //   deleteEmployee
 }
