@@ -69,8 +69,13 @@ async function deleteEmployee(req, res) {
 
 module.exports = {
     createLeave,
+<<<<<<< HEAD
     getAllLeave,
     getLeaveById
+=======
+    getAllLeave
+//   getEmployeeById,
+>>>>>>> 18ee6b45591930c36e935a43323b72bd273346a5
 //   updateEmployee,
 //   deleteEmployee
 }
