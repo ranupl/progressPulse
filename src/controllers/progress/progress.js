@@ -41,13 +41,13 @@ async function getProgressById(req, res) {
   }
 }
 
-async function updateTeam(req, res) {
-  const teamId = req.params.id;
-  const updateTeamData = req.body;
+async function updateProgress(req, res) {
+  const progressId = req.params.id;
+  const updateProgressData = req.body;
 
   try {
-    const updatedTeam = await teamService.updateTeam(teamId, updateTeamData);
-    res.json(updatedTeam);
+    const updatedProgress = await progressService.updateProgress(progressId, updateProgressData);
+    res.json(updatedProgress);
   } catch (err) {
     console.log(err);
   }
@@ -67,7 +67,7 @@ async function deleteTeam(req, res) {
 module.exports = {
     createProgress,
     getAllProgress,
-    getProgressById
-//   updateTeam,
+    getProgressById,
+    updateProgress
 //   deleteTeam
 }

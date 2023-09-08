@@ -27,14 +27,14 @@ async function getProgressById(progressId) {
   }
 }
 
-async function updateTeam(teamId, updatedTeamData) {
+async function updateProgress(progressId, updatedProgressData) {
   try {
-    const existingTeam = await teamStore.getTeamById(teamId);
-    if (!existingTeam) {
+    const existingProgress = await progressStore.getProgressById(progressId);
+    if (!existingProgress) {
       throw new Error("Team not found");
     }
-    const updatedTeam = await teamStore.updateTeam(teamId, updatedTeamData);
-    return updatedTeam;
+    const updatedProgress = await progressStore.updateProgress(progressId, updatedProgressData);
+    return updatedProgress;
   } catch (error) {
     console.log(error);
   }
@@ -56,7 +56,7 @@ async function deleteTeam(teamId) {
 module.exports = {
     createProgress,
     getAllProgress,
-    getProgressById
-//   updateTeam,
+    getProgressById,
+    updateProgress
 //   deleteTeam
 }

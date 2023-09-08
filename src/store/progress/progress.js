@@ -61,11 +61,11 @@ async function getProgressById(progressId) {
   }
 }
 
-async function updateTeam(teamId, updatedTeamData) {
-  const query = "UPDATE team SET ? WHERE id = ?";
+async function updateProgress(progressId, updatedProgressData) {
+  const query = "UPDATE progress SET ? WHERE id = ?";
   try {
     const queryResult = await new Promise((resolve, reject) => {
-      db.query(query, [updatedTeamData, teamId], (err, results) => {
+      db.query(query, [updatedProgressData, progressId], (err, results) => {
         if (err) {
           reject(err);
         }
@@ -96,7 +96,7 @@ async function deleteTeam(teamId) {
 module.exports = {
     createProgress,
     getAllProgress,
-    getProgressById
-//   updateTeam,
+    getProgressById,
+    updateProgress
 //   deleteTeam
 };
