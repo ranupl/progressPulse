@@ -18,10 +18,10 @@ async function getAllProgress() {
   }
 }
 
-async function getTeamById(teamId) {
+async function getProgressById(progressId) {
   try {
-    const team = await teamStore.getTeamById(teamId);
-    return team;
+    const progress = await progressStore.getProgressById(progressId);
+    return progress;
   } catch (error) {
     console.log(error);
   }
@@ -55,8 +55,8 @@ async function deleteTeam(teamId) {
 
 module.exports = {
     createProgress,
-    getAllProgress
-//   getTeamById,
+    getAllProgress,
+    getProgressById
 //   updateTeam,
 //   deleteTeam
 }

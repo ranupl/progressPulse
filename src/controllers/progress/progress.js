@@ -26,15 +26,15 @@ async function getAllProgress(req, res) {
   }
 }
 
-async function getTeamById(req, res) {
-  const teamId = req.params.id;
+async function getProgressById(req, res) {
+  const progressId = req.params.id;
 
   try {
-    const team = await teamService.getTeamById(teamId);
-    if (!team) {
-      res.status(404).json({ error: "Team not found" });
+    const progress = await progressService.getProgressById(progressId);
+    if (!progress) {
+      res.status(404).json({ error: "No Progress" });
     } else {
-      res.json(team);
+      res.json(progress);
     }
   } catch (err) {
     console.log(err);
@@ -66,8 +66,8 @@ async function deleteTeam(req, res) {
 
 module.exports = {
     createProgress,
-    getAllProgress
-//   getTeamById,
+    getAllProgress,
+    getProgressById
 //   updateTeam,
 //   deleteTeam
 }
