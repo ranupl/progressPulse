@@ -78,11 +78,11 @@ async function updateProgress(progressId, updatedProgressData) {
   }
 }
 
-async function deleteTeam(teamId) {
-  const query = "DELETE FROM team WHERE id = ?";
+async function deleteProgress(progressId) {
+  const query = "DELETE FROM progress WHERE id = ?";
   try {
     const queryResult = await new Promise((resolve, reject) => {
-      db.query(query, [teamId], (err, results) => {
+      db.query(query, [progressId], (err, results) => {
         if (err) reject(err);
         resolve(results.affectedRows > 0);
       });
@@ -97,6 +97,6 @@ module.exports = {
     createProgress,
     getAllProgress,
     getProgressById,
-    updateProgress
-//   deleteTeam
+    updateProgress,
+    deleteProgress
 };

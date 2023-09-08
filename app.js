@@ -36,6 +36,7 @@ app.post("/createProgress", progressController.createProgress);
 app.get("/getAllProgress", progressController.getAllProgress);
 app.get("/getProgressById/:id", progressController.getProgressById);
 app.put("/updateProgress/:id", progressController.updateProgress);
+app.delete("/deleteProgress/:id", progressController.deleteProgress);
 
 app.get("/", (req, res) => {
     res.send("progress pulse");

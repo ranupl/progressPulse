@@ -53,12 +53,12 @@ async function updateProgress(req, res) {
   }
 }
 
-async function deleteTeam(req, res) {
-  const teamId = req.params.id;
+async function deleteProgress(req, res) {
+  const progressId = req.params.id;
 
   try {
-    const deletedTeam = await teamService.deleteTeam(teamId);
-    res.json(deletedTeam);
+    const deletedProgress = await progressService.deleteProgress(progressId);
+    res.json(deletedProgress);
   } catch (err) {
     console.log(err);
   }
@@ -68,6 +68,6 @@ module.exports = {
     createProgress,
     getAllProgress,
     getProgressById,
-    updateProgress
-//   deleteTeam
+    updateProgress,
+    deleteProgress
 }
