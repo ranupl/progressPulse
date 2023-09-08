@@ -6,6 +6,7 @@ const adminController = require("./src/controllers/admin/admin");
 const teamController = require("./src/controllers/team/team");
 const progressController = require("./src/controllers/progress/progress");
 const leaveController = require("./src/controllers/leave/leave");
+const leaveApplyController = require("./src/controllers/leaveApply/leaveApply");
 const app = express();
 require("./src/store/db");
 
@@ -45,6 +46,10 @@ app.get("/getAllLeave", leaveController.getAllLeave);
 app.get("/getLeaveById/:id", leaveController.getLeaveById);
 app.put("/updateLeave/:id", leaveController.updateLeave);
 app.delete("/deleteLeave/:id", leaveController.deleteLeave);
+
+// leave Apply
+app.post("/createLeaveApply", leaveApplyController.createLeaveApply);
+
 
 app.get("/", (req, res) => {
     res.send("progress pulse");
