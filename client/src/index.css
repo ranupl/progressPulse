@@ -5,6 +5,11 @@
     height: 30px;
 }
 
+.logoDashboard {
+    width: 20px;
+    height: 20px;
+}
+
 .mg-top {
     margin-top: 30px;
 }
@@ -15,9 +20,6 @@
 }
 
 .font-family {
-    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
-    font-family: 'Courier New', Courier, monospace;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     font-family: 'Josefin Sans', sans-serif;
 }
 
@@ -28,6 +30,12 @@
 .big{
     font-size: 2em;
     color: black;
+}
+
+.project{
+    font-size: 1em;
+    color: rgb(137, 135, 135);
+    margin-top: 5px;
 }
 
 .para-font{
@@ -41,6 +49,34 @@
     color: darkgray;
 }
 
+.container nav ul li {
+    list-style: none;
+    padding-top: 30px;
+}
+
+.pd-btm{
+    padding-bottom: 275px;
+}
+
+.navlink{
+    text-decoration: none;
+    color: rgb(60, 59, 59);
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+
+.card-list {
+    display: flex;
+    overflow-x: scroll;
+    width: 100%;
+    white-space: nowrap;
+  }
+  
+  .card {
+    border: 1px solid #ccc;
+    padding: 16px;
+    margin-right: 8px; 
+  }
+  
 @media (max-width: 767px) {
     .para-font{
         font-size: .5em;

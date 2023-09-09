@@ -1,10 +1,12 @@
 import React from 'react';
-import Home from './Home';
+// import Home from './Home';
+import EmployeeDashboard from './EmployeeDashboard';
 
 const App = () => {
     return (
         <>
-        <Home />
+        {/* <Home /> */}
+        <EmployeeDashboard />
         </>
     )
 }
