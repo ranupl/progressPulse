@@ -1,6 +1,27 @@
 const leaveApplyService = require("../../services/leaveApply/leaveApply");
 
+// Function to start a transaction
+async function startTransaction() {
+  const connection = await pool.getConnection();
+  await connection.beginTransaction();
+  return connection;
+}
+
+// Function to commit a transaction
+async function commitTransaction(connection) {
+  await connection.commit();
+  connection.release();
+}
+
+// Function to rollback a transaction
+async function rollbackTransaction(connection) {
+  await connection.rollback();
+  connection.release();
+}
+
+
 async function createLeaveApply(req, res) {
+
   try {
     const { id, employee_id, no_of_days, type, reason, start_date, end_date } = req.body;
     const leaveApply = await leaveApplyService.createLeaveApply({
