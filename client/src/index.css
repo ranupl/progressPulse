@@ -1,0 +1,67 @@
+@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@1,500&display=swap');
+
+.logo {
+    width: 30px;
+    height: 30px;
+}
+
+.mg-top {
+    margin-top: 30px;
+}
+
+.homeImg {
+    width: 500px;
+    height: 400px;
+}
+
+.font-family {
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    font-family: 'Courier New', Courier, monospace;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: 'Josefin Sans', sans-serif;
+}
+
+.box-padding {
+    padding: 0 80px;
+}
+
+.big{
+    font-size: 2em;
+    color: black;
+}
+
+.para-font{
+    font-size: .9em;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    color: rgb(109, 106, 106);
+}
+
+.label-font{
+    font-size: small;
+    color: darkgray;
+}
+
+@media (max-width: 767px) {
+    .para-font{
+        font-size: .5em;
+        font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+        color: rgb(109, 106, 106);
+    }
+
+    .box-padding {
+        padding: 0 10px;
+    }
+}
+
+@media (max-width: 950px) {
+    .para-font{
+        font-size: .5em;
+        font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+        color: rgb(109, 106, 106);
+    }
+
+    .box-padding {
+        padding: 0 10px;
+    }
+}
+
