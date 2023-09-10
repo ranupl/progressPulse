@@ -7,8 +7,8 @@ const Update = () => {
                 <div className="row">
                     <div className="update-box">
                         <textarea class="borderless-textarea" placeholder="Enter text"></textarea>
-                        <div className="d-flex justify-content-between float-right">
-                            <button className="btn btn-info mg-top font-family float-right text-dark">update</button>
+                        <div className="d-flex">
+                            <button className="btn btn-info float-right mg-top font-family float-right text-white">update</button>
                         </div>
                     </div>
                 </div>

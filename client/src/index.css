@@ -13,7 +13,8 @@
 .mg-top {
     margin-top: 30px;
 }
-.mg-left{
+
+.mg-left {
     margin-left: 10px;
 }
 
@@ -30,24 +31,24 @@
     padding: 0 80px;
 }
 
-.big{
+.big {
     font-size: 2em;
     color: black;
 }
 
-.project{
+.project {
     font-size: 1em;
     color: rgb(137, 135, 135);
     margin-top: 5px;
 }
 
-.para-font{
+.para-font {
     font-size: .9em;
     font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
     color: rgb(109, 106, 106);
 }
 
-.label-font{
+.label-font {
     font-size: small;
     color: darkgray;
 }
@@ -57,11 +58,11 @@
     padding-top: 30px;
 }
 
-.pd-btm{
+.pd-btm {
     padding-bottom: 275px;
 }
 
-.navlink{
+.navlink {
     text-decoration: none;
     color: rgb(60, 59, 59);
     font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
@@ -72,41 +73,58 @@
     overflow-x: scroll;
     width: 100%;
     white-space: nowrap;
-  }
-  
-  .card {
+}
+
+.card {
     border: 1px solid #ccc;
     padding: 16px;
-    margin-right: 8px; 
+    margin-right: 8px;
     cursor: pointer;
     color: rgb(58, 58, 58);
     font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
     width: 18vw;
-  }
+}
 
-  .update-box {
+.update-box {
     width: 500px;
     height: 250px;
     margin-left: 20px;
-    /* margin-top: 20px; */
     border: 1px solid rgb(198, 197, 197);
     border-radius: 5px;
     background-color: rgb(224, 232, 250);
-  }
+}
 
-  .borderless-textarea{
+.borderless-textarea {
     border: none;
     width: 470px;
     height: 150px;
     padding: 20px;
     outline: none;
     margin-top: 20px;
-  }
+}
 
-  
-  
+.form-control {
+    outline: none;
+    border-radius: none;
+    border: none;
+    border-bottom: 3px solid grey;
+}
+.form-group{
+    margin-top: 20px;
+}
+
+.text-grey{
+    color: rgb(97, 95, 95);
+}
+
+.bg-register{
+    width: 100%;
+    background-color: rgb(224, 232, 250);
+    padding: 10px 30px;
+}
+
 @media (max-width: 767px) {
-    .para-font{
+    .para-font {
         font-size: .5em;
         font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
         color: rgb(109, 106, 106);
@@ -118,7 +136,7 @@
 }
 
 @media (max-width: 950px) {
-    .para-font{
+    .para-font {
         font-size: .5em;
         font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
         color: rgb(109, 106, 106);
@@ -128,4 +146,3 @@
         padding: 0 10px;
     }
 }
-
