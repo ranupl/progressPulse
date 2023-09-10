@@ -4,7 +4,7 @@ function Card({ title, content, cardStyle }) {
   return (
     <div className="container">
     <div className="card" style={cardStyle}>
-      <h2>{title}</h2>
+      <h4>{title}</h4>
       <p>{content}</p>
     </div>
     </div>
