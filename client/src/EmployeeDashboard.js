@@ -6,19 +6,19 @@ import Update from "./Update";
 const EmployeeDashboard = () => {
 
     const data = [
-        { title: 'Team A', content: 'Lorem ipsum 1', color: 'red' },
-        { title: 'Team B', content: 'Lorem ipsum 2', color: 'green' },
-        { title: 'Team C', content: 'Lorem ipsum 3', color: 'blue' },
-        { title: 'Team D', content: 'Lorem ipsum 3', color: 'pink' },
-        { title: 'Team E', content: 'Lorem ipsum 3', color: 'orange' },
-        { title: 'Team F', content: 'Lorem ipsum 3', color: 'yellow' },
-        { title: 'Team G', content: 'Lorem ipsum 3', color: 'green' },
-        { title: 'Team H', content: 'Lorem ipsum 3', color: 'white' },
-        { title: 'Team I', content: 'Lorem ipsum 3', color: 'pink' },
-        { title: 'Team J', content: 'Lorem ipsum 3', color: 'blue' },
-        { title: 'Team K', content: 'Lorem ipsum 3', color: 'yellow' },
-        { title: 'Team L', content: 'Lorem ipsum 3', color: 'red' },
-        { title: 'Team M', content: 'Lorem ipsum 3', color: 'orange' },
+        { title: 'Team A', content: 'Lorem ipsum 1', color: '#FF9B82' },
+        { title: 'Team B', content: 'Lorem ipsum 2', color: '#EBEF95' },
+        { title: 'Team C', content: 'Lorem ipsum 3', color: '#DAD4B5' },
+        { title: 'Team D', content: 'Lorem ipsum 3', color: '#CEDEBD' },
+        { title: 'Team E', content: 'Lorem ipsum 3', color: '#B9B4C7' },
+        { title: 'Team F', content: 'Lorem ipsum 3', color: '#EAC696' },
+        { title: 'Team G', content: 'Lorem ipsum 3', color: '#91C8E4' },
+        { title: 'Team H', content: 'Lorem ipsum 3', color: '#557A46' },
+        { title: 'Team I', content: 'Lorem ipsum 3', color: '#FF90BB' },
+        { title: 'Team J', content: 'Lorem ipsum 3', color: '#D3D04F' },
+        { title: 'Team K', content: 'Lorem ipsum 3', color: '#CEDEBD' },
+        { title: 'Team L', content: 'Lorem ipsum 3', color: '#EBEF95' },
+        { title: 'Team M', content: 'Lorem ipsum 3', color: '#FF9B82' },
     ];
 
     return (
