@@ -75,6 +75,13 @@
     white-space: nowrap;
 }
 
+.leave-list {
+    display: block;
+    overflow-y: scroll;
+    width: 100%;
+    max-height: 350px;
+}
+
 .card {
     border: 1px solid #ccc;
     padding: 16px;
@@ -121,6 +128,60 @@
     width: 100%;
     background-color: rgb(224, 232, 250);
     padding: 10px 30px;
+}
+
+.leave-child{
+    border: 1px solid rgb(187, 185, 185);
+    height: 400px;
+    background-color:  rgb(224, 232, 250);
+    border-radius: 5px;
+}
+
+.text-grey{
+    color: rgb(68, 67, 67);
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    padding: 5px 10px;
+}
+
+.card-margin-top{
+    margin-top: 10px;
+    width: 382px;
+    padding: 10px;
+}
+
+.pd-0{
+    margin: 0px;
+}
+
+.mg-right{
+    margin-right: 30px;
+}
+
+.mg-btm{
+    margin-top: 10px;
+}
+
+.mg-rgt{
+    margin-right: 5px;
+}
+
+.font{
+    font-size: x-small;
+}
+
+.leave-box{
+    width: 100%;
+    height: 100px;
+    background-color: white;
+    margin-top: 20px;
+    border-radius: 10px;
+}
+
+.para-f-fmly{
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+.box-pd{
+    padding-top: 14px;
 }
 
 @media (max-width: 767px) {

@@ -6,16 +6,20 @@ import EmployeeDashboard from './EmployeeDashboard';
 import Leave from './Leave';
 import MyTimeline from './MyTimeline';
 import Tasks from './Task';
+import Navbar from './Navbar';
 
 const App = () => {
     return (
         <>
+        <div className="row">
+            <Navbar />
             <Routes>
-                <Route path="/EmployeeDashboard" element={<EmployeeDashboard />} />
+                <Route path="/" element={<EmployeeDashboard />} />
                 <Route path="/MyTimeline" element={<MyTimeline />} />
                 <Route path="/Leave" element={<Leave />} />
                 <Route path="/Tasks" element={<Tasks />} />
             </Routes>
+            </div>
         </>
     )
 }

@@ -1,6 +1,5 @@
 import React from "react";
 import CardList from './CardList';
-import Navbar from "./Navbar";
 import Update from "./Update";
 
 const EmployeeDashboard = () => {
@@ -23,30 +22,27 @@ const EmployeeDashboard = () => {
 
     return (
         <>
-            <div className="row">
-                <Navbar />
-                <div className="col-10">
-                    <div className="container">
-                        <div className='d-flex mg-top border-bottom'>
-                            <img src="/images/list.png" alt="task" width="30px" height="30px " />&nbsp;&nbsp;
-                            <h5 className='text-dark'>Dashboard</h5>
-                        </div>
+            <div className="col-10">
+                <div className="container">
+                    <div className='d-flex mg-top border-bottom'>
+                        <img src="/images/list.png" alt="task" width="30px" height="30px " />&nbsp;&nbsp;
+                        <h5 className='text-dark'>Dashboard</h5>
                     </div>
-                    <div className="container">
-                        <div className="row border-bottom">
-                            <h4 className="project">Projects</h4>
-                        </div>
-                    </div>
-                    <div className="container mg-top">
-                        <div className="d-flex">
-                            <CardList data={data} />
-                        </div>
-                    </div>
-                    <div className="container">
-                        <h6 className="mg-top font-family mg-left">My Updates For Today</h6>
-                    </div>
-                    <Update />
                 </div>
+                <div className="container">
+                    <div className="row border-bottom">
+                        <h4 className="project">Projects</h4>
+                    </div>
+                </div>
+                <div className="container mg-top">
+                    <div className="d-flex">
+                        <CardList data={data} />
+                    </div>
+                </div>
+                <div className="container">
+                    <h6 className="mg-top font-family mg-left">My Updates For Today</h6>
+                </div>
+                <Update />
             </div>
         </>
     )

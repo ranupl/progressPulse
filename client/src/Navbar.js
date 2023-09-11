@@ -15,16 +15,16 @@ const Navbar = () => {
                     <nav>
                         <ul>
                             <li>
-                                <NavLink to="/EmployeeDashboard" className="navlink"><img src="/images/dashboard.png" alt="" className="text-dark" width="15px" height="15px" />&nbsp;&nbsp;Dashboard</NavLink>
+                                <NavLink to="/" className="navlink"><img src="/images/dashboard.png" alt="" className="text-dark" width="15px" height="15px" />&nbsp;&nbsp;&nbsp;Dashboard</NavLink>
                             </li>
                             <li>
-                                <NavLink to="/MyTimeline" className="navlink"><img src="/images/timeline.png" alt="" className="text-dark" width="20px" height="20px" />&nbsp;My Timeline</NavLink>
+                                <NavLink to="/MyTimeline" className="navlink"><img src="/images/timeline.png" alt="" className="text-dark" width="23px" height="23px" />&nbsp;&nbsp;My Timeline</NavLink>
                             </li>
                             <li>
-                                <NavLink to="/Leave" className="navlink"><img src="/images/leave.png" alt="" className="text-dark" width="20px" height="20px" />&nbsp;Leaves</NavLink>
+                                <NavLink to="/Leave" className="navlink"><img src="/images/leave.png" alt="" className="text-dark" width="20px" height="20px" />&nbsp;&nbsp;Leaves</NavLink>
                             </li>
                             <li>
-                                <NavLink to="/Tasks" className="navlink pd-btm"><img src="/images/task.png" alt="" className="text-dark" width="20px" height="20px" />&nbsp;My Tasks</NavLink>
+                                <NavLink to="/Tasks" className="navlink pd-btm"><img src="/images/task.png" alt="" className="text-dark" width="20px" height="20px" />&nbsp;&nbsp;My Tasks</NavLink>
                             </li>
                             <li className="pd-btm"></li>
                         </ul>
