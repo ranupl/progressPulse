@@ -7,10 +7,12 @@ import Leave from './Leave';
 import MyTimeline from './MyTimeline';
 import Tasks from './Task';
 import Navbar from './Navbar';
+import LeaveApply from './LeaveApply';
 
 const App = () => {
     return (
         <>
+        <LeaveApply />
         <div className="row">
             <Navbar />
             <Routes>
