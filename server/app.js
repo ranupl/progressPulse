@@ -7,10 +7,13 @@ const teamController = require("./src/controllers/team/team");
 const progressController = require("./src/controllers/progress/progress");
 const leaveController = require("./src/controllers/leave/leave");
 const leaveApplyController = require("./src/controllers/leaveApply/leaveApply");
+const authController = require("./src/controllers/auth/auth");
+const cors = require('cors');
 const app = express();
 require("./src/store/db");
 
 const PORT = process.env.PORT || 3000;
+app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
@@ -50,6 +53,8 @@ app.delete("/deleteLeave/:id", leaveController.deleteLeave);
 // leave Apply
 app.post("/createLeaveApply", leaveApplyController.createLeaveApply);
 
+// auth
+app.post("/login", authController.login);
 
 app.get("/", (req, res) => {
     res.send("progress pulse");
