@@ -1,5 +1,6 @@
 import React from "react";
 import AllLeaves from "./AllLeaves";
+import LeaveApply from "./LeaveApply";
 
 const Leave = () => {
 
@@ -28,7 +29,7 @@ const Leave = () => {
                     <div className="col-5"></div>
                     <div className="col-6">
                         <div className="d-flex justify-content-end">
-                            <button className="btn btn-info mg-btm text-white font">ApplyLeave</button>
+                            <LeaveApply />
                         </div>
                     </div>
                 </div>
