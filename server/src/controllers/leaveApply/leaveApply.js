@@ -22,6 +22,16 @@ async function createLeaveApply(req, res) {
   }
 }
 
+async function getAllLeaveApply(req, res) {
+  try {
+    const leaveApply = await leaveApplyService.getAllLeaveApply();
+    res.json(leaveApply);
+  } catch (error) {
+    console.error("Error fetching leaves:", error);
+    res.status(500).json({ error: "An error occurred while fetching leaves" });
+  }
+}
+
 async function getLeave_applyById(req, res) {
   const employeeId = req.params.id;
 
@@ -38,6 +48,6 @@ async function getLeave_applyById(req, res) {
 }
 
 module.exports = {
-  createLeaveApply
-  // getEmployeeById
+  createLeaveApply,
+  getAllLeaveApply
 }

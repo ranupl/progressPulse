@@ -1,6 +1,19 @@
 const db = require("../db");
 
+function generateRandomId(length) {
+  const charset = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+  let id = "";
+
+  for (let i = 0; i < length; i++) {
+      const randomIndex = Math.floor(Math.random() * charset.length);
+      id += charset.charAt(randomIndex);
+  }
+
+  return id;
+}
+
 async function createProgress(progressData) {
+  const randomId = generateRandomId(5);
   const { id, updates } = progressData;
   const query =
     "INSERT INTO progress (id, updates) VALUES ( ?, ?)";
@@ -9,7 +22,7 @@ async function createProgress(progressData) {
     const results = await new Promise((resolve, reject) => {
       db.query(
         query,
-        [id, updates],
+        [randomId, updates],
         (err, results) => {
           if (err) {
             reject(err);

@@ -9,6 +9,15 @@ async function createLeaveApply(leaveApplyData) {
   }
 }
 
+async function getAllLeaveApply() {
+  try {
+    const allLeave = await leaveApplyStore.getAllLeaveApply();
+    return allLeave;
+  } catch (error) {
+    console.log(error);
+  }
+}
+
 async function getAllEmployee() {
   try {
     const allEmployee = await employeeStore.getAllEmployee();
@@ -54,8 +63,8 @@ async function deleteEmployee(employeeId) {
 }
 
 module.exports = {
-  createLeaveApply
-  // getEmployeeById,
+  createLeaveApply,
+  getAllLeaveApply
   // updateEmployee,
   // deleteEmployee
 }

@@ -7,7 +7,7 @@ async function createProgress(req, res) {
       id,
       updates
     });
-    res.json(progress);
+    res.send(progress);
   } catch (error) {
     console.error("Error creating progress:", error);
     res

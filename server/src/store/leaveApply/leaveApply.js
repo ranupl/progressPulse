@@ -25,6 +25,24 @@ async function createLeaveApply(leaveApplyData) {
   }
 }
 
+async function getAllLeaveApply() {
+  const query = "SELECT * FROM leave_apply";
+  try {
+    const queryResults = await new Promise((resolve, reject) => {
+      db.query(query, (err, results) => {
+        if (err) {
+          reject(err);
+        } else {
+          resolve(results);
+        }
+      });
+    });
+    return queryResults;
+  } catch (error) {
+    console.log(error);
+  }
+}
+
 async function getAllEmployee() {
   const query = "SELECT * FROM employee";
   try {
@@ -94,6 +112,7 @@ async function deleteEmployee(employeeId) {
 }
 
 module.exports = {
-  createLeaveApply
+  createLeaveApply,
+  getAllLeaveApply
   
 };
