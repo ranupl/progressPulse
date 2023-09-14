@@ -53,6 +53,7 @@ app.delete("/deleteLeave/:id", leaveController.deleteLeave);
 // leave Apply
 app.post("/createLeaveApply", leaveApplyController.createLeaveApply);
 app.get("/getAllLeaveApply", leaveApplyController.getAllLeaveApply);
+app.get("/getAllLeaveApplyById/:id", leaveApplyController.getAllLeaveById);
 
 // auth
 app.post("/login", authController.login);

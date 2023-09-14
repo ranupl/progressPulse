@@ -18,23 +18,16 @@ async function getAllLeaveApply() {
   }
 }
 
-async function getAllEmployee() {
+async function getAllLeaveById() {
   try {
-    const allEmployee = await employeeStore.getAllEmployee();
-    return allEmployee;
+    const allLeave = await leaveApplyStore.getAllLeaveById();
+    return allLeave;
   } catch (error) {
     console.log(error);
   }
 }
 
-async function getEmployeeById(employeeId) {
-  try {
-    const employee = await employeeStore.getEmployeeById(employeeId);
-    return employee;
-  } catch (error) {
-    console.log(error);
-  }
-}
+
 
 async function updateEmployee(employeeId, updatedEmployeeData) {
   try {
@@ -64,7 +57,7 @@ async function deleteEmployee(employeeId) {
 
 module.exports = {
   createLeaveApply,
-  getAllLeaveApply
-  // updateEmployee,
-  // deleteEmployee
+  getAllLeaveApply,
+  getAllLeaveById
+  
 }

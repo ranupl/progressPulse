@@ -43,8 +43,8 @@ async function getAllLeaveApply() {
   }
 }
 
-async function getAllEmployee() {
-  const query = "SELECT * FROM employee";
+async function getAllLeaveById() {
+  const query = "SELECT * FROM leave_apply";
   try {
     const queryResults = await new Promise((resolve, reject) => {
       db.query(query, (err, results) => {
@@ -56,24 +56,6 @@ async function getAllEmployee() {
       });
     });
     return queryResults;
-  } catch (error) {
-    console.log(error);
-  }
-}
-
-async function getEmployeeById(employeeId) {
-  const query = "SELECT * FROM employee WHERE id = ?";
-  try {
-    const queryResult = await new Promise((resolve, reject) => {
-      db.query(query, [employeeId], (err, results) => {
-        if (err) {
-          reject(err);
-        } else {
-          resolve(results);
-        }
-      });
-    });
-    return queryResult;
   } catch (error) {
     console.log(error);
   }
@@ -113,6 +95,7 @@ async function deleteEmployee(employeeId) {
 
 module.exports = {
   createLeaveApply,
-  getAllLeaveApply
+  getAllLeaveApply,
+  getAllLeaveById
   
 };
