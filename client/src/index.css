@@ -1,4 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@1,500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@1,500&family=Poppins:wght@400;600;700&display=swap');
+
 
 .logo {
     width: 30px;
@@ -6,8 +8,8 @@
 }
 
 .logoDashboard {
-    width: 20px;
-    height: 20px;
+    width: 23px;
+    height: 23px;
 }
 
 .mg-top {
@@ -18,13 +20,13 @@
     margin-left: 10px;
 }
 
-.homeImg {
-    width: 500px;
-    height: 400px;
+.dashImg {
+    width: 400px;
+    height: 300px;
 }
 
 .font-family {
-    font-family: 'Josefin Sans', sans-serif;
+    font-family: 'Poppins', sans-serif;
 }
 
 .box-padding {
@@ -43,8 +45,8 @@
 }
 
 .para-font {
-    font-size: .9em;
-    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: .7em;
+    font-family: 'Poppins', sans-serif;
     color: rgb(109, 106, 106);
 }
 
@@ -65,7 +67,7 @@
 .navlink {
     text-decoration: none;
     color: rgb(60, 59, 59);
-    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-family: 'Poppins', sans-serif;
 }
 
 .card-list {
@@ -79,7 +81,7 @@
     display: block;
     overflow-y: scroll;
     width: 100%;
-    max-height: 350px;
+    max-height: 360px;
 }
 
 .card {
@@ -88,17 +90,22 @@
     margin-right: 8px;
     cursor: pointer;
     color: rgb(58, 58, 58);
-    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-family: 'Poppins', sans-serif;
     width: 18vw;
 }
 
 .update-box {
     width: 500px;
     height: 250px;
-    margin-left: 20px;
+    margin-left: 10px;
     border: 1px solid rgb(198, 197, 197);
     border-radius: 5px;
-    background-color: rgb(224, 232, 250);
+    background-color: #ECECF4;
+}
+
+.line{
+    width: 100%;
+    height: 5px;
 }
 
 .borderless-textarea {
@@ -107,39 +114,92 @@
     height: 150px;
     padding: 20px;
     outline: none;
+    border-radius: 5px;
     margin-top: 20px;
 }
 
-.form-control {
-    outline: none;
-    border-radius: none;
-    border: none;
-    border-bottom: 3px solid grey;
-}
 .form-group{
     margin-top: 20px;
+    width: 90%;
+}
+
+.modal-margin {
+    margin-left: 60px;
 }
 
 .text-grey{
     color: rgb(97, 95, 95);
 }
 
+.btn-color:hover {
+    color: #4253F0 !important;
+    border: 1px solid #4253F0;
+}
+
+.font-set{
+    font-size: 0.7em;
+    color: rgb(112, 111, 111);
+}
+
+.login-btn{
+    background-color: #4253F0;
+}
+
+.font-update{
+    font-size: 0.9em;
+}
+
 .bg-register{
     width: 100%;
-    background-color: rgb(224, 232, 250);
+    background-color: #ECECF4;
     padding: 10px 30px;
 }
 
+.pencil{
+    cursor: pointer;
+    margin-top: 5px;
+}
+
+.bg-color{
+    background-color: #ECECF4;
+}
+
+.f-size{
+    font-size: 0.8em;
+}
+
+.lb-f-size{
+    font-size: .9em;
+}
+
+.br-wt{
+    width: 70%;
+    border: 1px solid rgb(214, 213, 213);
+    border-radius: 20px;
+}
+
+.cursor-pointer{
+    cursor: pointer;
+}
+.align-center{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+}
+
 .leave-child{
-    border: 1px solid rgb(187, 185, 185);
     height: 400px;
-    background-color:  rgb(224, 232, 250);
-    border-radius: 5px;
+    background-color:  #ECECF4;
+}
+
+.active {
+    color: #007bff;   
 }
 
 .text-grey{
     color: rgb(68, 67, 67);
-    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-family: 'Poppins', sans-serif;
     padding: 5px 10px;
 }
 
@@ -169,6 +229,21 @@
     font-size: x-small;
 }
 
+.text-color {
+    color : #4253F0;
+}
+
+.btn-color{
+    background-color : #4253F0;
+}
+
+.outer-box{
+    width: 100%;
+    height: 70vh;
+    background-color: #4253F0;
+    padding: 30px 50px;
+}
+
 .leave-box{
     width: 100%;
     height: 100px;
@@ -178,26 +253,16 @@
 }
 
 .para-f-fmly{
-    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-family: 'Poppins', sans-serif;
 }
 .box-pd{
     padding-top: 14px;
 }
 
-.form-control{
-    width: 70%;
-}
-
-.col-form-label{
-    width: 50%;
-    padding: 5px;
-    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
-}
-
 @media (max-width: 767px) {
     .para-font {
         font-size: .5em;
-        font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+        font-family: 'Poppins', sans-serif;
         color: rgb(109, 106, 106);
     }
 
@@ -209,11 +274,21 @@
 @media (max-width: 950px) {
     .para-font {
         font-size: .5em;
-        font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+        font-family: 'Poppins', sans-serif;
         color: rgb(109, 106, 106);
     }
 
     .box-padding {
         padding: 0 10px;
     }
+}
+.show {
+    display: block;
+}
+.hide {
+    display: none;
+}
+
+.cursor-pointer{
+    cursor: pointer;
 }

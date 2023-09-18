@@ -1,27 +1,29 @@
 import React from 'react';
-import { Routes, Route } from 'react-router-dom';
-// import Home from './Home';
-import EmployeeDashboard from './EmployeeDashboard';
-// import Register from './Register';
-import Leave from './Leave';
-import MyTimeline from './MyTimeline';
-import Tasks from './Task';
-import Navbar from './Navbar';
-// import LeaveApply from './LeaveApply';
+import { Routes, Route, Navigate} from 'react-router-dom';
+import Home from './components/Home';
+import EmployeeDashboard from './dashboard/EmployeeDashboard';
+import Leave from './components/Leave';
+import MyTimeline from './components/MyTimeline';
+import Tasks from './components/Task';
+import { Slide, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import Layout from './components/Layout';
+import ProtectedRoute from './components/ProtectedRoute';
 
 const App = () => {
+    const user = localStorage.getItem("user");
     return (
         <>
-        {/* <LeaveApply /> */}
-        <div className="row">
-            <Navbar />
+            <ToastContainer position='top-right' autoClose={2000} hideProgressBar transition={Slide} />
             <Routes>
-                <Route path="/" element={<EmployeeDashboard />} />
-                <Route path="/MyTimeline" element={<MyTimeline />} />
-                <Route path="/Leave" element={<Leave />} />
-                <Route path="/Tasks" element={<Tasks />} />
+                <Route path='/login' element={user ? <Navigate to="/" /> : <Home />} />
+                <Route exact path="/" element={<ProtectedRoute element={<Layout />} />}>
+                    <Route index element={<ProtectedRoute element={<EmployeeDashboard />} />} />
+                    <Route path="timeline" element={<ProtectedRoute element={<MyTimeline />}  />} />
+                    <Route path="leave" element={<ProtectedRoute element={<Leave />} />} />
+                    <Route path="tasks" element={<ProtectedRoute element={<Tasks />} /> } />
+                </Route>
             </Routes>
-            </div>
         </>
     )
 }
