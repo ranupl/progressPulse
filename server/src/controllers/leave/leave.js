@@ -37,7 +37,7 @@ async function getLeaveById(req, res) {
     if (!leave) {
       res.status(404).json({ error: "No Leaves" });
     } else {
-      res.json(leave);
+      res.status(200).json({ message: 'success', leave });
     }
   } catch (err) {
     console.log(err);

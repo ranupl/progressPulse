@@ -12,7 +12,7 @@ async function createEmployee(req, res) {
       username,
       password,
     });
-    res.json(employee);
+    res.status(200).json({ message: 'Registered successful', employee });
   } catch (error) {
     console.error("Error creating employee:", error);
     res

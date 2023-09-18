@@ -44,7 +44,7 @@ async function getAllLeave() {
 }
 
 async function getLeaveById(leaveId) {
-  const query = "SELECT * FROM leaves WHERE id = ?";
+  const query = "SELECT * FROM leaves WHERE employee_id = ?";
   try {
     const queryResult = await new Promise((resolve, reject) => {
       db.query(query, [leaveId], (err, results) => {

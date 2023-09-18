@@ -1,7 +1,21 @@
 const authStore = require('../../store/auth/auth');
 
-function login(email, password, callback) {
+function userLogin(email, password, callback) {
     authStore.getEmployeeByEmail(email, (error, employee) => {
+        if (error) {
+            console.log(error);
+            return callback(error, null);
+        }
+        if (!employee || employee.password !== password) {
+            return callback(null, null);
+        }
+        console.log(employee);
+        return callback(null, employee);
+    });
+}
+
+function adminLogin(email, password, callback) {
+    authStore.getAdminByEmail(email, (error, employee) => {
         if (error) {
             console.log(error);
             return callback(error, null);
@@ -14,5 +28,6 @@ function login(email, password, callback) {
 }
 
 module.exports = {
-    login,
+    userLogin,
+    adminLogin
 };

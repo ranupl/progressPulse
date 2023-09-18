@@ -27,14 +27,14 @@ async function getAllProgress(req, res) {
 }
 
 async function getProgressById(req, res) {
-  const progressId = req.params.id;
+  const progessId = req.params.id;
 
   try {
-    const progress = await progressService.getProgressById(progressId);
+    const progress = await progressService.getProgressById(progessId);
     if (!progress) {
       res.status(404).json({ error: "No Progress" });
     } else {
-      res.json(progress);
+      res.status(200).json({ message: 'Login successful', progress });
     }
   } catch (err) {
     console.log(err);

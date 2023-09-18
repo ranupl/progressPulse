@@ -32,23 +32,38 @@ async function getAllLeaveApply(req, res) {
   }
 }
 
-async function getAllLeaveById(req, res) {
+async function getLeaveApplyById(req, res) {
   const leaveId = req.params.id;
 
   try {
-    const allLeave = await leaveApplyService.getAllLeaveById(leaveId);
+    const allLeave = await leaveApplyService.getLeaveApplyById(leaveId);
     if (!allLeave) {
       res.status(404).json({ error: "No Leaves" });
     } else {
-      res.json(allLeave);
+      // res.json(allLeave);
+      res.status(200).json({ message: 'success', allLeave });
     }
   } catch (err) {
     console.log(err);
   }
 }
 
+async function updateLeaveApply(req, res) {
+  const leaveId = req.params.id;
+  const updateLeaveData = req.body;
+
+  try {
+    const updatedLeave = await leaveApplyService.updateLeaveApply(leaveId, updateLeaveData);
+    res.json(updatedLeave);
+  } catch (err) {
+    console.log(err);
+  }
+}
+
+
 module.exports = {
   createLeaveApply,
   getAllLeaveApply,
-  getAllLeaveById
+  getLeaveApplyById,
+  updateLeaveApply
 }

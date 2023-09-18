@@ -1,6 +1,17 @@
 const db = require("../db");
+function generateRandomId(length) {
+  const charset = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+  let id = "";
+
+  for (let i = 0; i < length; i++) {
+    const randomIndex = Math.floor(Math.random() * charset.length);
+    id += charset.charAt(randomIndex);
+  }
+  return id;
+}
 
 async function createLeaveApply(leaveApplyData) {
+  const randomId = generateRandomId(5);
   const { id, employee_id, no_of_days, type, reason, start_date, end_date } = leaveApplyData;
   const query =
     "INSERT INTO leave_apply (id, employee_id, no_of_days, type, reason, start_date, end_date) VALUES ( ?,?, ?, ?, ?, ?, ?)";
@@ -9,7 +20,7 @@ async function createLeaveApply(leaveApplyData) {
     const results = await new Promise((resolve, reject) => {
       db.query(
         query,
-        [id, employee_id, no_of_days,type, reason, start_date, end_date ],
+        [randomId, employee_id, no_of_days, type, reason, start_date, end_date],
         (err, results) => {
           if (err) {
             reject(err);
@@ -43,11 +54,11 @@ async function getAllLeaveApply() {
   }
 }
 
-async function getAllLeaveById() {
-  const query = "SELECT * FROM leave_apply";
+async function getLeaveApplyById(leaveId) {
+  const query = " SELECT * FROM leave_apply where employee_id = ?";
   try {
     const queryResults = await new Promise((resolve, reject) => {
-      db.query(query, (err, results) => {
+      db.query(query, [leaveId], (err, results) => {
         if (err) {
           reject(err);
         } else {
@@ -61,11 +72,11 @@ async function getAllLeaveById() {
   }
 }
 
-async function updateEmployee(employeeId, updatedEmployeeData) {
-  const query = "UPDATE employee SET ? WHERE id = ?";
+async function updateLeaveApply(leaveId, updatedLeaveData) {
+  const query = "UPDATE leave_apply SET ? WHERE id = ?";
   try {
     const queryResult = await new Promise((resolve, reject) => {
-      db.query(query, [updatedEmployeeData, employeeId], (err, results) => {
+      db.query(query, [updatedLeaveData, leaveId], (err, results) => {
         if (err) {
           reject(err);
         }
@@ -96,6 +107,7 @@ async function deleteEmployee(employeeId) {
 module.exports = {
   createLeaveApply,
   getAllLeaveApply,
-  getAllLeaveById
-  
+  getLeaveApplyById,
+  updateLeaveApply
+
 };

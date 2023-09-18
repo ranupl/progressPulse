@@ -19,6 +19,7 @@ async function getAllProgress() {
 }
 
 async function getProgressById(progressId) {
+  
   try {
     const progress = await progressStore.getProgressById(progressId);
     return progress;

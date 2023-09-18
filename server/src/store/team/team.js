@@ -44,7 +44,8 @@ async function getAllTeam() {
 }
 
 async function getTeamById(teamId) {
-  const query = "SELECT * FROM team WHERE id = ?";
+  // const query = "select * from team where id = ?";
+  const query = "select * from progress p join employee_progress_map epm on p.id = epm.progress_id join employee_team_map etm on etm.employee_id = epm.employee_id where etm.team_id = ?";
   try {
     const queryResult = await new Promise((resolve, reject) => {
       db.query(query, [teamId], (err, results) => {
@@ -55,6 +56,7 @@ async function getTeamById(teamId) {
         }
       });
     });
+    console.log(queryResult);
     return queryResult;
   } catch (error) {
     console.log(error);

@@ -11,6 +11,13 @@ const authController = require("./src/controllers/auth/auth");
 const cors = require('cors');
 const app = express();
 require("./src/store/db");
+const session = require('express-session');
+
+app.use(session({
+  secret: 'progressPulse',
+  resave: false,
+  saveUninitialized: true
+}));
 
 const PORT = process.env.PORT || 3000;
 app.use(cors());
@@ -53,10 +60,12 @@ app.delete("/deleteLeave/:id", leaveController.deleteLeave);
 // leave Apply
 app.post("/createLeaveApply", leaveApplyController.createLeaveApply);
 app.get("/getAllLeaveApply", leaveApplyController.getAllLeaveApply);
-app.get("/getAllLeaveApplyById/:id", leaveApplyController.getAllLeaveById);
+app.get("/getLeaveApplyById/:id", leaveApplyController.getLeaveApplyById);
+app.put("/updateLeaveApply/:id", leaveApplyController.updateLeaveApply);
 
 // auth
-app.post("/login", authController.login);
+app.post("/login", authController.userLogin);
+app.post("/adminLogin", authController.adminLogin);
 
 app.get("/", (req, res) => {
     res.send("progress pulse");

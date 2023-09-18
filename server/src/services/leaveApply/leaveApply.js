@@ -18,25 +18,23 @@ async function getAllLeaveApply() {
   }
 }
 
-async function getAllLeaveById() {
+async function getLeaveApplyById() {
   try {
-    const allLeave = await leaveApplyStore.getAllLeaveById();
+    const allLeave = await leaveApplyStore.getLeaveApplyById();
     return allLeave;
   } catch (error) {
     console.log(error);
   }
 }
 
-
-
-async function updateEmployee(employeeId, updatedEmployeeData) {
+async function updateLeaveApply(leaveId, updatedLeaveData) {
   try {
-    const existingEmployee = await employeeStore.getEmployeeById(employeeId);
-    if (!existingEmployee) {
-      throw new Error("employee not found");
+    const existingLeave = await leaveApplyStore.updateLeaveApply(leaveId);
+    if (!existingLeave) {
+      throw new Error("No leaves");
     }
-    const updatedEmployee = await employeeStore.updateEmployee(employeeId, updatedEmployeeData);
-    return updatedEmployee;
+    const updatedLeave = await leaveApplyStore.updateLeaveApply(leaveId, updatedLeaveData);
+    return updatedLeave;
   } catch (error) {
     console.log(error);
   }
@@ -58,6 +56,7 @@ async function deleteEmployee(employeeId) {
 module.exports = {
   createLeaveApply,
   getAllLeaveApply,
-  getAllLeaveById
+  getLeaveApplyById,
+  updateLeaveApply
   
 }

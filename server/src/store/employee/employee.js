@@ -1,6 +1,17 @@
 const db = require("../db");
+function generateRandomId(length) {
+  const charset = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+  let id = "";
+
+  for (let i = 0; i < length; i++) {
+      const randomIndex = Math.floor(Math.random() * charset.length);
+      id += charset.charAt(randomIndex);
+  }
+  return id;
+}
 
 async function createEmployee(employeeData) {
+  const randomId = generateRandomId(5);
   const { id,first_name, middle_name, last_name, email, username, password } = employeeData;
   const query =
     "INSERT INTO employee (id,first_name, middle_name, last_name, email, username, password) VALUES ( ?,?, ?, ?, ?, ?, ?)";
@@ -9,7 +20,7 @@ async function createEmployee(employeeData) {
     const results = await new Promise((resolve, reject) => {
       db.query(
         query,
-        [id,first_name, middle_name, last_name, email, username, password],
+        [randomId, first_name, middle_name, last_name, email, username, password],
         (err, results) => {
           if (err) {
             reject(err);
@@ -45,6 +56,7 @@ async function getAllEmployee() {
 
 async function getEmployeeById(employeeId) {
   const query = "SELECT * FROM employee WHERE id = ?";
+  
   try {
     const queryResult = await new Promise((resolve, reject) => {
       db.query(query, [employeeId], (err, results) => {
