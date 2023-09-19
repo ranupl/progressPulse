@@ -12,7 +12,9 @@ const Leave = () => {
     const employeeId = userObject.id;
    
     const [data, setData] = useState([]);
-    const [leaveData, setLeaveData] = useState({});
+    const [sickLeaveData, setSickLeaveData] = useState(0);
+    const [casualLeaveData, setCasualLeaveData] = useState(0);
+    const [totalLeaveData, setTotalLeaveData] = useState(0);
 
     useEffect(() => {
         const fetchData = async () => {
@@ -34,7 +36,12 @@ const Leave = () => {
               const response = await axios.get(
                 `${process.env.REACT_APP_SERVER_URL}/getLeaveById/${employeeId}`
               );
-              setLeaveData(response.data.leave);
+              const sickLeave = response.data.leave[0].sick;
+              const casualLeave = response.data.leave[0].casual;
+              const totalLeave = response.data.leave[0].total;
+              setSickLeaveData(sickLeave);
+              setCasualLeaveData(casualLeave);
+              setTotalLeaveData(totalLeave);
             } catch (error) {
               console.log(error);
             }
@@ -77,15 +84,15 @@ const Leave = () => {
                             <div className="leave-box">
                                 <div className="d-flex justify-content-around box-pd">
                                     <div className="d-block">
-                                        <h6 className="text-info text-center">{leaveData.sick}</h6>
+                                        <h6 className="text-info text-center">{sickLeaveData}</h6>
                                         <p className="para-f-fmly">Sick</p>
                                     </div>
                                     <div className="d-block">
-                                        <h6 className="text-info text-center">{leaveData.casual}</h6>
+                                        <h6 className="text-info text-center">{casualLeaveData}</h6>
                                         <p className="para-f-fmly">Casual</p>
                                     </div>
                                     <div className="d-block">
-                                        <h6 className="text-info text-center">{leaveData.total}</h6>
+                                        <h6 className="text-info text-center">{totalLeaveData}</h6>
                                         <p className="para-f-fmly">Total</p>
                                     </div>
                                 </div>
