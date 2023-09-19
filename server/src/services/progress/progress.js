@@ -19,7 +19,6 @@ async function getAllProgress() {
 }
 
 async function getProgressById(progressId) {
-  
   try {
     const progress = await progressStore.getProgressById(progressId);
     return progress;
@@ -28,13 +27,13 @@ async function getProgressById(progressId) {
   }
 }
 
-async function updateProgress(progressId, updatedProgressData) {
+async function updateProgress(progressId, updateProgressData) {
   try {
     const existingProgress = await progressStore.getProgressById(progressId);
     if (!existingProgress) {
       throw new Error("No progress");
     }
-    const updatedProgress = await progressStore.updateProgress(progressId, updatedProgressData);
+    const updatedProgress = await progressStore.updateProgress(progressId, updateProgressData);
     return updatedProgress;
   } catch (error) {
     console.log(error);

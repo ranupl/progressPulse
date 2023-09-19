@@ -47,7 +47,7 @@ async function updateProgress(req, res) {
 
   try {
     const updatedProgress = await progressService.updateProgress(progressId, updateProgressData);
-    res.json(updatedProgress);
+    res.status(200).json({ message: 'success', updatedProgress: updatedProgress });
   } catch (err) {
     console.log(err);
   }

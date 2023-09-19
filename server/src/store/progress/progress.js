@@ -58,6 +58,7 @@ async function getAllProgress() {
 
 async function getProgressById(progressId) {
   const query = "select * from progress p join employee_progress_map epm on epm.progress_id = p.id where epm.employee_id = ?";
+  // const query= "select * from progress where id = ?";
   try {
     const queryResult = await new Promise((resolve, reject) => {
       db.query(query, [progressId], (err, results) => {
@@ -74,17 +75,18 @@ async function getProgressById(progressId) {
   }
 }
 
-async function updateProgress(progressId, updatedProgressData) {
+async function updateProgress(progressId, updateProgressData) {
   const query = "UPDATE progress SET ? WHERE id = ?";
   try {
     const queryResult = await new Promise((resolve, reject) => {
-      db.query(query, [updatedProgressData, progressId], (err, results) => {
+      db.query(query, [updateProgressData, progressId], (err, results) => {
         if (err) {
           reject(err);
         }
         resolve(results.affectedRows > 0);
       });
     });
+    console.log(queryResult);
     return queryResult;
   } catch (error) {
     console.log(error);

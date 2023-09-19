@@ -18,9 +18,9 @@ async function getAllLeaveApply() {
   }
 }
 
-async function getLeaveApplyById() {
+async function getLeaveApplyById(leaveId) {
   try {
-    const allLeave = await leaveApplyStore.getLeaveApplyById();
+    const allLeave = await leaveApplyStore.getLeaveApplyById(leaveId);
     return allLeave;
   } catch (error) {
     console.log(error);

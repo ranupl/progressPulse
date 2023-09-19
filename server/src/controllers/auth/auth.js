@@ -1,4 +1,5 @@
 const authService = require("../../services/auth/auth");
+const errorCodes = require("../../models/error");
 
 async function userLogin(req, res) {
     try {

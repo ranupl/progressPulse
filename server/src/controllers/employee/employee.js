@@ -1,4 +1,6 @@
 const employeeService = require("../../services/employee/employee");
+const errorCodes = require("../../models/error");
+const logErrorToFile = require("../../util/errorLogs");
 
 async function createEmployee(req, res) {
   try {
@@ -41,10 +43,11 @@ async function getEmployeeById(req, res) {
     } else {
       res.json(employee);
     }
-  } catch (err) {
+  } catch (error) {
     console.log(err);
+    }
   }
-}
+
 
 async function updateEmployee(req, res) {
   const employeeId = req.params.id;
