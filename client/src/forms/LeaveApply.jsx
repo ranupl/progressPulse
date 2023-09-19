@@ -23,8 +23,9 @@ const LeaveApply = () => {
         console.log(result);
 		if (result.status === 200) {
             if (result?.data?.employee) {
-                toast.success("Leave Applied successfull");
-                navigate('/');
+                toast.success("Leave Applied successfully");
+                // navigate('/');
+                // handleClose();
             } 
         } else {
             toast.error("Something went wrong!");
@@ -95,7 +96,8 @@ const LeaveApply = () => {
                                 </div>
                                 <div className="form-group">
                                     <div className="col-sm-10">
-                                        <button type="submit" className="btn btn-color text-white font-family">Submit</button>
+                                        <button type="submit" onClick={handleClose}
+                                        className="btn btn-color text-white font-family">Submit</button>
                                     </div>
                                 </div>
                             </form>

@@ -17,7 +17,6 @@ const MyTimeline = () => {
           const response = await axios.get(
             `${process.env.REACT_APP_SERVER_URL}/getProgressById/${id}`
           );
-  
           console.log(response.data);
           setData(response.data.progress);
         } catch (error) {

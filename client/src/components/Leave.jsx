@@ -79,15 +79,15 @@ const Leave = () => {
                             <div className="leave-box">
                                 <div className="d-flex justify-content-around box-pd">
                                     <div className="d-block">
-                                        <h6 className="text-info text-center">{leaveData[0].sick}</h6>
+                                        <h6 className="text-info text-center">{leaveData.sick}</h6>
                                         <p className="para-f-fmly">Sick</p>
                                     </div>
                                     <div className="d-block">
-                                        <h6 className="text-info text-center">{leaveData[0].casual}</h6>
+                                        <h6 className="text-info text-center">{leaveData.casual}</h6>
                                         <p className="para-f-fmly">Casual</p>
                                     </div>
                                     <div className="d-block">
-                                        <h6 className="text-info text-center">{leaveData[0].total}</h6>
+                                        <h6 className="text-info text-center">{leaveData.total}</h6>
                                         <p className="para-f-fmly">Total</p>
                                     </div>
                                 </div>

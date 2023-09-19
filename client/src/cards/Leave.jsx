@@ -16,8 +16,8 @@ function LeaveCard({ sdate, edate, type, days, reason, status }) {
                 <h6 className="font-set">End-date :  {`${eyear}-${emonth}-${eday}`}</h6>
                 <h6 className="text-info font-update">{type}</h6>
                 <h6 className="font-update">Days : {days} </h6>
-                <h6 className="font-update text-success">Status : {status} </h6>
-                <p className="pd-0 font-update">{reason}</p>
+                <h6 className="font-update text-danger">Status : {status} </h6>
+                <p className="pd-0 font-update">Reason: {reason}</p>
             </div>
         </div>
     );
