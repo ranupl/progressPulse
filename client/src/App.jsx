@@ -14,7 +14,7 @@ const App = () => {
     const user = localStorage.getItem("user");
     return (
         <>
-            <ToastContainer position='top-right' autoClose={2000} hideProgressBar transition={Slide} />
+            <ToastContainer position='top-right' autoClose={3000} hideProgressBar transition={Slide} />
             <Routes>
                 <Route path='/login' element={user ? <Navigate to="/" /> : <Home />} />
                 <Route exact path="/" element={<ProtectedRoute element={<Layout />} />}>

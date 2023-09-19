@@ -20,7 +20,6 @@ const Leave = () => {
               const response = await axios.get(
                 `${process.env.REACT_APP_SERVER_URL}/getLeaveApplyById/${employeeId}`
               );
-              console.log(response.data);
               setData(response.data.allLeave);
             } catch (error) {
               console.log(error);
@@ -35,7 +34,6 @@ const Leave = () => {
               const response = await axios.get(
                 `${process.env.REACT_APP_SERVER_URL}/getLeaveById/${employeeId}`
               );
-              console.log(response.data.leave);
               setLeaveData(response.data.leave);
             } catch (error) {
               console.log(error);
