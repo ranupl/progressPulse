@@ -19,7 +19,7 @@ const LeaveApply = () => {
     const userData = localStorage.getItem("user")
     const userObject = JSON.parse(userData);
     const employeeId = userObject.id;
-    console.log(`totalleave ${totalLeave}`);
+   
     useEffect(() => {
         const fetchData = async () => {
             try {
@@ -41,12 +41,12 @@ const LeaveApply = () => {
         const startDateObj = new Date(start_date);
         const endDateObj = new Date(end_date);
         const dayDifference = Math.floor((endDateObj - startDateObj) / (1000 * 60 * 60 * 24)) + 1;
-        const status = type === "sick" ? "approved" : "pending";
+        
         if (dayDifference <= totalLeave) {
-            const result = await axios.post(`${process.env.REACT_APP_SERVER_URL}/createLeaveApply`, { no_of_days: no_of_days, type: type, reason: reason, status :status, start_date: start_date, end_date: end_date });
+            const result = await axios.post(`${process.env.REACT_APP_SERVER_URL}/createLeaveApply`, { no_of_days: no_of_days, type: type, reason: reason, start_date: start_date, end_date: end_date });
             if (result.status === 200) {
                 if (result?.data?.employee) {
-                    toast.success("Leave Applied successfully");
+                    toast.error("Leave Applied successfully");
                 }
             } else {
                 toast.error("Something went wrong!");
