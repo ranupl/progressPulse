@@ -45,9 +45,8 @@ async function getEmployeeById(req, res) {
     }
   } catch (error) {
     console.log(err);
-    }
   }
-
+}
 
 async function updateEmployee(req, res) {
   const employeeId = req.params.id;

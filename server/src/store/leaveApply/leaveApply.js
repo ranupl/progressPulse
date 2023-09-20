@@ -13,14 +13,17 @@ function generateRandomId(length) {
 async function createLeaveApply(leaveApplyData) {
   const randomId = generateRandomId(5);
   const { id, employee_id, no_of_days, type, reason, start_date, end_date } = leaveApplyData;
+  const status = type === '1' ? 'approved' : 'pending';
+  console.log("type",type);
+  console.log("status", status);
   const query =
-    "INSERT INTO leave_apply (id, employee_id, no_of_days, type, reason, start_date, end_date) VALUES ( ?,?, ?, ?, ?, ?, ?)";
+    "INSERT INTO leave_apply (id, employee_id, no_of_days, type, reason,start_date, end_date, status) VALUES ( ?,?, ?, ?, ?, ?, ?, ?)";
 
   try {
     const results = await new Promise((resolve, reject) => {
       db.query(
         query,
-        [randomId, employee_id, no_of_days, type, reason, start_date, end_date],
+        [randomId, employee_id, no_of_days, type, reason, start_date, end_date, status],
         (err, results) => {
           if (err) {
             reject(err);
@@ -37,7 +40,7 @@ async function createLeaveApply(leaveApplyData) {
 }
 
 async function getAllLeaveApply() {
-  const query = "SELECT * FROM leave_apply";
+  const query = "select e.username , la.id, la.type, la.status, la.start_date, la.end_date from leave_apply la join employee e on la.employee_id = e.id where la.status = 'pending'";
   try {
     const queryResults = await new Promise((resolve, reject) => {
       db.query(query, (err, results) => {

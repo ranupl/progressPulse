@@ -29,7 +29,7 @@ async function getLeaveApplyById(leaveId) {
 
 async function updateLeaveApply(leaveId, updatedLeaveData) {
   try {
-    const existingLeave = await leaveApplyStore.updateLeaveApply(leaveId);
+    const existingLeave = await leaveApplyStore.getLeaveApplyById(leaveId);
     if (!existingLeave) {
       throw new Error("No leaves");
     }

@@ -27,10 +27,10 @@ async function getAllProgress(req, res) {
 }
 
 async function getProgressById(req, res) {
-  const progessId = req.params.id;
+  const employeeId = req.params.id;
 
   try {
-    const progress = await progressService.getProgressById(progessId);
+    const progress = await progressService.getProgressById(employeeId);
     if (!progress) {
       res.status(404).json({ error: "No Progress" });
     } else {

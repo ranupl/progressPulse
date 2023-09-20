@@ -56,12 +56,11 @@ async function getAllProgress() {
   }
 }
 
-async function getProgressById(progressId) {
+async function getProgressById(employeeId) {
   const query = "select * from progress p join employee_progress_map epm on epm.progress_id = p.id where epm.employee_id = ?";
-  // const query= "select * from progress where id = ?";
   try {
     const queryResult = await new Promise((resolve, reject) => {
-      db.query(query, [progressId], (err, results) => {
+      db.query(query, [employeeId], (err, results) => {
         if (err) {
           reject(err);
         } else {

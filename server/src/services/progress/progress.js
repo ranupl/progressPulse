@@ -18,9 +18,9 @@ async function getAllProgress() {
   }
 }
 
-async function getProgressById(progressId) {
+async function getProgressById(employeeId) {
   try {
-    const progress = await progressStore.getProgressById(progressId);
+    const progress = await progressStore.getProgressById(employeeId);
     return progress;
   } catch (error) {
     console.log(error);
