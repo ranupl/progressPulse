@@ -1,6 +1,7 @@
 import React from "react";
 import CardList from '../cardLists/TeamList';
 import Team from "../components/Team";
+import LeaveTable from "../components/LeaveTable";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faList } from '@fortawesome/free-solid-svg-icons'
 import Update from "../forms/Update";
@@ -14,7 +15,11 @@ const EmployeeDashboard = (props) => {
         update: true,
         teams: false,
     });
+    const userData = localStorage.getItem("user")
+    const userObject = JSON.parse(userData);
+    const username = userObject.username;
     const [teamId, setTeamID] = useState("");
+
     useEffect(() => {
         const predefinedColors = [
             'linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(35,67,80,1) 35%, rgba(0,212,255,1) 100%)',
@@ -39,17 +44,12 @@ const EmployeeDashboard = (props) => {
         setTeamID(id);
         setShow((prevState) => ({
             ...prevState,
-            teams : true,
-            update : false
+            teams: true,
+            update: false
         }));
     }
 
-    const userData = localStorage.getItem("user")
-    const userObject = JSON.parse(userData);
-    const username = userObject.username;
-    
-    function handleLogout()
-    {
+    function handleLogout() {
         localStorage.removeItem("user");
         navigate("/login");
     }
@@ -87,7 +87,10 @@ const EmployeeDashboard = (props) => {
                 <div className="container">
                     <h6 className="mg-top font-family text-color mb-4">My Updates For Today</h6>
                 </div>
-                <Update show={show} />
+                <div className="row">
+                    <div className="col"><Update show={show} /></div>
+                    <div className="col"><LeaveTable /></div>
+                </div>
                 <Team show={show} teamId={teamId} />
             </div>
 
