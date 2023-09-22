@@ -84,6 +84,13 @@
     max-height: 360px;
 }
 
+.employee-list {
+    display: block;
+    overflow-y: scroll;
+    width: 80%;
+    max-height: 360px;
+}
+
 .card {
     border: 1px solid #ccc;
     padding: 16px;

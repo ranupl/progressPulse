@@ -7,39 +7,48 @@ import { faList } from '@fortawesome/free-solid-svg-icons'
 import Update from "../forms/Update";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import jwt_decode from "jwt-decode";
+import TeamForm from "../forms/TeamForm";
 
-const EmployeeDashboard = (props) => {
+const EmployeeDashboard = () => {
     const navigate = useNavigate();
     const [data, setData] = useState([]);
+    const [teamId, setTeamID] = useState("");
     const [show, setShow] = useState({
-        update: true,
+        update: true,   
         teams: false,
     });
-    const userData = localStorage.getItem("user")
-    const userObject = JSON.parse(userData);
-    const username = userObject.username;
-    const [teamId, setTeamID] = useState("");
+    const token = localStorage.getItem("authToken");
+    var decodedHeader = jwt_decode(token);
+    const username = decodedHeader.employee.username;
 
     useEffect(() => {
         const predefinedColors = [
-            'linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(35,67,80,1) 35%, rgba(0,212,255,1) 100%)',
-            'linear-gradient(90deg, rgba(131,58,180,1) 0%, rgba(253,29,29,1) 50%, rgba(252,176,69,1) 100%)',
-            'linear-gradient(90deg, rgba(131,58,180,1) 0%, rgba(105,62,62,1) 50%, rgba(252,176,69,1) 100%)',
-            'linear-gradient(90deg, rgba(58,86,180,1) 0%, rgba(105,99,62,1) 50%, rgba(252,69,117,1) 100%)'];
-        fetch("http://localhost:7000/getAllTeam")
-            .then((res) => res.json())
-            .then((responseData) => {
-                console.log(responseData);
-                const dataWithColors = responseData.map((item, index) => ({
-                    ...item,
-                    color: predefinedColors[index % predefinedColors.length],
-                }));
-                setData(dataWithColors);
-            })
-            .catch((error) => {
-                console.error("Error fetching data:", error);
-            });
-    }, []);
+          'linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(35,67,80,1) 35%, rgba(0,212,255,1) 100%)',
+          'linear-gradient(90deg, rgba(131,58,180,1) 0%, rgba(253,29,29,1) 50%, rgba(252,176,69,1) 100%)',
+          'linear-gradient(90deg, rgba(131,58,180,1) 0%, rgba(105,62,62,1) 50%, rgba(252,176,69,1) 100%)',
+          'linear-gradient(90deg, rgba(58,86,180,1) 0%, rgba(105,99,62,1) 50%, rgba(252,69,117,1) 100%)'];
+      
+        axios.get("http://localhost:7000/getAllTeam",
+         { headers: {
+            'Authorization': `Bearer ${token}`, 
+            'Content-Type': 'application/json', 
+          },})
+          .then((response) => {
+            const responseData = response.data;
+            console.log(responseData);
+            const dataWithColors = responseData.map((item, index) => ({
+              ...item,
+              color: predefinedColors[index % predefinedColors.length],
+            }));
+            setData(dataWithColors);
+          })
+          .catch((error) => {
+            console.error("Error fetching data:", error);
+          });
+      }, []);
+      
     const cardHandleClick = (id) => {
         setTeamID(id);
         setShow((prevState) => ({
@@ -50,7 +59,7 @@ const EmployeeDashboard = (props) => {
     }
 
     function handleLogout() {
-        localStorage.removeItem("user");
+        localStorage.removeItem("authToken");
         navigate("/login");
     }
 
@@ -68,7 +77,7 @@ const EmployeeDashboard = (props) => {
                                 {username}
                             </span>
                             <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                                <li><a className="dropdown-item" onClick={handleLogout}>Logout</a></li>
+                                <li><a className="dropdown-item" href="#" onClick={handleLogout}>Logout</a></li>
                             </ul>
                         </div>
                         {/* dropdown */}
@@ -86,6 +95,9 @@ const EmployeeDashboard = (props) => {
                 </div>
                 <div className="container">
                     <h6 className="mg-top font-family text-color mb-4">My Updates For Today</h6>
+                </div>
+                <div className="container">
+                    <TeamForm />
                 </div>
                 <div className="row">
                     <div className="col"><Update show={show} /></div>

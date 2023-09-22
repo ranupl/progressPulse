@@ -4,28 +4,54 @@ import axios from "axios";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 
-
 const LoginForm = () => {
     const navigate = useNavigate();
-    const [email,setEmail] = useState("");
-	const [password,setPassword] = useState("");
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
 
-	const handleSubmit = async (e) =>{
-		e.preventDefault();
-		const result = await axios.post(`${process.env.REACT_APP_SERVER_URL}/login`,{email:email,password:password});
-        console.log(result);
-		if(result.status === 200){
-            if(result?.data?.employee){
-                const user = result?.data?.employee;
-                localStorage.setItem("user",JSON.stringify(user));
-                navigate('/');
-            }else{
-                toast.error(result?.data?.error);
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+      
+        try {
+          const result = await axios.post(`${process.env.REACT_APP_SERVER_URL}/login`, {
+            email: email,
+            password: password,
+          });
+          console.log(result.data);
+      
+          if (result.status === 200) {
+            if (result?.data) {
+              const token = result.data.token;
+              console.log(token);
+              // axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+              localStorage.setItem("authToken", token);
+              navigate('/');
+            } else {
+              toast.error(result?.data?.error);
             }
-        }else{
+          } else {
             toast.error("Something went wrong!");
-        }	
-	}
+          }
+        } catch (error) {
+          console.error("Error in login:", error);
+      
+          // Handle specific error cases here
+          if (error.response) {
+            // Server responded with an error status code (e.g., 4xx, 5xx)
+            console.error("Server error:", error.response.data);
+            toast.error("Server error. Please try again later.");
+          } else if (error.request) {
+            // The request was made but no response was received
+            console.error("Network error:", error.request);
+            toast.error("Network error. Please check your internet connection.");
+          } else {
+            // Something else happened in setting up the request
+            console.error("Other error:", error.message);
+            toast.error("An error occurred. Please try again.");
+          }
+        }
+      };
+      
 
     return (
         <>
@@ -43,15 +69,15 @@ const LoginForm = () => {
                 <div className="form-outline mb-1">
                     <label className="form-label label-font" htmlFor="email">Email address</label>
                     <input type="email" id="email" name="email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    className="form-control" />
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                        className="form-control" />
                 </div>
                 <div className="form-outline mb-1">
                     <label className="form-label label-font" htmlFor="password">Password</label>
-                    <input type="password" id="password" name="password" 
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}className="form-control" />
+                    <input type="password" id="password" name="password"
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)} className="form-control" />
                 </div>
                 <div className="row mb-2 d-flex">
                     <a href="#!" className="text-color d-flex justify-content-end para-font mb-2">Forgot password?</a>

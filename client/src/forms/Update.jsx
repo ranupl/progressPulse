@@ -2,6 +2,7 @@ import React from "react";
 import { useState } from "react";
 
 const Update = ({show}) => {
+    const token = localStorage.getItem("authToken");
     const [isSubmitted, setIsSubmitted] = useState(false);
 
     async function handleSubmit(e) {
@@ -11,8 +12,9 @@ const Update = ({show}) => {
             const response = await fetch('http://localhost:7000/createProgress', {
                 method: 'POST',
                 headers: {
-                    'Content-Type': 'application/json',
-                },
+                    'Authorization': `Bearer ${token}`, 
+                    'Content-Type': 'application/json', 
+                  },
                 body: JSON.stringify({ updates: e.target.updates.value }),
             });
 

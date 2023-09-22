@@ -5,12 +5,13 @@ import LeaveApply from "../forms/LeaveApply";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faList } from '@fortawesome/free-solid-svg-icons'
 import axios from "axios";
+import jwt_decode from "jwt-decode";
 
 const Leave = () => {
-    const userData = localStorage.getItem("user")
-    const userObject = JSON.parse(userData);
-    const employeeId = userObject.id;
-   
+    const token = localStorage.getItem("authToken");
+    var decodedHeader = jwt_decode(token);
+    const employeeId = decodedHeader.employee.id;
+    
     const [data, setData] = useState([]);
     const [sickLeaveData, setSickLeaveData] = useState(0);
     const [casualLeaveData, setCasualLeaveData] = useState(0);

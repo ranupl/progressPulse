@@ -3,6 +3,7 @@ import { Modal } from 'react-bootstrap';
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { toast } from "react-toastify";
+import jwt_decode from "jwt-decode";
 
 const LeaveApply = () => {
     const [show, setShow] = useState(false);
@@ -16,9 +17,9 @@ const LeaveApply = () => {
     const [end_date, setEndDate] = useState("");
     const [totalLeave, setTotalLeave] = useState(0);
 
-    const userData = localStorage.getItem("user")
-    const userObject = JSON.parse(userData);
-    const employeeId = userObject.id;
+    const token = localStorage.getItem("authToken");
+    var decodedHeader = jwt_decode(token);
+    const employeeId = decodedHeader.employee.id;
    
     useEffect(() => {
         const fetchData = async () => {

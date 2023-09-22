@@ -11,12 +11,12 @@ import Layout from './components/Layout';
 import ProtectedRoute from './components/ProtectedRoute';
 
 const App = () => {
-    const user = localStorage.getItem("user");
+    const token = localStorage.getItem("authToken");
     return (
         <>
             <ToastContainer position='top-right' autoClose={3000} hideProgressBar transition={Slide} />
             <Routes>
-                <Route path='/login' element={user ? <Navigate to="/" /> : <Home />} />
+                <Route path='/login' element={token ? <Navigate to="/" /> : <Home />} />
                 <Route exact path="/" element={<ProtectedRoute element={<Layout />} />}>
                     <Route index element={<ProtectedRoute element={<EmployeeDashboard />} />} />
                     <Route path="timeline" element={<ProtectedRoute element={<MyTimeline />}  />} />
