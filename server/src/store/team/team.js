@@ -1,6 +1,18 @@
 const db = require("../db");
 
+function generateRandomId(length) {
+  const charset = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+  let id = "";
+
+  for (let i = 0; i < length; i++) {
+      const randomIndex = Math.floor(Math.random() * charset.length);
+      id += charset.charAt(randomIndex);
+  }
+  return id;
+}
+
 async function createTeam(teamData) {
+  const randomId = generateRandomId(5);
   const { id, title, description, release_notes } = teamData;
   const query =
     "INSERT INTO team (id, title, description, release_notes) VALUES ( ?, ?, ?, ?)";
@@ -9,7 +21,7 @@ async function createTeam(teamData) {
     const results = await new Promise((resolve, reject) => {
       db.query(
         query,
-        [id, title, description, release_notes],
+        [randomId, title, description, release_notes],
         (err, results) => {
           if (err) {
             reject(err);

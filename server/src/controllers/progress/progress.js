@@ -28,7 +28,7 @@ async function getAllProgress(req, res) {
 
 async function getProgressById(req, res) {
   const employeeId = req.params.id;
-
+ 
   try {
     const progress = await progressService.getProgressById(employeeId);
     if (!progress) {

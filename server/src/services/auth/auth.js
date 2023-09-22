@@ -9,7 +9,6 @@ function userLogin(email, password, callback) {
         if (!employee || employee.password !== password) {
             return callback(null, null);
         }
-        console.log(employee);
         return callback(null, employee);
     });
 }

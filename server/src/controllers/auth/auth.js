@@ -1,5 +1,6 @@
 const authService = require("../../services/auth/auth");
 const errorCodes = require("../../models/error");
+const jwt = require('jsonwebtoken');
 
 async function userLogin(req, res) {
     try {
@@ -12,9 +13,11 @@ async function userLogin(req, res) {
             if (!employee) {
                 return res.status(200).json({ error: 'Invalid credentials' });
             }
-            req.session.employeeId = employee.id;
+            
             delete employee.password;
-            res.status(200).json({ message: 'Login successful', employee });
+            const token = jwt.sign({ employee }, 'progressPulse', { expiresIn: '1h' });
+            
+            res.status(200).json({ message: 'Login successful', token });
         });
     } catch (error) {
         console.error("Error while login:", error);

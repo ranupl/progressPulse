@@ -8,6 +8,7 @@ const progressController = require("./src/controllers/progress/progress");
 const leaveController = require("./src/controllers/leave/leave");
 const leaveApplyController = require("./src/controllers/leaveApply/leaveApply");
 const authController = require("./src/controllers/auth/auth");
+const authenticateToken = require('./src/middleware/authToken');
 const cors = require('cors');
 const app = express();
 require("./src/store/db");
@@ -23,6 +24,12 @@ const PORT = process.env.PORT || 3000;
 app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+
+// app.use(authenticateToken);
+
+// auth
+app.post("/login", authController.userLogin);
+app.post("/adminLogin", authController.adminLogin);
 
 // admin
 app.get("/getAdminById/:id", adminController.getAdminById);
@@ -62,10 +69,6 @@ app.post("/createLeaveApply", leaveApplyController.createLeaveApply);
 app.get("/getAllLeaveApply", leaveApplyController.getAllLeaveApply);
 app.get("/getLeaveApplyById/:id", leaveApplyController.getLeaveApplyById);
 app.put("/updateLeaveApply/:id", leaveApplyController.updateLeaveApply);
-
-// auth
-app.post("/login", authController.userLogin);
-app.post("/adminLogin", authController.adminLogin);
 
 app.get("/", (req, res) => {
     res.send("progress pulse");
