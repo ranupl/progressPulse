@@ -17,13 +17,11 @@ const TeamForm = () => {
         e.preventDefault();
 
         const result = await axios.post(`${process.env.REACT_APP_SERVER_URL}/createTeam`, { title: title, description: description, release_notes: release_notes });
-        
+
         if (result.status === 200) {
-            if (result?.data?.team) {
-                toast.error("Team Created successfully");
-                handleClose();
-            }
-        } else {
+            toast.error("Team Created successfully");
+        }
+        else {
             toast.error("Something went wrong!");
         }
     }
@@ -46,7 +44,7 @@ const TeamForm = () => {
                                     <input type="text" className="form-control" id="title"
                                         value={title}
                                         onChange={(e) => setTitle(e.target.value)}
-                                        placeholder="Enter title" required/>
+                                        placeholder="Enter title" required />
                                 </div>
                                 <div className="form-group">
                                     <label for="description">Description</label>
@@ -60,7 +58,7 @@ const TeamForm = () => {
                                     <input type="text" className="form-control" id="notes"
                                         value={release_notes}
                                         onChange={(e) => setReleaseNotes(e.target.value)}
-                                        placeholder="Enter notes" required/>
+                                        placeholder="Enter notes" required />
                                 </div>
                                 <button type="submit" className="btn btn-primary">Submit</button>
                             </form>

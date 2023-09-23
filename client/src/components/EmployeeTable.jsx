@@ -9,6 +9,8 @@ const EmployeeTable = ({teamId}) => {
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
     const [data, setData] = useState([]);
+    const [btnColor, setBtnColor] = useState("btn-danger");
+
 
     useEffect(() => {
         const token = localStorage.getItem("authToken");
@@ -34,8 +36,9 @@ const EmployeeTable = ({teamId}) => {
     const handleMapping = async (employeeId) => {
         const result = await axios.post(`${process.env.REACT_APP_SERVER_URL}/teamEmployeeMap`,
             { team_id: teamId, employee_id: employeeId});
-            console.log(result.data);
+
         if (result.status === 200) {
+            setBtnColor("btn-success");
             toast.error("Member added successfully");
         } else {
             toast.error("Something went wrong!");
@@ -69,7 +72,7 @@ const EmployeeTable = ({teamId}) => {
                                             <td className="font">{data.first_name}</td>
                                             <td className="font">{data.last_name}</td>
                                             <td className="font">{data.username}</td>
-                                            <td><button type="button"  onClick={() => handleMapping(data.id)}className="btn btn-danger font btn-size text-white">Add</button>
+                                            <td><button type="button" onClick={() => handleMapping(data.id)} className={`btn ${btnColor} font btn-size text-white`}>Add</button>
                                             </td>
                                         </tr>
                                     ))}
