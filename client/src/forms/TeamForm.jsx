@@ -28,39 +28,39 @@ const TeamForm = () => {
 
     return (
         <>
-            <button type="button" className="btn btn-color mg-btm text-white font" onClick={handleShow}>
+            <button type="button" className="btn btn-color mb-2 text-white font" onClick={handleShow}>
                 Create Team
             </button>
             <Modal show={show} onHide={handleClose}>
                 <Modal.Header closeButton>
-                    <Modal.Title className="text-color font-family">CreateTeam</Modal.Title>
+                    <Modal.Title className="text-color font-family fontHeading">CreateTeam</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
                     <div className="container bg-register">
                         <div className="container">
                             <form onSubmit={(e) => handleSubmit(e)}>
                                 <div className="form-group">
-                                    <label for="title">Title</label>
+                                    <label for="title" className="inputFont font-family">Title</label>
                                     <input type="text" className="form-control" id="title"
                                         value={title}
                                         onChange={(e) => setTitle(e.target.value)}
                                         placeholder="Enter title" required />
                                 </div>
                                 <div className="form-group">
-                                    <label for="description">Description</label>
+                                    <label for="description" className="inputFont font-family">Description</label>
                                     <input type="text" className="form-control" id="description"
                                         value={description}
                                         onChange={(e) => setDescription(e.target.value)}
                                         placeholder="Enter description" required />
                                 </div>
                                 <div className="form-group">
-                                    <label for="notes">Release-Notes</label>
+                                    <label for="notes" className="inputFont font-family">Release-Notes</label>
                                     <input type="text" className="form-control" id="notes"
                                         value={release_notes}
                                         onChange={(e) => setReleaseNotes(e.target.value)}
                                         placeholder="Enter notes" required />
                                 </div>
-                                <button type="submit" className="btn btn-color font text-white">Submit</button>
+                                <button type="submit" className="btn btn-color font text-white mt-3">Submit</button>
                             </form>
                         </div>
                     </div>

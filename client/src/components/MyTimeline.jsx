@@ -36,9 +36,9 @@ const MyTimeline = ({ toggleTextVisibility, dashwidth }) => {
         <>
             <div  className={`${dashwidth ? "dashexpand col-10" : "dashcollapse col-11"}`}>
                 <div className="container">
-                    <div className='d-flex mg-top border-bottom'>
+                    <div className='d-flex mg-top cursor-pointer bold border-bottom'>
                         <FontAwesomeIcon icon={faList} onClick={toggleTextVisibility} />&nbsp;&nbsp;
-                        <h6 className='text-dark font-family'>MyTimeline</h6>
+                        <h6 className='text-dark bold font-family'>MyTimeline</h6>
                     </div>
                 </div>
                 <div className="container mg-top">

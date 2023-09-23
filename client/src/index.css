@@ -79,6 +79,38 @@
     font-family: 'Poppins', sans-serif;
 }
 
+.teamCard{
+    width: 150px;
+    height: 50px;
+    border-radius: 5px;
+    padding: 5px 12px;
+}
+
+.bold{
+   font-weight: 700;
+}
+
+.fontHeading{
+    font-size: 1em;
+}
+
+.inputFont{
+    font-size: .9em;
+}
+
+input::placeholder {
+    font-size: .8em;
+}
+
+.capital{
+    text-transform: capitalize;
+}
+
+.teamFont{
+    font-size: .8em;
+    font-family: 'Poppins', sans-serif;
+}
+
 .card-list {
     display: flex;
     overflow-x: scroll;
@@ -114,7 +146,6 @@
     width: 500px;
     height: 250px;
     margin-left: 10px;
-    border: 1px solid rgb(198, 197, 197);
     border-radius: 5px;
     background-color: #ECECF4;
 }
@@ -130,8 +161,11 @@
     height: 150px;
     padding: 20px;
     outline: none;
-    border-radius: 5px;
     margin-top: 20px;
+}
+
+.text-padding{
+    padding: 5px 12px;
 }
 
 .form-group{
@@ -206,7 +240,8 @@
 
 .leave-child{
     height: 400px;
-    background-color:  #ECECF4;
+    background-color:  #faf9f9;
+    /* background-color:  #ECECF4; */
 }
 
 .active {

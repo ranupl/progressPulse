@@ -32,23 +32,24 @@ function TimelineCard({id, created, modified, updates , onUpdate}) {
   return (
     <div className="container">
       <div className="card card-margin-top">
-        <h6 className="font-set">Updated at: {`${cyear}-${cmonth}-${cday}`}</h6>
-        <h6 className="font-set">Modified at: {`${myear}-${mmonth}-${mday}`}</h6>
+        <h6 className="font-set"><span className="text-color">Updated at:</span> {`${cyear}-${cmonth}-${cday}`}</h6>
+        <h6 className="font-set"><span className="text-color">Modified at:</span> {`${myear}-${mmonth}-${mday}`}</h6>
         
         {isEditing ? (
           <div>
             <textarea
               rows="4"
-              cols="50"
+              cols="40"
               value={updatedProgress}
+              className="text-padding"
               onChange={(e) => setUpdatedProgress(e.target.value)}
             />
-            <button onClick={handleUpdateClick}>Update</button>
-            <button onClick={handleCancelClick}>Cancel</button>
+            <button className="btn btn-success font text-white" onClick={handleUpdateClick}>Update</button>&nbsp;
+            <button className="btn btn-danger font text-white" onClick={handleCancelClick}>Cancel</button>
           </div>
         ) : (
           <>
-            <p className="pd-0 font-update font-family">Updates : {updates}</p>
+            <p className="pd-0 font-update font-family"><span className="text-success font-family">Updates : </span> {updates}</p>
             <div className="d-flex pencil justify-content-end">
               <FontAwesomeIcon icon={faPencil} onClick={handleEditClick} />
             </div>

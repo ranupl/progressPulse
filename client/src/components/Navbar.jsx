@@ -6,7 +6,7 @@ import { NavLink } from 'react-router-dom';
 const Navbar = ({ showText , expanded}) => {
     return (
         <>
-            <div  className={`navbar ${expanded ? "expanded col-2 bg-color border" : "collapsed col-1 bg-color border"} bg-color`}>
+            <div  className={`${expanded ? "expanded col-2 bg-color border" : "collapsed col-1 bg-color border"} bg-color`}>
                 <div className='container bdr-btm'>
                     <div className='d-flex mg-top'>
                         <img src="/images/settings.png" alt='logo' className='logoDashboard' />&nbsp;

@@ -65,28 +65,27 @@ const EmployeeDashboard = ({ toggleTextVisibility, dashwidth }) => {
 
     return (
         <>
-            {/* <div className="col-10"> */}
             <div  className={`${dashwidth ? "dashexpand col-10" : "dashcollapse col-11"}`}>
                 <div className="container">
                     <div className='d-flex mg-top border-bottom justify-content-between'>
-                        <div className="d-flex cursor-pointer"> <FontAwesomeIcon icon={faList} onClick={toggleTextVisibility} />&nbsp;&nbsp;
-                            <h6 className='text-dark font-family'>Dashboard</h6></div>
+                        <div className="d-flex cursor-pointer bold"> <FontAwesomeIcon icon={faList} onClick={toggleTextVisibility} />&nbsp;&nbsp;
+                            <h6 className='text-dark bold font-family'>Dashboard</h6></div>
                         {/* dropdown */}
-                        <div class="dropdown">
-                            <span className="text-color dropdown-toggle cursor-pointer" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                                <img src="/images/user (1).png" width="23px" height="23px" alt="" />&nbsp;
-                                {username}
+                        <div className="dropdown">
+                            <span className="text-color d-flex capital cursor-pointer" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                                <img src="/images/user (1).png" width="21px" height="21px" alt="" />&nbsp;
+                                <p className="font-family teamFont text-color">{username}</p>
                             </span>
-                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                                <li><a className="dropdown-item" href="#" onClick={handleLogout}>Logout</a></li>
+                            <ul className="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                                <li><a className="dropdown-item font-family text-color teamFont" href="#" onClick={handleLogout}>Logout</a></li>
                             </ul>
                         </div>
                         {/* dropdown */}
                     </div>
                 </div>
                 <div className="container">
-                    <div className="row border-bottom">
-                        <h4 className="project">Projects/Teams</h4>
+                    <div className="row">
+                        <h4 className="project font-family font">Projects/Teams</h4>
                     </div>
                 </div>
                 <div className="container mg-top">
@@ -95,7 +94,7 @@ const EmployeeDashboard = ({ toggleTextVisibility, dashwidth }) => {
                     </div>
                 </div>
                 <div className="container">
-                    <h6 className="mg-top font-family text-color mb-4">My Updates For Today</h6>
+                    <h6 className="mg-top font-family text-color teamFont mb-4">My Updates For Today</h6>
                 </div>
                 <div className="container">
                     <TeamForm />

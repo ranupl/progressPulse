@@ -39,7 +39,7 @@ const Update = ({show}) => {
                             <form onSubmit={handleSubmit}>
                                 <textarea className="borderless-textarea" name="updates" placeholder="Enter text"></textarea>
                                 <div className="d-flex">
-                                    <button type='submit' className="btn btn-color float-right mg-top font-family float-right text-white">Update</button>
+                                    <button type='submit' className="btn btn-color font float-right mg-top font-family float-right text-white">Update</button>
                                 </div>
                             </form>
                             </div>

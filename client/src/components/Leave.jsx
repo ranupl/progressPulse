@@ -11,6 +11,7 @@ const Leave = ({ toggleTextVisibility, dashwidth }) => {
     const token = localStorage.getItem("authToken");
     var decodedHeader = jwt_decode(token);
     const employeeId = decodedHeader.employee.id;
+    const username = decodedHeader.employee.username;
     
     const [data, setData] = useState([]);
     const [sickLeaveData, setSickLeaveData] = useState(0);
@@ -54,9 +55,9 @@ const Leave = ({ toggleTextVisibility, dashwidth }) => {
         <>
              <div  className={`${dashwidth ? "dashexpand col-10" : "dashcollapse col-11"}`}>
                 <div className="container">
-                    <div className='d-flex mg-top border-bottom'>
+                    <div className='d-flex mg-top border-bottom bold'>
                     <FontAwesomeIcon icon={faList} onClick={toggleTextVisibility}/>&nbsp;&nbsp;
-                        <h6 className='text-dark  font-family'>Leaves</h6>
+                        <h6 className='text-dark bold font-family'>Leaves</h6>
                     </div>
                 </div>
                 <div className="row">
@@ -70,7 +71,7 @@ const Leave = ({ toggleTextVisibility, dashwidth }) => {
                 <div className="container mt-2">
                     <div className="row">
                         <div className="col-5 leave-child mg-rgt">
-                            <h6 className="text-grey font-family">All Leaves</h6>
+                            <h6 className="text-grey font-family teamFont">All Leaves</h6>
                             <div className="d-block">
                                 <AllLeaves data={data} />
                             </div>
@@ -78,23 +79,23 @@ const Leave = ({ toggleTextVisibility, dashwidth }) => {
                         <div className="col-6 leave-child">
                             <div className="container">
                                 <div className='d-flex mg-top border-bottom'>
-                                    <img src="/images/user (1).png" alt="task" width="35px" height="35px " />&nbsp;&nbsp;
-                                    <h5 className='text-dark font-family mt-1'>Employee Name</h5>
+                                    <img src="/images/user (1).png" alt="task" width="30px" height="30px " />&nbsp;&nbsp;
+                                    <h5 className='text-color nav-font font-family mt-1'>{username}</h5>
                                 </div>
                             </div>
                             <div className="leave-box">
                                 <div className="d-flex justify-content-around box-pd">
                                     <div className="d-block">
                                         <h6 className="text-info text-center">{sickLeaveData}</h6>
-                                        <p className="para-f-fmly">Sick</p>
+                                        <p className="font-family teamFont">Sick</p>
                                     </div>
                                     <div className="d-block">
                                         <h6 className="text-info text-center">{casualLeaveData}</h6>
-                                        <p className="para-f-fmly">Casual</p>
+                                        <p className="font-family teamFont">Casual</p>
                                     </div>
                                     <div className="d-block">
                                         <h6 className="text-info text-center">{totalLeaveData}</h6>
-                                        <p className="para-f-fmly">Total</p>
+                                        <p className="font-family teamFont">Total</p>
                                     </div>
                                 </div>
                             </div>

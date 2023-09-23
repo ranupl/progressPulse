@@ -90,14 +90,14 @@ const LeaveApply = () => {
             </button>
             <Modal show={show} onHide={handleClose}>
                 <Modal.Header closeButton>
-                    <Modal.Title className="text-color font-family">Apply Leave</Modal.Title>
+                    <Modal.Title className="text-color font-family fontHeading">Apply Leave</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
                     <div className="container bg-register">
                         <div className="container">
                             <form onSubmit={(e) => handleSubmit(e)}>
                                 <div className="form-group d-flex">
-                                    <label for="inputEmail3" className="col-sm-2 col-form-label font-family lb-f-size">Start-Date</label>
+                                    <label for="inputEmail3" className="col-sm-2 col-form-label inputFont font-family lb-f-size">Start-Date</label>
                                     <div className="col-sm-10">
                                         <input type="date" className="form-control f-size modal-margin" id="inputEmail3" name="start_date"
                                             value={start_date}
@@ -106,7 +106,7 @@ const LeaveApply = () => {
                                     </div>
                                 </div>
                                 <div className="form-group d-flex">
-                                    <label for="inputEmail3" className="col-sm-2 col-form-label font-family lb-f-size">End-Date</label>
+                                    <label for="inputEmail3" className="col-sm-2 col-form-label inputFont font-family lb-f-size">End-Date</label>
                                     <div className="col-sm-10">
                                         <input type="date" className="form-control f-size modal-margin" id="inputEmail3" name="end_date"
                                             value={end_date}
@@ -115,20 +115,20 @@ const LeaveApply = () => {
                                     </div>
                                 </div>
                                 <div className="form-group d-flex">
-                                    <label className="col-sm-2 col-form-label font-family lb-f-size" for="inlineFormCustomSelectPref">Type</label>
+                                    <label className="col-sm-2 col-form-label font-family inputFont lb-f-size" for="inlineFormCustomSelectPref">Type</label>
                                     <div className="col-sm-10">
                                         <select id="inlineFormCustomSelectPref" name="type"
                                             value={type}
                                             onChange={(e) => setType(e.target.value)}
                                             className="form-control f-size modal-margin" required>
-                                            <option selected>Choose...</option>
+                                            <option selected><span className="text-grey inputFont">Choose...</span></option>
                                             <option value="1">Sick</option>
                                             <option value="2">Casual</option>
                                         </select>
                                     </div>
                                 </div>
                                 <div className="form-group d-flex">
-                                    <label for="inputEmail3" className="col-sm-2 col-form-label font-family lb-f-size">No Of Days</label>
+                                    <label for="inputEmail3" className="col-sm-2 col-form-label font-family lb-f-size inputFont">No Of Days</label>
                                     <div className="col-sm-10">
                                         <input type="text" className="form-control f-size modal-margin" id="inputEmail3" name="no_of_days"
                                             value={no_of_days}
@@ -139,7 +139,7 @@ const LeaveApply = () => {
                                     </div>
                                 </div>
                                 <div className="form-group d-flex">
-                                    <label for="inputEmail3" className="col-sm-2 col-form-label font-family lb-f-size">Reason</label>
+                                    <label for="inputEmail3" className="col-sm-2 col-form-label font-family inputFont lb-f-size">Reason</label>
                                     <div className="col-sm-10">
                                         <input type="text" className="form-control f-size modal-margin" id="inputEmail3" name="reason"
                                             value={reason}
@@ -150,7 +150,7 @@ const LeaveApply = () => {
                                 <div className="form-group">
                                     <div className="col-sm-10">
                                         <button type="submit" onClick={handleClose}
-                                            className="btn btn-color text-white font-family">Submit</button>
+                                            className="btn btn-color font text-white font-family">Submit</button>
                                     </div>
                                 </div>
                             </form>
