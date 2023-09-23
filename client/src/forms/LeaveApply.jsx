@@ -37,18 +37,6 @@ const LeaveApply = () => {
         fetchData();
     }, [employeeId]);
 
-    // const handleBlur = () => {
-    //     const startDateObj = new Date(start_date);
-    //     const endDateObj = new Date(end_date);
-    //     const dayDifference = Math.floor((endDateObj - startDateObj) / (1000 * 60 * 60 * 24)) + 1;
-    
-    //     if (dayDifference <= totalLeave) {
-    //         setTempMessage(""); 
-    //     } else {
-    //         setTempMessage("No. of days exceeds your total leave balance.");
-    //     }
-    // };
-
     function calculateWeekdays(startDate, endDate) {
         const start = new Date(startDate);
         const end = new Date(endDate);
@@ -64,7 +52,6 @@ const LeaveApply = () => {
         return weekdays;
     }
     
-
     const handleBlur = () => {
         const weekdays = calculateWeekdays(start_date, end_date);
         console.log("handle",weekdays);
@@ -75,7 +62,6 @@ const LeaveApply = () => {
             setTempMessage(""); 
         }
     };
-    
     
     const handleSubmit = async (e) => {
         e.preventDefault();

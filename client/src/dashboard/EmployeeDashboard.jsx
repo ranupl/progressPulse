@@ -11,7 +11,7 @@ import axios from "axios";
 import jwt_decode from "jwt-decode";
 import TeamForm from "../forms/TeamForm";
 
-const EmployeeDashboard = () => {
+const EmployeeDashboard = ({ toggleTextVisibility, dashwidth }) => {
     const navigate = useNavigate();
     const [data, setData] = useState([]);
     const [teamId, setTeamID] = useState("");
@@ -65,10 +65,11 @@ const EmployeeDashboard = () => {
 
     return (
         <>
-            <div className="col-10">
+            {/* <div className="col-10"> */}
+            <div  className={`${dashwidth ? "dashexpand col-10" : "dashcollapse col-11"}`}>
                 <div className="container">
                     <div className='d-flex mg-top border-bottom justify-content-between'>
-                        <div className="d-flex"> <FontAwesomeIcon icon={faList} />&nbsp;&nbsp;
+                        <div className="d-flex cursor-pointer"> <FontAwesomeIcon icon={faList} onClick={toggleTextVisibility} />&nbsp;&nbsp;
                             <h6 className='text-dark font-family'>Dashboard</h6></div>
                         {/* dropdown */}
                         <div class="dropdown">

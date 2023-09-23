@@ -60,7 +60,7 @@ const TeamForm = () => {
                                         onChange={(e) => setReleaseNotes(e.target.value)}
                                         placeholder="Enter notes" required />
                                 </div>
-                                <button type="submit" className="btn btn-primary">Submit</button>
+                                <button type="submit" className="btn btn-color font text-white">Submit</button>
                             </form>
                         </div>
                     </div>

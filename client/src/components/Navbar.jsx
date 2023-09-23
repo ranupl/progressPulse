@@ -3,30 +3,30 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faHouse, faRightFromBracket, faListCheck, faClock } from '@fortawesome/free-solid-svg-icons'
 import { NavLink } from 'react-router-dom';
 
-const Navbar = () => {
+const Navbar = ({ showText , expanded}) => {
     return (
         <>
-            <div className="col-2 border bg-color">
-                <div className='container'>
-                    <div className='d-flex mg-top border-bottom'>
+            <div  className={`navbar ${expanded ? "expanded col-2 bg-color border" : "collapsed col-1 bg-color border"} bg-color`}>
+                <div className='container bdr-btm'>
+                    <div className='d-flex mg-top'>
                         <img src="/images/settings.png" alt='logo' className='logoDashboard' />&nbsp;
-                        <h5 className='text-color font-family'>ProgressPulse</h5>
+                        <h6 className='text-color font-family'>{showText && <span>ProgressPulse</span>}</h6>
                     </div>
                 </div>
                 <div className="container">
                     <nav>
                         <ul>
                             <li>
-                                <NavLink to="/" className="navlink" activeClassName="active" exact><FontAwesomeIcon icon={faHouse} />&nbsp;<span>Dashboard</span></NavLink>
+                                <NavLink to="/" className="navlink nav-font font-family" activeClassName="active" exact><FontAwesomeIcon icon={faHouse} />&nbsp;{showText && <span>Dashboard</span>}</NavLink>
                             </li>
                             <li>
-                                <NavLink to="/timeline" className="navlink" activeClassName="active"><FontAwesomeIcon icon={faClock} />&nbsp;<span>MyTimeline</span></NavLink>
+                                <NavLink to="/timeline" className="navlink nav-font font-family" activeClassName="active"><FontAwesomeIcon icon={faClock} />&nbsp;{showText && <span>MyTimeline</span>}</NavLink>
                             </li>
                             <li>
-                                <NavLink to="/leave" className="navlink" activeClassName="active"><FontAwesomeIcon icon={faRightFromBracket} />&nbsp;<span>Leaves</span></NavLink>
+                                <NavLink to="/leave" className="navlink nav-font font-family" activeClassName="active"><FontAwesomeIcon icon={faRightFromBracket} />&nbsp;{showText && <span>Leaves</span>}</NavLink>
                             </li>
                             <li>
-                                <NavLink to="/tasks" className="navlink" activeClassName="active"><FontAwesomeIcon icon={faListCheck} />&nbsp;<span>MyTasks</span></NavLink>
+                                <NavLink to="/tasks" className="navlink nav-font font-family" activeClassName="active"><FontAwesomeIcon icon={faListCheck} />&nbsp;{showText && <span>MyTasks</span>}</NavLink>
                             </li>
                             <li className=" navlink pd-btm"></li>
                         </ul>

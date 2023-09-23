@@ -7,7 +7,7 @@ import { faList } from '@fortawesome/free-solid-svg-icons'
 import axios from "axios";
 import jwt_decode from "jwt-decode";
 
-const Leave = () => {
+const Leave = ({ toggleTextVisibility, dashwidth }) => {
     const token = localStorage.getItem("authToken");
     var decodedHeader = jwt_decode(token);
     const employeeId = decodedHeader.employee.id;
@@ -52,10 +52,10 @@ const Leave = () => {
 
     return (
         <>
-            <div className="col-10">
+             <div  className={`${dashwidth ? "dashexpand col-10" : "dashcollapse col-11"}`}>
                 <div className="container">
                     <div className='d-flex mg-top border-bottom'>
-                    <FontAwesomeIcon icon={faList} />&nbsp;&nbsp;
+                    <FontAwesomeIcon icon={faList} onClick={toggleTextVisibility}/>&nbsp;&nbsp;
                         <h6 className='text-dark  font-family'>Leaves</h6>
                     </div>
                 </div>
