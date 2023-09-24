@@ -4,22 +4,23 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import { toast } from "react-toastify";
 
-const EmployeeTable = ({teamId}) => {
+const EmployeeTable = ({ teamId }) => {
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
     const [data, setData] = useState([]);
-    
+    const [buttonShow, setButtonShow] = useState(true);
+
     useEffect(() => {
         const token = localStorage.getItem("authToken");
         const fetchData = async () => {
             try {
                 const response = await axios.get(
                     `${process.env.REACT_APP_SERVER_URL}/getAllEmployee`, {
-                        headers: {
-                            'Authorization': `Bearer ${token}`,
-                            'Content-Type': 'application/json',
-                        },
+                    headers: {
+                        'Authorization': `Bearer ${token}`,
+                        'Content-Type': 'application/json',
+                    },
                 }
                 );
                 setData(response.data);
@@ -30,13 +31,24 @@ const EmployeeTable = ({teamId}) => {
         fetchData();
     }, []);
 
-    
+
     const handleMapping = async (employeeId) => {
         const result = await axios.post(`${process.env.REACT_APP_SERVER_URL}/teamEmployeeMap`,
-            { team_id: teamId, employee_id: employeeId});
+            { team_id: teamId, employee_id: employeeId });
 
         if (result.status === 200) {
             toast.error("Member added successfully");
+            setButtonShow(false);
+        } else {
+            toast.error("Something went wrong!");
+        }
+    }
+
+    const handleRemoveMapping = async (employeeId) => {
+        const result = await axios.delete(`${process.env.REACT_APP_SERVER_URL}/deleteTeamEmployeeMap/${employeeId}`);
+        if (result.status === 200) {
+            toast.error("Member removed successfully");
+            setButtonShow(true);
         } else {
             toast.error("Something went wrong!");
         }
@@ -69,7 +81,12 @@ const EmployeeTable = ({teamId}) => {
                                             <td className="font">{data.first_name}</td>
                                             <td className="font">{data.last_name}</td>
                                             <td className="font">{data.username}</td>
-                                            <td><button type="button" onClick={() => handleMapping(data.id)} className={`btn btn-danger font btn-size text-white`}>Add</button>
+                                            <td>
+                                                {buttonShow ? (
+                                                    <button type="button" onClick={() => handleMapping(data.id)} className={`btn btn-danger font btn-size text-white`}>Add</button>
+                                                ) : (
+                                                    <button type="button" onClick={() => handleRemoveMapping(data.id)} className={`btn btn-success font btn-size text-white`}>Remove</button>
+                                                )}
                                             </td>
                                         </tr>
                                     ))}

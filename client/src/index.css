@@ -241,7 +241,6 @@ input::placeholder {
 .leave-child{
     height: 400px;
     background-color:  #faf9f9;
-    /* background-color:  #ECECF4; */
 }
 
 .active {
