@@ -18,13 +18,13 @@ async function getTeamEmployeeMapById(teamId) {
     }
   }
 
-async function deleteTeamEmployeeMap(teamId) {
+async function deleteTeamEmployeeMap(employeeId) {
     try {
-      const existingTeam = await teamStore.getTeamEmployeeMapById(teamId);
+      const existingTeam = await teamStore.getTeamEmployeeMapById(employeeId);
       if (!existingTeam) {
         throw new Error("Mapping not found");
       }
-      const deletedTeam = await teamStore.deleteTeamEmployeeMap(teamId);
+      const deletedTeam = await teamStore.deleteTeamEmployeeMap(employeeId);
       return deletedTeam;
     } catch (error) {
       console.log(error);

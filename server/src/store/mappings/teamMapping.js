@@ -25,11 +25,11 @@ async function teamEmployeeMap(teamData) {
     }
 }
 
-async function getTeamEmployeeMapById(teamId) {
-    const query = "select * from employee_team_map where team_id = ?";
+async function getTeamEmployeeMapById(employeeId) {
+    const query = "select * from employee_team_map where employee_id = ?";
     try {
       const queryResult = await new Promise((resolve, reject) => {
-        db.query(query, [teamId], (err, results) => {
+        db.query(query, [employeeId], (err, results) => {
           if (err) {
             reject(err);
           } else {
@@ -43,11 +43,11 @@ async function getTeamEmployeeMapById(teamId) {
     }
   }
 
-async function deleteTeamEmployeeMap(teamId) {
+async function deleteTeamEmployeeMap(employeeId) {
     const query = "DELETE FROM employee_team_map WHERE employee_id = ?";
     try {
         const queryResult = await new Promise((resolve, reject) => {
-            db.query(query, [teamId], (err, results) => {
+            db.query(query, [employeeId], (err, results) => {
                 if (err) reject(err);
                 resolve(results.affectedRows > 0);
             });

@@ -73,6 +73,7 @@ app.put("/updateLeaveApply/:id", leaveApplyController.updateLeaveApply);
 
 // teamEmployee map
 app.post("/teamEmployeeMap", mappingController.teamEmployeeMap);
+app.get("/getTeamEmployeeMapById/:id", mappingController.getTeamEmployeeMapById);
 app.delete("/deleteTeamEmployeeMap/:id", mappingController.deleteTeamEmployeeMap);
 
 app.get("/", (req, res) => {

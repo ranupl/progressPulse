@@ -17,11 +17,11 @@ async function teamEmployeeMap(req, res) {
 }
 
 async function getTeamEmployeeMapById(req, res) {
-    const teamId = req.params.id;
+    const employeeId = req.params.id;
   
     try {
-      const teamMapping = await teamService.getTeamEmployeeMapById(teamId);
-      if (!team) {
+      const teamMapping = await teamService.getTeamEmployeeMapById(employeeId);
+      if (!teamMapping) {
         res.status(404).json({ error: "Mapping not found" });
       } else {
         res.status(200).json({ message: 'successful', teamMapping });
@@ -32,10 +32,10 @@ async function getTeamEmployeeMapById(req, res) {
   }
 
 async function deleteTeamEmployeeMap(req, res) {
-    const teamId = req.params.id;
+    const employeeId = req.params.id;
 
     try {
-        const deletedTeam = await teamService.deleteTeamEmployeeMap(teamId);
+        const deletedTeam = await teamService.deleteTeamEmployeeMap(employeeId);
         res.json(deletedTeam);
     } catch (err) {
         console.log(err);
