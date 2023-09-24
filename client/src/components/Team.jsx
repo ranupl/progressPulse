@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
 import EmployeeTable from "./EmployeeTable";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faUser, faPenNib } from '@fortawesome/free-solid-svg-icons'
 import axios from "axios";
 
 const Team = ({ show, teamId }) => {
@@ -41,13 +43,13 @@ const Team = ({ show, teamId }) => {
     <div className={show.teams ? "show" : "hide"}>
       <EmployeeTable teamId={teamId}/>
       {teams.map((team) => (        
-        <div className="container border" key={team.id}>
+        <div className="container border p-3" key={team.id}>
           <div className="d-flex">
-            <p className="font text-success">created: {team.created}</p>&nbsp;&nbsp;
-            <p className="font text-success">modified: {team.modified}</p>
+            <p className="font"><span className="text-color">created : </span> {team.created}</p>&nbsp;&nbsp;
+            <p className="font"><span className="text-color">modified : </span> {team.modified}</p>
           </div>
-          <p className="text-info">username: {team.username}</p>
-          <p className="text-info">updates: {team.updates}</p>
+          <p className="font"><FontAwesomeIcon icon={faUser} />&nbsp;&nbsp;username: {team.username}</p>
+          <p className="font"><FontAwesomeIcon icon={faPenNib}/>&nbsp;&nbsp;updates: {team.updates}</p>
         </div>
       ))}
     </div>

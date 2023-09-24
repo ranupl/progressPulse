@@ -1,6 +1,5 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Modal } from 'react-bootstrap';
-import { useState, useEffect } from "react";
 import axios from "axios";
 import { toast } from "react-toastify";
 
@@ -9,9 +8,12 @@ const EmployeeTable = ({ teamId }) => {
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
     const [data, setData] = useState([]);
-    const [buttonShow, setButtonShow] = useState(true);
+    const [employeeMapping, setEmployeeMapping] = useState({});
 
     useEffect(() => {
+        const savedEmployeeMapping = JSON.parse(localStorage.getItem("employeeMapping")) || {};
+        setEmployeeMapping(savedEmployeeMapping);
+
         const token = localStorage.getItem("authToken");
         const fetchData = async () => {
             try {
@@ -31,6 +33,9 @@ const EmployeeTable = ({ teamId }) => {
         fetchData();
     }, []);
 
+    useEffect(() => {
+        localStorage.setItem("employeeMapping", JSON.stringify(employeeMapping));
+    }, [employeeMapping]);
 
     const handleMapping = async (employeeId) => {
         const result = await axios.post(`${process.env.REACT_APP_SERVER_URL}/teamEmployeeMap`,
@@ -38,7 +43,10 @@ const EmployeeTable = ({ teamId }) => {
 
         if (result.status === 200) {
             toast.error("Member added successfully");
-            setButtonShow(false);
+            setEmployeeMapping(prevMapping => ({
+                ...prevMapping,
+                [employeeId]: true,
+            }));
         } else {
             toast.error("Something went wrong!");
         }
@@ -48,7 +56,10 @@ const EmployeeTable = ({ teamId }) => {
         const result = await axios.delete(`${process.env.REACT_APP_SERVER_URL}/deleteTeamEmployeeMap/${employeeId}`);
         if (result.status === 200) {
             toast.error("Member removed successfully");
-            setButtonShow(true);
+            setEmployeeMapping(prevMapping => ({
+                ...prevMapping,
+                [employeeId]: false,
+            }));
         } else {
             toast.error("Something went wrong!");
         }
@@ -56,17 +67,17 @@ const EmployeeTable = ({ teamId }) => {
 
     return (
         <>
-            <button type="button" className="btn btn-color mg-btm text-white font" onClick={handleShow}>
+            <button type="button" className="btn btn-color mb-2 text-white font" onClick={handleShow}>
                 Add Members
             </button>
             <Modal show={show} onHide={handleClose}>
                 <Modal.Header closeButton>
-                    <Modal.Title className="text-color font-family">Add Members</Modal.Title>
+                    <Modal.Title className="text-color font-family fontHeading">Add Members</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
                     <div className="bg-register">
-                        <div className="container border">
-                            <table className="table table-striped employee-list">
+                        <div className="container employee-list">
+                            <table className="table table-striped">
                                 <thead>
                                     <tr>
                                         <th scope="col" className="font">FirstName</th>
@@ -76,16 +87,28 @@ const EmployeeTable = ({ teamId }) => {
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {data.map((data, index) => (
+                                    {data.map((employee, index) => (
                                         <tr key={index}>
-                                            <td className="font">{data.first_name}</td>
-                                            <td className="font">{data.last_name}</td>
-                                            <td className="font">{data.username}</td>
+                                            <td className="font">{employee.first_name}</td>
+                                            <td className="font">{employee.last_name}</td>
+                                            <td className="font">{employee.username}</td>
                                             <td>
-                                                {buttonShow ? (
-                                                    <button type="button" onClick={() => handleMapping(data.id)} className={`btn btn-danger font btn-size text-white`}>Add</button>
+                                                {employeeMapping[employee.id] ? (
+                                                    <button
+                                                        type="button"
+                                                        onClick={() => handleRemoveMapping(employee.id)}
+                                                        className="btn btn-success font btn-size text-white"
+                                                    >
+                                                        Remove
+                                                    </button>
                                                 ) : (
-                                                    <button type="button" onClick={() => handleRemoveMapping(data.id)} className={`btn btn-success font btn-size text-white`}>Remove</button>
+                                                    <button
+                                                        type="button"
+                                                        onClick={() => handleMapping(employee.id)}
+                                                        className="btn btn-danger font btn-size text-white"
+                                                    >
+                                                        Add
+                                                    </button>
                                                 )}
                                             </td>
                                         </tr>

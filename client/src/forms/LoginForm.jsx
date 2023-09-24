@@ -20,10 +20,10 @@ const LoginForm = () => {
           console.log(result.data);
       
           if (result.status === 200) {
-            if (result?.data) {
+            if (result?.data?.token) {
               const token = result.data.token;
               console.log(token);
-              // axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+              axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
               localStorage.setItem("authToken", token);
               navigate('/');
             } else {
@@ -34,25 +34,19 @@ const LoginForm = () => {
           }
         } catch (error) {
           console.error("Error in login:", error);
-      
-          // Handle specific error cases here
           if (error.response) {
-            // Server responded with an error status code (e.g., 4xx, 5xx)
             console.error("Server error:", error.response.data);
             toast.error("Server error. Please try again later.");
           } else if (error.request) {
-            // The request was made but no response was received
             console.error("Network error:", error.request);
             toast.error("Network error. Please check your internet connection.");
           } else {
-            // Something else happened in setting up the request
             console.error("Other error:", error.message);
             toast.error("An error occurred. Please try again.");
           }
         }
       };
       
-
     return (
         <>
             <form onSubmit={(e) => handleSubmit(e)} >
