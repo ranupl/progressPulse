@@ -14,8 +14,7 @@ async function createLeaveApply(leaveApplyData) {
   const randomId = generateRandomId(5);
   const { id, employee_id, no_of_days, type, reason, start_date, end_date } = leaveApplyData;
   const status = type === '1' ? 'approved' : 'pending';
-  console.log("type",type);
-  console.log("status", status);
+ 
   const query =
     "INSERT INTO leave_apply (id, employee_id, no_of_days, type, reason,start_date, end_date, status) VALUES ( ?,?, ?, ?, ?, ?, ?, ?)";
 

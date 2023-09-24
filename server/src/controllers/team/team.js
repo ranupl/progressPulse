@@ -36,7 +36,6 @@ async function getTeamById(req, res) {
     if (!team) {
       res.status(404).json({ error: "Team not found" });
     } else {
-      // res.json(team);
       res.status(200).json({ message: 'successful', team });
     }
   } catch (err) {
@@ -72,5 +71,5 @@ module.exports = {
   getAllTeam,
   getTeamById,
   updateTeam,
-  deleteTeam
+  deleteTeam,
 }

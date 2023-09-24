@@ -8,6 +8,7 @@ const progressController = require("./src/controllers/progress/progress");
 const leaveController = require("./src/controllers/leave/leave");
 const leaveApplyController = require("./src/controllers/leaveApply/leaveApply");
 const authController = require("./src/controllers/auth/auth");
+const mappingController = require("./src/controllers/mappings/teamMapping");
 const authenticateToken = require('./src/middleware/authToken');
 const cors = require('cors');
 const app = express();
@@ -69,6 +70,10 @@ app.post("/createLeaveApply", leaveApplyController.createLeaveApply);
 app.get("/getAllLeaveApply", leaveApplyController.getAllLeaveApply);
 app.get("/getLeaveApplyById/:id", leaveApplyController.getLeaveApplyById);
 app.put("/updateLeaveApply/:id", leaveApplyController.updateLeaveApply);
+
+// teamEmployee map
+app.post("/teamEmployeeMap", mappingController.teamEmployeeMap);
+app.delete("/deleteTeamEmployeeMap/:id", mappingController.deleteTeamEmployeeMap);
 
 app.get("/", (req, res) => {
     res.send("progress pulse");
