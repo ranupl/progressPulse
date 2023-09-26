@@ -22,7 +22,12 @@ const Leave = ({ toggleTextVisibility, dashwidth }) => {
         const fetchData = async () => {
             try {
               const response = await axios.get(
-                `${process.env.REACT_APP_SERVER_URL}/getLeaveApplyById/${employeeId}`
+                `${process.env.REACT_APP_SERVER_URL}/getLeaveApplyById/${employeeId}`,
+                {
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    },
+                }
               );
               setData(response.data.allLeave);
             } catch (error) {
@@ -36,7 +41,12 @@ const Leave = ({ toggleTextVisibility, dashwidth }) => {
         const fetchData = async () => {
             try {
               const response = await axios.get(
-                `${process.env.REACT_APP_SERVER_URL}/getLeaveById/${employeeId}`
+                `${process.env.REACT_APP_SERVER_URL}/getLeaveById/${employeeId}`,
+                {
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    },
+                }
               );
               const sickLeave = response.data.leave[0].sick;
               const casualLeave = response.data.leave[0].casual;

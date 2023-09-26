@@ -3,10 +3,17 @@ import MytimelineCard from '../cards/Mytimeline';
 import axios from "axios";
 
 function MyTimelineList({ data }) {
-
+  const token = localStorage.getItem("authToken");
   const onUpdate = (progressId, updatedProgress) => {
-    
-    axios.put(`${process.env.REACT_APP_SERVER_URL}/updateProgress/${progressId}`,  {updates: updatedProgress})
+
+    axios.put(`${process.env.REACT_APP_SERVER_URL}/updateProgress/${progressId}`, { updates: updatedProgress },
+      {
+        headers: {
+          'Authorization': `Bearer ${token}`,
+          'Content-Type': 'application/json',
+        },
+      }
+    )
       .then(response => {
         console.log("Updated successfully:", response.data);
       })

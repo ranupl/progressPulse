@@ -22,6 +22,7 @@ const EmployeeDashboard = ({ toggleTextVisibility, dashwidth }) => {
     const token = localStorage.getItem("authToken");
     var decodedHeader = jwt_decode(token);
     const username = decodedHeader.employee.username;
+    const designation = decodedHeader.employee.designation;
 
     useEffect(() => {
         const predefinedColors = [
@@ -37,7 +38,6 @@ const EmployeeDashboard = ({ toggleTextVisibility, dashwidth }) => {
           },})
           .then((response) => {
             const responseData = response.data;
-            console.log(responseData);
             const dataWithColors = responseData.map((item, index) => ({
               ...item,
               color: predefinedColors[index % predefinedColors.length],
@@ -97,11 +97,11 @@ const EmployeeDashboard = ({ toggleTextVisibility, dashwidth }) => {
                     <h6 className="mg-top font-family text-color teamFont mb-4">My Updates For Today</h6>
                 </div>
                 <div className="container">
-                    <TeamForm />
+                    {designation === "manager" && <TeamForm />}
                 </div>
                 <div className="row">
                     <div className="col"><Update show={show} /></div>
-                    <div className="col"><LeaveTable /></div>
+                    <div className="col">{designation === "manager" && <LeaveTable />}</div>
                 </div>
                 <Team show={show} teamId={teamId} />
             </div>

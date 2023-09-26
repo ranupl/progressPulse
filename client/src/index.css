@@ -193,6 +193,13 @@ input::placeholder {
 
 .login-btn{
     background-color: #4253F0;
+    color: white;
+}
+
+.login-btn:hover {
+    color: #4253F0;
+    background-color: white;
+    border: 1px solid #4253F0;
 }
 
 .font-update{

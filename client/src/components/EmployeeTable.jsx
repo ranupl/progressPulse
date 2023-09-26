@@ -9,6 +9,7 @@ const EmployeeTable = ({ teamId }) => {
     const handleShow = () => setShow(true);
     const [data, setData] = useState([]);
     const [employeeMapping, setEmployeeMapping] = useState({});
+    const token = localStorage.getItem("authToken");
 
     useEffect(() => {
         const savedEmployeeMapping = JSON.parse(localStorage.getItem("employeeMapping")) || {};
@@ -39,7 +40,13 @@ const EmployeeTable = ({ teamId }) => {
 
     const handleMapping = async (employeeId) => {
         const result = await axios.post(`${process.env.REACT_APP_SERVER_URL}/teamEmployeeMap`,
-            { team_id: teamId, employee_id: employeeId });
+            { team_id: teamId, employee_id: employeeId },
+            {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            }
+            );
 
         if (result.status === 200) {
             toast.error("Member added successfully");
@@ -53,7 +60,13 @@ const EmployeeTable = ({ teamId }) => {
     }
 
     const handleRemoveMapping = async (employeeId) => {
-        const result = await axios.delete(`${process.env.REACT_APP_SERVER_URL}/deleteTeamEmployeeMap/${employeeId}`);
+        const result = await axios.delete(`${process.env.REACT_APP_SERVER_URL}/deleteTeamEmployeeMap/${employeeId}`,
+        {
+            headers: {
+                Authorization: `Bearer ${token}`,
+            },
+        }
+        );
         if (result.status === 200) {
             toast.error("Member removed successfully");
             setEmployeeMapping(prevMapping => ({

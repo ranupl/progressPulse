@@ -13,10 +13,18 @@ const TeamForm = () => {
     const [description, setDescription] = useState("");
     const [release_notes, setReleaseNotes] = useState("");
 
+    const token = localStorage.getItem("authToken");
+
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        const result = await axios.post(`${process.env.REACT_APP_SERVER_URL}/createTeam`, { title: title, description: description, release_notes: release_notes });
+        const result = await axios.post(`${process.env.REACT_APP_SERVER_URL}/createTeam`,
+            { title: title, description: description, release_notes: release_notes },
+            {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            });
 
         if (result.status === 200) {
             toast.error("Team Created successfully");

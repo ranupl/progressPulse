@@ -9,10 +9,12 @@ const LeaveTable = () => {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          `${process.env.REACT_APP_SERVER_URL}/getAllLeaveApply`,{ headers: {
-            'Authorization': `Bearer ${token}`, 
-            'Content-Type': 'application/json', 
-          },}
+          `${process.env.REACT_APP_SERVER_URL}/getAllLeaveApply`,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
         );
         setLeaves(response.data);
       } catch (error) {
@@ -32,7 +34,12 @@ const LeaveTable = () => {
     try {
       await axios.put(
         `${process.env.REACT_APP_SERVER_URL}/updateLeaveApply/${leaveId}`,
-        { status: 'rejected' }
+        { status: 'rejected' },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
       );
 
       const updatedLeaves = leaves.map((leave) =>
@@ -49,12 +56,12 @@ const LeaveTable = () => {
     try {
       await axios.put(
         `${process.env.REACT_APP_SERVER_URL}/updateLeaveApply/${leaveId}`,
-        { status: 'approved' }, {
+        { status: 'approved' },
+        {
           headers: {
-            'Authorization': `Bearer ${token}`, 
-            'Content-Type': 'application/json', 
+            Authorization: `Bearer ${token}`,
           },
-      }
+        }
       );
 
       const updatedLeaves = leaves.map((leave) =>

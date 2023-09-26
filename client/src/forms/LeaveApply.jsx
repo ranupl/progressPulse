@@ -1,8 +1,7 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Modal } from 'react-bootstrap';
-import { useState, useEffect } from "react";
-import axios from "axios";
 import { toast } from "react-toastify";
+import axios from "axios";
 import jwt_decode from "jwt-decode";
 
 const LeaveApply = () => {
@@ -21,12 +20,17 @@ const LeaveApply = () => {
     const token = localStorage.getItem("authToken");
     var decodedHeader = jwt_decode(token);
     const employeeId = decodedHeader.employee.id;
-   
+
     useEffect(() => {
         const fetchData = async () => {
             try {
                 const response = await axios.get(
-                    `${process.env.REACT_APP_SERVER_URL}/getLeaveById/${employeeId}`
+                    `${process.env.REACT_APP_SERVER_URL}/getLeaveById/${employeeId}`,
+                    {
+                        headers: {
+                            Authorization: `Bearer ${token}`,
+                        },
+                    }
                 );
                 const totalLeaveValue = response.data.leave[0].total;
                 setTotalLeave(totalLeaveValue);
@@ -37,39 +41,47 @@ const LeaveApply = () => {
         fetchData();
     }, [employeeId]);
 
-    function calculateWeekdays(startDate, endDate) {
-        const start = new Date(startDate);
-        const end = new Date(endDate);
-    
-        let weekdays = 0;
-        while (start <= end) {
-            if (start.getDay() !== 0 && start.getDay() !== 6) {
-                weekdays++;
+    function calculateWeekdays() {
+        if (start_date && end_date) {
+            const start = new Date(start_date);
+            const end = new Date(end_date);
+
+            let weekdays = 0;
+            while (start <= end) {
+                if (start.getDay() !== 0 && start.getDay() !== 6) {
+                    weekdays++;
+                }
+                start.setDate(start.getDate() + 1);
             }
-            start.setDate(start.getDate() + 1);
+
+            setDays(weekdays);
         }
-    
-        return weekdays;
     }
-    
+
+    useEffect(() => {
+        calculateWeekdays();
+    }, [start_date, end_date]);
+
     const handleBlur = () => {
-        const weekdays = calculateWeekdays(start_date, end_date);
-        console.log("handle",weekdays);
-    
-        if (weekdays > totalLeave) {
-            setTempMessage("Total weekdays exceeds your total leave balance.");
+        if (no_of_days > totalLeave) {
+            setTempMessage("Total weekdays exceed your total leave balance.");
         } else {
-            setTempMessage(""); 
+            setTempMessage("");
         }
     };
-    
+
     const handleSubmit = async (e) => {
         e.preventDefault();
-    
-        const weekdays = calculateWeekdays(start_date, end_date);
-        console.log("on submit", weekdays);
-        if (weekdays <= totalLeave) {
-            const result = await axios.post(`${process.env.REACT_APP_SERVER_URL}/createLeaveApply`, { no_of_days: no_of_days, type: type, reason: reason, start_date: start_date, end_date: end_date });
+
+        if (no_of_days <= totalLeave) {
+            const result = await axios.post(`${process.env.REACT_APP_SERVER_URL}/createLeaveApply`, 
+            { no_of_days: no_of_days, type: type, reason: reason, start_date: start_date, end_date: end_date, totalLeave: totalLeave, },
+            {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            }
+            );
             if (result.status === 200) {
                 if (result?.data?.allLeave) {
                     toast.error("Leave Applied successfully");
@@ -77,11 +89,10 @@ const LeaveApply = () => {
             } else {
                 toast.error("Something went wrong!");
             }
+        } else {
+            toast.error("Leave Application failed");
         }
-        else {
-            toast.error("Leave Applied failed");
-        }
-    }
+    };
 
     return (
         <>
@@ -111,7 +122,7 @@ const LeaveApply = () => {
                                         <input type="date" className="form-control f-size modal-margin" id="inputEmail3" name="end_date"
                                             value={end_date}
                                             onChange={(e) => setEndDate(e.target.value)}
-                                            placeholder="End date" required/>
+                                            placeholder="End date" required />
                                     </div>
                                 </div>
                                 <div className="form-group d-flex">
@@ -134,8 +145,8 @@ const LeaveApply = () => {
                                             value={no_of_days}
                                             onChange={(e) => setDays(e.target.value)}
                                             onBlur={handleBlur}
-                                            placeholder="No. of days"required />
-                                            <div className="text-danger font modal-margin">{tempMessage}</div>
+                                            placeholder="No. of days" required />
+                                        <div className="text-danger font modal-margin">{tempMessage}</div>
                                     </div>
                                 </div>
                                 <div className="form-group d-flex">
@@ -144,7 +155,7 @@ const LeaveApply = () => {
                                         <input type="text" className="form-control f-size modal-margin" id="inputEmail3" name="reason"
                                             value={reason}
                                             onChange={(e) => setReason(e.target.value)}
-                                            placeholder="Reason" required/>
+                                            placeholder="Reason" required />
                                     </div>
                                 </div>
                                 <div className="form-group">
