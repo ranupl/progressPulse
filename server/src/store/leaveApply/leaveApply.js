@@ -1,4 +1,4 @@
-const db = require("../db");
+const { db, query } = require("../db");
 function generateRandomId(length) {
   const charset = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
   let id = "";
@@ -12,29 +12,37 @@ function generateRandomId(length) {
 
 async function createLeaveApply(leaveApplyData) {
   const randomId = generateRandomId(5);
-  const { id, employee_id, no_of_days, type, reason, start_date, end_date } = leaveApplyData;
+  const { id, no_of_days, type, reason, start_date, end_date, totalLeave, sessionData } = leaveApplyData;
   const status = type === '1' ? 'approved' : 'pending';
- 
-  const query =
-    "INSERT INTO leave_apply (id, employee_id, no_of_days, type, reason,start_date, end_date, status) VALUES ( ?,?, ?, ?, ?, ?, ?, ?)";
+  const uid = sessionData.id;
 
   try {
-    const results = await new Promise((resolve, reject) => {
-      db.query(
-        query,
-        [randomId, employee_id, no_of_days, type, reason, start_date, end_date, status],
-        (err, results) => {
-          if (err) {
-            reject(err);
-          } else {
-            resolve(results);
-          }
-        }
-      );
-    });
-    return results;
-  } catch (error) {
-    console.log(error);
+    await query("START TRANSACTION");
+
+    const leaveCountsQuery = "SELECT sick, casual, total FROM leaves WHERE employee_id = ?";
+    const [currentLeaveCounts] = await query(leaveCountsQuery, [uid]);
+    let { sick, casual, total } = currentLeaveCounts;
+    
+    if (type === '1') {
+      sick += no_of_days;
+    } else {
+      casual += no_of_days;
+    }
+
+    total = totalLeave - no_of_days;
+
+    const leaveMappingQuery = "UPDATE leaves SET sick = ?, casual = ?, total = ? WHERE employee_id = ?";
+    await query(leaveMappingQuery, [sick, casual, total, uid]);
+
+    const leaveApplyCreationQuery = "INSERT INTO leave_apply (id, employee_id, no_of_days, type, reason, start_date, end_date, status) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+    await query(leaveApplyCreationQuery, [randomId, uid, no_of_days, type, reason, start_date, end_date, status]);
+
+    await query("COMMIT");
+    return { success: true, message: "Leave application created successfully." };
+  } catch (err) {
+    console.error(err);
+    await query("ROLLBACK");
+    throw err;
   }
 }
 

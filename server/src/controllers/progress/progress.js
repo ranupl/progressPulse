@@ -3,9 +3,11 @@ const progressService = require("../../services/progress/progress");
 async function createProgress(req, res) {
   try {
     const { id, updates } = req.body;
+    const sessionData = req.session.user;
     const progress = await progressService.createProgress({
       id,
-      updates
+      updates,
+      sessionData
     });
     res.send(progress);
   } catch (error) {

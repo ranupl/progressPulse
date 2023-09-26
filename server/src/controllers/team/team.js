@@ -3,11 +3,13 @@ const teamService = require("../../services/team/team");
 async function createTeam(req, res) {
   try {
     const { id, title, description, release_notes } = req.body;
+    const sessionData = req.session.user;
     const team = await teamService.createTeam({
       id,
       title,
       description,
-      release_notes
+      release_notes,
+      sessionData
     });
     res.json(team);
   } catch (error) {

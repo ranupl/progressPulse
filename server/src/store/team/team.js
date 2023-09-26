@@ -1,39 +1,36 @@
-const db = require("../db");
+const {db , query} = require("../db");
 
 function generateRandomId(length) {
   const charset = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
   let id = "";
 
   for (let i = 0; i < length; i++) {
-      const randomIndex = Math.floor(Math.random() * charset.length);
-      id += charset.charAt(randomIndex);
+    const randomIndex = Math.floor(Math.random() * charset.length);
+    id += charset.charAt(randomIndex);
   }
   return id;
 }
 
 async function createTeam(teamData) {
   const randomId = generateRandomId(5);
-  const { id, title, description, release_notes } = teamData;
-  const query =
-    "INSERT INTO team (id, title, description, release_notes) VALUES ( ?, ?, ?, ?)";
+  const { id, title, description, release_notes, sessionData } = teamData;
+  const uid = sessionData.id;
 
   try {
-    const results = await new Promise((resolve, reject) => {
-      db.query(
-        query,
-        [randomId, title, description, release_notes],
-        (err, results) => {
-          if (err) {
-            reject(err);
-          } else {
-            resolve(results);
-          }
-        }
-      );
-    });
-    return results;
-  } catch (error) {
-    console.log(error);
+    await query("START TRANSACTION");
+
+    const teamCreationQuery = "INSERT INTO team (id, title, description, release_notes) VALUES (?, ?, ?, ?)";
+    await query(teamCreationQuery, [randomId, title, description, release_notes]);
+
+    const teamMappingQuery = "INSERT INTO employee_team_map (team_id, employee_id ) VALUES (?, ?)";
+    await query(teamMappingQuery, [randomId, uid]);
+
+    await query("COMMIT");
+    return { success: true, message: "Team created successfully." };
+  } catch (err) {
+    await query("ROLLBACK");
+    console.error(err);
+    throw err;
   }
 }
 

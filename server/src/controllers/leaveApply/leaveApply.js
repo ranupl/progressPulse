@@ -3,7 +3,9 @@ const leaveApplyService = require("../../services/leaveApply/leaveApply");
 async function createLeaveApply(req, res) {
 
   try {
-    const { id, employee_id, no_of_days, type, reason, start_date, end_date } = req.body;
+    const { id, employee_id, no_of_days, type, reason, start_date, end_date, totalLeave } = req.body;
+    console.log(req.body);
+    const sessionData = req.session.user;
     const leaveApply = await leaveApplyService.createLeaveApply({
       id,
       employee_id,
@@ -11,7 +13,9 @@ async function createLeaveApply(req, res) {
       type,
       reason, 
       start_date,
-      end_date
+      end_date,
+      totalLeave,
+      sessionData
     });
     res.json(leaveApply);
   } catch (error) {

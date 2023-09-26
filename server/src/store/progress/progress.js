@@ -1,4 +1,4 @@
-const db = require("../db");
+const {db, query} = require("../db");
 
 function generateRandomId(length) {
   const charset = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
@@ -8,33 +8,29 @@ function generateRandomId(length) {
       const randomIndex = Math.floor(Math.random() * charset.length);
       id += charset.charAt(randomIndex);
   }
-
   return id;
 }
 
 async function createProgress(progressData) {
   const randomId = generateRandomId(5);
-  const { id, updates } = progressData;
-  const query =
-    "INSERT INTO progress (id, updates) VALUES ( ?, ?)";
+  const { id, updates , sessionData} = progressData;
+  const uid = sessionData.id;
 
   try {
-    const results = await new Promise((resolve, reject) => {
-      db.query(
-        query,
-        [randomId, updates],
-        (err, results) => {
-          if (err) {
-            reject(err);
-          } else {
-            resolve(results);
-          }
-        }
-      );
-    });
-    return results;
-  } catch (error) {
-    console.log(error);
+    await query("START TRANSACTION");
+
+    const progressCreationQuery = "INSERT INTO progress (id, updates) VALUES ( ?, ?)";
+    await query(progressCreationQuery, [randomId, updates]);
+
+    const progressMappingQuery = "INSERT INTO employee_progress_map (progress_id, employee_id ) VALUES (?, ?)";
+    await query(progressMappingQuery, [randomId, uid]);
+
+    await query("COMMIT");
+    return { success: true, message: "Progress created successfully." };
+  } catch (err) {
+    await query("ROLLBACK");
+    console.error(err);
+    throw err;
   }
 }
 
