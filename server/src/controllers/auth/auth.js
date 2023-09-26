@@ -13,10 +13,8 @@ async function userLogin(req, res) {
             if (!employee) {
                 return res.status(200).json({ error: 'Invalid credentials' });
             }
-            
             delete employee.password;
             const token = jwt.sign({ employee }, 'progressPulse', { expiresIn: '1h' });
-            
             res.status(200).json({ message: 'Login successful', token });
         });
     } catch (error) {
@@ -38,8 +36,7 @@ async function adminLogin(req, res) {
             if (!employee) {
                 return res.status(401).json({ error: 'Invalid credentials' });
             }
-            const token = jwt.sign({ userId: employee.id }, 'progressPulse', { expiresIn: '1h' });
-            // res.status(200).json({ message: 'Login successful', employee });
+            const token = jwt.sign(employee, 'progressPulse', { expiresIn: '1h' });
             res.status(200).json({ message: 'Login successful', token });
         });
     } catch (error) {
