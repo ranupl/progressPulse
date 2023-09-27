@@ -10,14 +10,17 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import jwt_decode from "jwt-decode";
 import TeamForm from "../forms/TeamForm";
+import TeamMember from "../components/TeamMember";
+import Register from "../forms/Register";
 
 const EmployeeDashboard = ({ toggleTextVisibility, dashwidth }) => {
     const navigate = useNavigate();
     const [data, setData] = useState([]);
     const [teamId, setTeamID] = useState("");
     const [show, setShow] = useState({
-        update: true,   
+        update: true,
         teams: false,
+        member: false,
     });
     const token = localStorage.getItem("authToken");
     var decodedHeader = jwt_decode(token);
@@ -26,35 +29,38 @@ const EmployeeDashboard = ({ toggleTextVisibility, dashwidth }) => {
 
     useEffect(() => {
         const predefinedColors = [
-          'linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(35,67,80,1) 35%, rgba(0,212,255,1) 100%)',
-          'linear-gradient(90deg, rgba(131,58,180,1) 0%, rgba(253,29,29,1) 50%, rgba(252,176,69,1) 100%)',
-          'linear-gradient(90deg, rgba(131,58,180,1) 0%, rgba(105,62,62,1) 50%, rgba(252,176,69,1) 100%)',
-          'linear-gradient(90deg, rgba(58,86,180,1) 0%, rgba(105,99,62,1) 50%, rgba(252,69,117,1) 100%)'];
-      
+            'linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(35,67,80,1) 35%, rgba(0,212,255,1) 100%)',
+            'linear-gradient(90deg, rgba(131,58,180,1) 0%, rgba(253,29,29,1) 50%, rgba(252,176,69,1) 100%)',
+            'linear-gradient(90deg, rgba(131,58,180,1) 0%, rgba(105,62,62,1) 50%, rgba(252,176,69,1) 100%)',
+            'linear-gradient(90deg, rgba(58,86,180,1) 0%, rgba(105,99,62,1) 50%, rgba(252,69,117,1) 100%)'];
+
         axios.get("http://localhost:7000/getAllTeam",
-         { headers: {
-            'Authorization': `Bearer ${token}`, 
-            'Content-Type': 'application/json', 
-          },})
-          .then((response) => {
-            const responseData = response.data;
-            const dataWithColors = responseData.map((item, index) => ({
-              ...item,
-              color: predefinedColors[index % predefinedColors.length],
-            }));
-            setData(dataWithColors);
-          })
-          .catch((error) => {
-            console.error("Error fetching data:", error);
-          });
-      }, []);
-      
+            {
+                headers: {
+                    'Authorization': `Bearer ${token}`,
+                    'Content-Type': 'application/json',
+                },
+            })
+            .then((response) => {
+                const responseData = response.data;
+                const dataWithColors = responseData.map((item, index) => ({
+                    ...item,
+                    color: predefinedColors[index % predefinedColors.length],
+                }));
+                setData(dataWithColors);
+            })
+            .catch((error) => {
+                console.error("Error fetching data:", error);
+            });
+    }, []);
+
     const cardHandleClick = (id) => {
         setTeamID(id);
         setShow((prevState) => ({
             ...prevState,
             teams: true,
-            update: false
+            update: false,
+            member: false,
         }));
     }
 
@@ -65,7 +71,7 @@ const EmployeeDashboard = ({ toggleTextVisibility, dashwidth }) => {
 
     return (
         <>
-            <div  className={`${dashwidth ? "dashexpand col-10" : "dashcollapse col-11"}`}>
+            <div className={`${dashwidth ? "dashexpand col-10" : "dashcollapse col-11"}`}>
                 <div className="container">
                     <div className='d-flex mg-top border-bottom justify-content-between'>
                         <div className="d-flex cursor-pointer bold"> <FontAwesomeIcon icon={faList} onClick={toggleTextVisibility} />&nbsp;&nbsp;
@@ -97,11 +103,19 @@ const EmployeeDashboard = ({ toggleTextVisibility, dashwidth }) => {
                     <h6 className="mg-top font-family text-color teamFont mb-4">My Updates For Today</h6>
                 </div>
                 <div className="container">
+                    {designation === "hr" && <Register />}
+                </div>
+                <div className="container">
                     {designation === "manager" && <TeamForm />}
                 </div>
                 <div className="row">
-                    <div className="col"><Update show={show} /></div>
-                    <div className="col">{designation === "manager" && <LeaveTable />}</div>
+                    <div className="col">
+                        <Update show={show} />
+                        {designation === "manager" && <TeamMember show={show} teamId={teamId} />}
+                    </div>
+                    <div className="col">
+                        {designation === "manager" && <LeaveTable />}
+                    </div>
                 </div>
                 <Team show={show} teamId={teamId} />
             </div>

@@ -2,13 +2,19 @@ import React from "react";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faHouse, faRightFromBracket, faListCheck, faClock } from '@fortawesome/free-solid-svg-icons'
 import { NavLink } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 
 const Navbar = ({ showText , expanded}) => {
+    const navigate = useNavigate();
+    const openDashboard = () => {
+        navigate("/");
+    }
+
     return (
         <>
             <div  className={`${expanded ? "expanded col-2 bg-color border" : "collapsed col-1 bg-color border"} bg-color`}>
                 <div className='container bdr-btm'>
-                    <div className='d-flex mg-top'>
+                    <div className='d-flex mg-top cursor-pointer' onClick={openDashboard}>
                         <img src="/images/settings.png" alt='logo' className='logoDashboard' />&nbsp;
                         <h6 className='text-color font-family'>{showText && <span>ProgressPulse</span>}</h6>
                     </div>

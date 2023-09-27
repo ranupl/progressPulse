@@ -11,7 +11,6 @@ const TeamForm = () => {
 
     const [title, setTitle] = useState("");
     const [description, setDescription] = useState("");
-    const [release_notes, setReleaseNotes] = useState("");
 
     const token = localStorage.getItem("authToken");
 
@@ -19,7 +18,7 @@ const TeamForm = () => {
         e.preventDefault();
 
         const result = await axios.post(`${process.env.REACT_APP_SERVER_URL}/createTeam`,
-            { title: title, description: description, release_notes: release_notes },
+            { title: title, description: description },
             {
                 headers: {
                     Authorization: `Bearer ${token}`,
@@ -28,6 +27,7 @@ const TeamForm = () => {
 
         if (result.status === 200) {
             toast.error("Team Created successfully");
+            handleClose();
         }
         else {
             toast.error("Something went wrong!");
@@ -60,13 +60,6 @@ const TeamForm = () => {
                                         value={description}
                                         onChange={(e) => setDescription(e.target.value)}
                                         placeholder="Enter description" required />
-                                </div>
-                                <div className="form-group">
-                                    <label for="notes" className="inputFont font-family">Release-Notes</label>
-                                    <input type="text" className="form-control" id="notes"
-                                        value={release_notes}
-                                        onChange={(e) => setReleaseNotes(e.target.value)}
-                                        placeholder="Enter notes" required />
                                 </div>
                                 <button type="submit" className="btn btn-color font text-white mt-3">Submit</button>
                             </form>

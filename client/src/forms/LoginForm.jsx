@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import Register from "./Register";
 import axios from "axios";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
@@ -21,8 +20,6 @@ const LoginForm = () => {
       if (result.status === 200) {
         if (result?.data?.token) {
           const token = result.data.token;
-          console.log(token);
-          axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
           localStorage.setItem("authToken", token);
           navigate('/');
         } else {
@@ -77,9 +74,6 @@ const LoginForm = () => {
         </div>
         <div className="form-outline mb-1">
           <button type="submit" className="form-control login-btn mb-2">Login</button>
-        </div>
-        <div className="text-center">
-          <Register />
         </div>
       </form>
     </>

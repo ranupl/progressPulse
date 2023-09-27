@@ -33,10 +33,10 @@ const Register = () => {
 
     return (
         <>
-            <p className="para-font d-flex justify-content-center">Not a member ? <a href="#!" className="text-color" onClick={handleShow}>&nbsp;Register</a></p>
+            <p className="para-font justify-content-end"><a href="#!" className="text-color" onClick={handleShow}>Add Employee</a></p>
             <Modal show={show} onHide={handleClose}>
                 <Modal.Header closeButton>
-                    <Modal.Title className="text-color font-family fontHeading">Registration Form</Modal.Title>
+                    <Modal.Title className="text-color font-family fontHeading">Add Employee</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
                     <div className="container bg-register">
@@ -98,7 +98,7 @@ const Register = () => {
                                 </div>
                                 <div className="form-group">
                                     <div className="col-sm-10">
-                                        <button type="submit" className="btn btn-color text-white font font-family">Sign Up</button>
+                                        <button type="submit" className="btn btn-color text-white font font-family">Add</button>
                                     </div>
                                 </div>
                             </form>

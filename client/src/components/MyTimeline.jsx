@@ -23,7 +23,6 @@ const MyTimeline = ({ toggleTextVisibility, dashwidth }) => {
                     }
                 }
                 );
-                // console.log(response.data);
                 setData(response.data.progress);
             } catch (error) {
                 console.error("Error fetching data:", error);

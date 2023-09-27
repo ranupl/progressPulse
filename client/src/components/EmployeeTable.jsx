@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import { Modal } from 'react-bootstrap';
 import axios from "axios";
 import { toast } from "react-toastify";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons'
 
 const EmployeeTable = ({ teamId }) => {
     const [show, setShow] = useState(false);
@@ -46,7 +48,7 @@ const EmployeeTable = ({ teamId }) => {
                     Authorization: `Bearer ${token}`,
                 },
             }
-            );
+        );
 
         if (result.status === 200) {
             toast.error("Member added successfully");
@@ -61,11 +63,11 @@ const EmployeeTable = ({ teamId }) => {
 
     const handleRemoveMapping = async (employeeId) => {
         const result = await axios.delete(`${process.env.REACT_APP_SERVER_URL}/deleteTeamEmployeeMap/${employeeId}`,
-        {
-            headers: {
-                Authorization: `Bearer ${token}`,
-            },
-        }
+            {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            }
         );
         if (result.status === 200) {
             toast.error("Member removed successfully");
@@ -88,6 +90,12 @@ const EmployeeTable = ({ teamId }) => {
                     <Modal.Title className="text-color font-family fontHeading">Add Members</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
+                    <div className="container">
+                        <div className="input-group mb-3">
+                            <input type="search" className="form-control rounded" placeholder="Search" />
+                            <button type="button" className="btn border btn-color text-white"><FontAwesomeIcon icon={faMagnifyingGlass} /></button>
+                        </div>
+                    </div>
                     <div className="bg-register">
                         <div className="container employee-list">
                             <table className="table table-striped">

@@ -3,9 +3,13 @@ import EmployeeTable from "./EmployeeTable";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faUser, faPenNib } from '@fortawesome/free-solid-svg-icons'
 import axios from "axios";
+import jwt_decode from "jwt-decode";
 
 const Team = ({ show, teamId }) => {
   const [teams, setTeams] = useState([]);
+  const token = localStorage.getItem("authToken");
+  var decodedHeader = jwt_decode(token);
+  const designation = decodedHeader.employee.designation;
 
   const formatDate = (dateString) => {
     const date = new Date(dateString);
@@ -40,8 +44,8 @@ const Team = ({ show, teamId }) => {
   }, [teamId]);
 
   return (
-    <div className={show.teams ? "show" : "hide"}>
-      <EmployeeTable teamId={teamId}/>
+    <div className={show.teams ? "show leave-list" : "hide"}>
+      {designation === "manager" && <EmployeeTable teamId={teamId} />}
       {teams.map((team) => (        
         <div className="container border p-3" key={team.id}>
           <div className="d-flex">
