@@ -27,6 +27,15 @@ async function getTeamById(teamId) {
   }
 }
 
+async function getTeamMember(teamId) {
+  try {
+    const team = await teamStore.getTeamMember(teamId);
+    return team;
+  } catch (error) {
+    console.log(error);
+  }
+}
+
 async function updateTeam(teamId, updatedTeamData) {
   try {
     const existingTeam = await teamStore.getTeamById(teamId);
@@ -57,6 +66,7 @@ module.exports = {
   createTeam,
   getAllTeam,
   getTeamById,
+  getTeamMember,
   updateTeam,
   deleteTeam,
 }

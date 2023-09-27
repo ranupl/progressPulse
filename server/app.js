@@ -26,10 +26,9 @@ app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-app.use(authenticateToken);
-
 // auth
 app.post("/login", authController.userLogin);
+app.use(authenticateToken);
 app.post("/adminLogin", authController.adminLogin);
 
 // admin
@@ -47,6 +46,7 @@ app.delete("/deleteEmployee/:id", employeeController.deleteEmployee);
 // team
 app.post("/createTeam", teamController.createTeam);
 app.get("/getAllTeam", teamController.getAllTeam);
+app.get("/getTeamMember/:id", teamController.getTeamMember);
 app.get("/getTeamById/:id", teamController.getTeamById);
 app.put("/updateTeam/:id", teamController.updateTeam);
 app.delete("/deleteTeam/:id", teamController.deleteTeam);

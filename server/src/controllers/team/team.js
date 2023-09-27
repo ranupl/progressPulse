@@ -45,6 +45,21 @@ async function getTeamById(req, res) {
   }
 }
 
+async function getTeamMember(req, res) {
+  const teamId = req.params.id;
+
+  try {
+    const team = await teamService.getTeamMember(teamId);
+    if (!team) {
+      res.status(404).json({ error: "Team not found" });
+    } else {
+      res.status(200).json({ message: 'successful', team });
+    }
+  } catch (err) {
+    console.log(err);
+  }
+}
+
 async function updateTeam(req, res) {
   const teamId = req.params.id;
   const updateTeamData = req.body;
@@ -72,6 +87,7 @@ module.exports = {
   createTeam,
   getAllTeam,
   getTeamById,
+  getTeamMember,
   updateTeam,
   deleteTeam,
 }

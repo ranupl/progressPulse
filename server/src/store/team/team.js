@@ -54,6 +54,26 @@ async function getAllTeam() {
 
 async function getTeamById(teamId) {
   const query = "select * from progress p join employee_progress_map epm on p.id = epm.progress_id join employee_team_map etm on etm.employee_id = epm.employee_id join employee e on e.id = epm.employee_id where etm.team_id = ?";
+  
+  try {
+    const queryResult = await new Promise((resolve, reject) => {
+      db.query(query, [teamId], (err, results) => {
+        if (err) {
+          reject(err);
+        } else {
+          resolve(results);
+        }
+      });
+    });
+    return queryResult;
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+async function getTeamMember(teamId) {
+  const query = "select e.first_name, e.last_name from employee e join employee_team_map etm on e.id = etm.employee_id where etm.team_id = ?";
+  
   try {
     const queryResult = await new Promise((resolve, reject) => {
       db.query(query, [teamId], (err, results) => {
@@ -107,5 +127,6 @@ module.exports = {
   getAllTeam,
   getTeamById,
   updateTeam,
+  getTeamMember,
   deleteTeam,
 };
