@@ -2,8 +2,6 @@ import React, { useState, useEffect } from "react";
 import { Modal } from 'react-bootstrap';
 import axios from "axios";
 import { toast } from "react-toastify";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons'
 
 const EmployeeTable = ({ teamId }) => {
     const [show, setShow] = useState(false);
@@ -12,6 +10,7 @@ const EmployeeTable = ({ teamId }) => {
     const [data, setData] = useState([]);
     const [employeeMapping, setEmployeeMapping] = useState({});
     const token = localStorage.getItem("authToken");
+    const [searchQuery, setSearchQuery] = useState("");
 
     useEffect(() => {
         const savedEmployeeMapping = JSON.parse(localStorage.getItem("employeeMapping")) || {};
@@ -80,6 +79,15 @@ const EmployeeTable = ({ teamId }) => {
         }
     }
 
+    const filteredData = data.filter((employee) => {
+        const fullName = `${employee.first_name} ${employee.last_name}`;
+        return fullName.toLowerCase().includes(searchQuery.toLowerCase());
+    });
+
+    const handleSearchChange = (e) => {
+        setSearchQuery(e.target.value);
+    };
+
     return (
         <>
             <button type="button" className="btn btn-color mb-2 text-white font" onClick={handleShow}>
@@ -92,8 +100,11 @@ const EmployeeTable = ({ teamId }) => {
                 <Modal.Body>
                     <div className="container">
                         <div className="input-group mb-3">
-                            <input type="search" className="form-control rounded" placeholder="Search" />
-                            <button type="button" className="btn border btn-color text-white"><FontAwesomeIcon icon={faMagnifyingGlass} /></button>
+                            <input type="search"
+                                className="form-control rounded"
+                                placeholder="Search"
+                                value={searchQuery}
+                                onChange={handleSearchChange} />
                         </div>
                     </div>
                     <div className="bg-register">
@@ -108,7 +119,7 @@ const EmployeeTable = ({ teamId }) => {
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {data.map((employee, index) => (
+                                    {filteredData.map((employee, index) => (
                                         <tr key={index}>
                                             <td className="font">{employee.first_name}</td>
                                             <td className="font">{employee.last_name}</td>
