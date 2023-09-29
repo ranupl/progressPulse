@@ -16,16 +16,21 @@ const Register = () => {
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
+    const token = localStorage.getItem("authToken");
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         const result = await axios.post(`${process.env.REACT_APP_SERVER_URL}/createEmployee`,
-            { first_name: firstname, middle_name: middlename, last_name: lastname, email: email, username: username, password: password });
+            { first_name: firstname, middle_name: middlename, last_name: lastname, email: email, username: username, password: password },
+            {
+                headers: {
+                    'Authorization': `Bearer ${token}`,
+                    'Content-Type': 'application/json',
+                },
+            });
         if (result.status === 200) {
-            if (result?.data?.employee) {
                 toast.success("successfully registered");
-                navigate('/');
-            } 
+                handleClose();
         } else {
             toast.error("Something went wrong!");
         }

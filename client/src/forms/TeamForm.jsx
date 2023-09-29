@@ -47,6 +47,9 @@ const TeamForm = () => {
                     <div className="container bg-register">
                         <div className="container">
                             <form onSubmit={(e) => handleSubmit(e)}>
+                                <div className="form-group d-flex justify-content-end">
+                                    <input type="text" className="team-identifier" value={title.replace(/\s/g, '').toLowerCase()} onChange={(e) => setTitle(e.target.value)}/>
+                                </div>
                                 <div className="form-group">
                                     <label for="title" className="inputFont font-family">Title</label>
                                     <input type="text" className="form-control" id="title"

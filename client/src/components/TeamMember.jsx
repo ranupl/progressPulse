@@ -5,7 +5,6 @@ import axios from "axios";
 const TeamMember = ({ show, teamId }) => {
     const [teamMember, setTeamMember] = useState([]);
     const token = localStorage.getItem("authToken");
-    console.log(teamMember);
 
     useEffect(() => {
         const fetchData = async () => {
@@ -30,11 +29,12 @@ const TeamMember = ({ show, teamId }) => {
     return (
         <div className={show.teams ? "show border" : "hide"}>
           <p className="font text-color font-family p-2">Team Members</p>
-          <div className="card-list p-2" style={{width:"510px"}}>
+          <div className="card-list" style={{width:"510px"}}>
             {teamMember.map((team, index) => (
-              <div key={index}>
-                <img src="/images/user (1).png" width="21px" height="21px" alt="" />&nbsp;
-                <span className="font font-family">{team.first_name} {team.last_name}</span>&nbsp;&nbsp;
+              <div key={index} className="text-center">
+                <p className="text-center" width="5px" height="5px"><span className="member-icon">{team.first_name.charAt(0)}</span></p>
+                {/* <img src="/images/user (1).png" width="21px" height="21px" alt="" /> */}
+                <p className="font font-family p-2">{team.first_name} {team.last_name}</p>&nbsp;&nbsp;
               </div>
             ))}
           </div>

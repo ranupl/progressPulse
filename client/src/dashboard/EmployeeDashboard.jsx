@@ -111,7 +111,7 @@ const EmployeeDashboard = ({ toggleTextVisibility, dashwidth }) => {
                 <div className="row">
                     <div className="col">
                         <Update show={show} />
-                        {designation === "manager" && <TeamMember show={show} teamId={teamId} />}
+                        <TeamMember show={show} teamId={teamId} />
                     </div>
                     <div className="col">
                         {designation === "manager" && <LeaveTable />}
