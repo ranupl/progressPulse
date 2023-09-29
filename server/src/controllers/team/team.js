@@ -2,13 +2,13 @@ const teamService = require("../../services/team/team");
 
 async function createTeam(req, res) {
   try {
-    const { id, title, description, release_notes } = req.body;
+    const { id, title, description, identifier } = req.body;
     const sessionData = req.session.user;
     const team = await teamService.createTeam({
       id,
       title,
       description,
-      release_notes,
+      identifier,
       sessionData
     });
     res.json(team);
@@ -32,9 +32,10 @@ async function getAllTeam(req, res) {
 
 async function getTeamById(req, res) {
   const teamId = req.params.id;
+  const selectedDate = req.query.selectedDate;
 
   try {
-    const team = await teamService.getTeamById(teamId);
+    const team = await teamService.getTeamById(teamId, selectedDate);
     if (!team) {
       res.status(404).json({ error: "Team not found" });
     } else {

@@ -18,9 +18,9 @@ async function getAllTeam() {
   }
 }
 
-async function getTeamById(teamId) {
+async function getTeamById(teamId, selectedDate) {
   try {
-    const team = await teamStore.getTeamById(teamId);
+    const team = await teamStore.getTeamById(teamId, selectedDate);
     return team;
   } catch (error) {
     console.log(error);

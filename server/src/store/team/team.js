@@ -13,14 +13,21 @@ function generateRandomId(length) {
 
 async function createTeam(teamData) {
   const randomId = generateRandomId(5);
-  const { id, title, description, release_notes, sessionData } = teamData;
+  const { id, title, description, identifier, sessionData } = teamData;
   const uid = sessionData.id;
+
+  const titleCheckQuery = "SELECT COUNT(*) AS count FROM team WHERE title = ?";
+    const titleCheckResult = await query(titleCheckQuery, [title]);
+
+    if (titleCheckResult[0].count > 0) {
+      return { success: false, message: "Team title already exists." };
+    }
 
   try {
     await query("START TRANSACTION");
 
-    const teamCreationQuery = "INSERT INTO team (id, title, description, release_notes) VALUES (?, ?, ?, ?)";
-    await query(teamCreationQuery, [randomId, title, description, release_notes]);
+    const teamCreationQuery = "INSERT INTO team (id, title, description) VALUES (?, ?, ?)";
+    await query(teamCreationQuery, [randomId, title, description, identifier]);
 
     const teamMappingQuery = "INSERT INTO employee_team_map (team_id, employee_id ) VALUES (?, ?)";
     await query(teamMappingQuery, [randomId, uid]);
@@ -52,12 +59,12 @@ async function getAllTeam() {
   }
 }
 
-async function getTeamById(teamId) {
-  const query = "select * from progress p join employee_progress_map epm on p.id = epm.progress_id join employee_team_map etm on etm.employee_id = epm.employee_id join employee e on e.id = epm.employee_id where etm.team_id = ?";
+async function getTeamById(teamId, selectedDate) {
+  const query = "select * from progress p join employee_progress_map epm on p.id = epm.progress_id join employee_team_map etm on etm.employee_id = epm.employee_id join employee e on e.id = epm.employee_id where etm.team_id = ? and DATE(p.created) = ?";
   
   try {
     const queryResult = await new Promise((resolve, reject) => {
-      db.query(query, [teamId], (err, results) => {
+      db.query(query, [teamId, selectedDate], (err, results) => {
         if (err) {
           reject(err);
         } else {
