@@ -127,7 +127,7 @@ input::placeholder {
 
 .employee-list {
     width: 100%;
-    height: 50px;
+    max-height: 255px;
     display: block;
     overflow-y: scroll;
 }

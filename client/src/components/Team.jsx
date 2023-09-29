@@ -12,7 +12,7 @@ const Team = ({ show, teamId }) => {
   var decodedHeader = jwt_decode(token);
   const designation = decodedHeader.employee.designation;
   const [selectedDate, setSelectedDate] = useState(new Date());
-
+  
   const handleDateSelect = (date) => {
     setSelectedDate(date);
   };
@@ -32,6 +32,9 @@ const Team = ({ show, teamId }) => {
             'Authorization': `Bearer ${token}`,
             'Content-Type': 'application/json',
           },
+          params: {
+            selectedDate: formatDate(selectedDate), 
+          },
         }
         );
 
@@ -47,7 +50,7 @@ const Team = ({ show, teamId }) => {
     };
 
     fetchData();
-  }, [teamId]);
+  }, [teamId, selectedDate]);
 
   return (
     <div className={show.teams ? "show leave-list" : "hide"}>

@@ -75,8 +75,8 @@ const LeaveTable = () => {
 
   return (
     <>
-      <div className="container border">
-        <table class="table table-striped">
+      <div className="container employee-list">
+        <table class="table table-striped border">
           <thead>
             <tr>
               <th scope="col" className="font">Username</th>

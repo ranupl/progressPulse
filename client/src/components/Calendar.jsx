@@ -5,8 +5,8 @@ import 'react-calendar/dist/Calendar.css';
 
 const ReactCalendar = ({ onDateSelect }) => {
     const [date, setDate] = useState(new Date());
-    const formattedDate = date.toISOString().split("T")[0];
     const onChange = date => {
+        date.setDate(date.getDate() + 1);
         setDate(date);
         onDateSelect(date);
     }
@@ -15,7 +15,6 @@ const ReactCalendar = ({ onDateSelect }) => {
         <>
             <div>
                 <Calendar onChange={onChange} value={date} />
-                {formattedDate}
             </div>
         </>
     )

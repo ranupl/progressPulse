@@ -108,8 +108,8 @@ const EmployeeTable = ({ teamId }) => {
                         </div>
                     </div>
                     <div className="bg-register">
-                        <div className="container">
-                            <table className="table table-striped employee-list">
+                        <div className="container employee-list">
+                            <table className="table table-striped">
                                 <thead>
                                     <tr>
                                         <th scope="col" className="font">FirstName</th>
