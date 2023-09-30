@@ -80,10 +80,9 @@ async function verifyEmail(req, res) {
     const employee = await employeeService.verifyEmail(email);
     if (employee) {
       const otp = otpGenerator.generate(6, { upperCaseAlphabets: false, specialChars: false });
-      console.log(otp);
       const html = `<pre>Otp ${otp}</pre>`;
       const info = await mailSend("Forgot password OTP", email, `Hello ${employee.first_name}`, html);
-      
+      req.session.otp = otp;
       if (info && info.accepted.length > 0) {
         res.status(200).json({ status: 200, status: "success", message: "OTP sent to the email." });
       } else {
@@ -99,11 +98,29 @@ async function verifyEmail(req, res) {
   }
 }
 
+async function verifyOtp(req, res) {
+    const { otp } = req.body;
+   
+    try {
+      const sessionOtp = req.session.otp;
+      if(otp == sessionOtp)
+      {
+        res.status(200).json({status: 200, message: "Otp verified successfully"});
+      }
+      else{
+        res.status(404).json({status: 404, message: "Invalid Otp"});
+      }
+    } catch(error) {
+      console.log(error);
+    }
+}
+
 module.exports = {
   createEmployee,
   getAllEmployee,
   getEmployeeById,
   updateEmployee,
   deleteEmployee,
-  verifyEmail
+  verifyEmail,
+  verifyOtp
 }

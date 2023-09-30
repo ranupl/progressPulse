@@ -28,6 +28,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 // forgot-password
 app.post("/verifyEmail", employeeController.verifyEmail);
+app.post("/verifyOtp", employeeController.verifyOtp);
 
 // auth
 app.post("/login", authController.userLogin);
