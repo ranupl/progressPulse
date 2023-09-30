@@ -53,10 +53,23 @@ async function deleteEmployee(employeeId) {
   }
 }
 
+async function verifyEmail(email) {
+  try {
+    const existingEmployee = await employeeStore.getEmployeeByEmail(email);
+    if(!existingEmployee) {
+      throw new Error("Employee not found");
+    }
+    return existingEmployee;
+  } catch (error) {
+    console.log(error);
+  }
+}
+
 module.exports = {
   createEmployee,
   getAllEmployee,
   getEmployeeById,
   updateEmployee,
-  deleteEmployee
+  deleteEmployee,
+  verifyEmail
 }

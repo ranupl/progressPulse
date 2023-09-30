@@ -1,6 +1,8 @@
 const employeeService = require("../../services/employee/employee");
 const errorCodes = require("../../models/error");
 const logErrorToFile = require("../../util/errorLogs");
+const otpGenerator = require('otp-generator')
+const { mailSend } = require("../../util/mail.js");
 
 async function createEmployee(req, res) {
   try {
@@ -71,10 +73,37 @@ async function deleteEmployee(req, res) {
   }
 }
 
+async function verifyEmail(req, res) {
+  const { email } = req.body;
+
+  try {
+    const employee = await employeeService.verifyEmail(email);
+    if (employee) {
+      const otp = otpGenerator.generate(6, { upperCaseAlphabets: false, specialChars: false });
+      console.log(otp);
+      const html = `<pre>Otp ${otp}</pre>`;
+      const info = await mailSend("Forgot password OTP", email, `Hello ${employee.first_name}`, html);
+      
+      if (info && info.accepted.length > 0) {
+        res.status(200).json({ status: 200, status: "success", message: "OTP sent to the email." });
+      } else {
+        res.status(500).json({ status: 500, status: "error", message: "Failed to send OTP email." });
+      }
+    } else {
+      const message = "Invalid email address";
+      res.status(400).json({ status: 400, status: "failed", message: message });
+    }
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ status: 500, status: "error", message: "Internal server error." });
+  }
+}
+
 module.exports = {
   createEmployee,
   getAllEmployee,
   getEmployeeById,
   updateEmployee,
-  deleteEmployee
+  deleteEmployee,
+  verifyEmail
 }

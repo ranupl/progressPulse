@@ -15,7 +15,6 @@ async function userLogin(req, res) {
             }
             delete employee.password;
             const token = jwt.sign( { employee } , 'progressPulse', { expiresIn: '1h' });
-            console.log(token);
             res.status(200).json({ message: 'Login successful', token });
         });
     } catch (error) {

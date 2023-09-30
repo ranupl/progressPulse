@@ -79,7 +79,7 @@ async function getTeamById(teamId, selectedDate) {
 }
 
 async function getTeamMember(teamId) {
-  const query = "select e.first_name, e.last_name from employee e join employee_team_map etm on e.id = etm.employee_id where etm.team_id = ?";
+  const query = "select e.id, e.first_name, e.last_name from employee e join employee_team_map etm on e.id = etm.employee_id where etm.team_id = ?";
   
   try {
     const queryResult = await new Promise((resolve, reject) => {

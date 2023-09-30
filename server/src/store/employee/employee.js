@@ -4,15 +4,15 @@ function generateRandomId(length) {
   let id = "";
 
   for (let i = 0; i < length; i++) {
-      const randomIndex = Math.floor(Math.random() * charset.length);
-      id += charset.charAt(randomIndex);
+    const randomIndex = Math.floor(Math.random() * charset.length);
+    id += charset.charAt(randomIndex);
   }
   return id;
 }
 
 async function createEmployee(employeeData) {
   const randomId = generateRandomId(5);
-  const { id,first_name, middle_name, last_name, email, username, password } = employeeData;
+  const { id, first_name, middle_name, last_name, email, username, password } = employeeData;
   const query =
     "INSERT INTO employee (id,first_name, middle_name, last_name, email, username, password) VALUES ( ?,?, ?, ?, ?, ?, ?)";
 
@@ -56,7 +56,7 @@ async function getAllEmployee() {
 
 async function getEmployeeById(employeeId) {
   const query = "SELECT * FROM employee WHERE id = ?";
-  
+
   try {
     const queryResult = await new Promise((resolve, reject) => {
       db.query(query, [employeeId], (err, results) => {
@@ -105,10 +105,29 @@ async function deleteEmployee(employeeId) {
   }
 }
 
+async function getEmployeeByEmail(email) {
+  const query = "SELECT * FROM employee WHERE email = ?";
+  try {
+    const queryResult = await new Promise((resolve, reject) => {
+      db.query(query, [email], (err, results) => {
+        if (err) {
+          reject(err);
+        } else {
+          resolve(results);
+        }
+      })
+    })
+    return queryResult;
+  } catch (error) {
+    console.log(error);
+  }
+}
+
 module.exports = {
   createEmployee,
   getAllEmployee,
-  getEmployeeById, 
+  getEmployeeById,
   updateEmployee,
-  deleteEmployee
+  deleteEmployee,
+  getEmployeeByEmail
 };

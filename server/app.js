@@ -26,6 +26,9 @@ app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
+// forgot-password
+app.post("/verifyEmail", employeeController.verifyEmail);
+
 // auth
 app.post("/login", authController.userLogin);
 app.use(authenticateToken);
