@@ -3,6 +3,7 @@ const errorCodes = require("../../models/error");
 const logErrorToFile = require("../../util/errorLogs");
 const otpGenerator = require('otp-generator')
 const { mailSend } = require("../../util/mail.js");
+const jwt = require('jsonwebtoken');
 
 async function createEmployee(req, res) {
   try {
@@ -82,11 +83,12 @@ async function verifyEmail(req, res) {
       const otp = otpGenerator.generate(6, { upperCaseAlphabets: false, specialChars: false });
       const html = `<pre>Otp ${otp}</pre>`;
       const info = await mailSend("Forgot password OTP", email, `Hello ${employee.first_name}`, html);
-      req.session.otp = otp;
+
       if (info && info.accepted.length > 0) {
-        res.status(200).json({ status: 200, status: "success", message: "OTP sent to the email." });
+        const token = jwt.sign({ otp, email }, 'progressPulse', { expiresIn: '5m' });
+        res.status(200).json({ message: 'Otp Send Successfully', token});
       } else {
-        res.status(500).json({ status: 500, status: "error", message: "Failed to send OTP email." });
+        res.status(500).json({ status: 200, status: "error", message: "Failed to send OTP email." });
       }
     } else {
       const message = "Invalid email address";
@@ -99,21 +101,41 @@ async function verifyEmail(req, res) {
 }
 
 async function verifyOtp(req, res) {
-    const { otp } = req.body;
-   
-    try {
-      const sessionOtp = req.session.otp;
-      if(otp == sessionOtp)
-      {
-        res.status(200).json({status: 200, message: "Otp verified successfully"});
-      }
-      else{
-        res.status(404).json({status: 404, message: "Invalid Otp"});
-      }
-    } catch(error) {
-      console.log(error);
+  const { otp } = req.body;
+  const sessionOtp = req.session.user.otp;
+ 
+  try {
+    if (sessionOtp === otp) {
+      res.status(200).json({ status: 200, message: "OTP verified successfully" });
+    } else {
+      res.status(400).json({ status: 200, message: "Invalid OTP" });
     }
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ status: 500, message: "Internal server error." });
+  }
 }
+
+async function resetPassword(req, res) {
+  const { password } = req.body;
+  const email = req.session.user.email;
+
+  try {
+    const user = await employeeService.verifyEmail(email);
+    if (!user) {
+      return res.status(400).json({ message: "User not found" });
+    }
+
+    const employeeId = user[0].id;
+    const pass = await employeeService.updateEmployee(employeeId, req.body);
+
+    res.status(200).json({ message: "Password reset successfully" });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Internal server error" });
+  }
+}
+
 
 module.exports = {
   createEmployee,
@@ -122,5 +144,6 @@ module.exports = {
   updateEmployee,
   deleteEmployee,
   verifyEmail,
-  verifyOtp
+  verifyOtp,
+  resetPassword
 }

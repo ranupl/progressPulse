@@ -10,6 +10,7 @@ const leaveApplyController = require("./src/controllers/leaveApply/leaveApply");
 const authController = require("./src/controllers/auth/auth");
 const mappingController = require("./src/controllers/mappings/teamMapping");
 const authenticateToken = require('./src/middleware/authToken');
+const authenticatePassword = require('./src/middleware/authPassToken');
 const cors = require('cors');
 const app = express();
 require("./src/store/db");
@@ -26,14 +27,18 @@ app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-// forgot-password
+
 app.post("/verifyEmail", employeeController.verifyEmail);
-app.post("/verifyOtp", employeeController.verifyOtp);
+// forgot-password
+app.post("/verifyOtp",authenticatePassword, employeeController.verifyOtp);
+app.post("/resetPassword",authenticatePassword, employeeController.resetPassword);
 
 // auth
 app.post("/login", authController.userLogin);
 app.use(authenticateToken);
 app.post("/adminLogin", authController.adminLogin);
+
+
 
 // admin
 app.get("/getAdminById/:id", adminController.getAdminById);
