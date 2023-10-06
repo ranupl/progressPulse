@@ -5,10 +5,11 @@ exports.mailSend = async (subject,to,text,html) => {
         host: 'smtp.ethereal.email',
         port: 587,
         auth: {
-            user: 'nathaniel.heathcote80@ethereal.email',
-            pass: 'GEnCHHzqSJtqRqfd6H'
+            user: 'larry77@ethereal.email',
+            pass: 'FpGkz81yTB4pXEnuDV'
         }
     });
+
     const info = await transporter.sendMail({
         from: 'ProgressPulse <ProgressPulse@mail.com>', 
         to: to, 

@@ -12,15 +12,25 @@ function generateRandomId(length) {
 
 async function createEmployee(employeeData) {
   const randomId = generateRandomId(5);
-  const { id, first_name, middle_name, last_name, email, username, password } = employeeData;
+  const { id, first_name, middle_name, last_name, email, username, password, designation: inputDesignation } = employeeData;
+  let designation; // Create a new variable
+
+  if (inputDesignation === '1') {
+    designation = 'employee';
+  } else if (inputDesignation === '2') {
+    designation = 'manager';
+  } else {
+    designation = 'hr';
+  }
+  
   const query =
-    "INSERT INTO employee (id,first_name, middle_name, last_name, email, username, password) VALUES ( ?,?, ?, ?, ?, ?, ?)";
+    "INSERT INTO employee (id,first_name, middle_name, last_name, email, username, password, designation) VALUES ( ?,?, ?, ?, ?, ?,?, ?)";
 
   try {
     const results = await new Promise((resolve, reject) => {
       db.query(
         query,
-        [randomId, first_name, middle_name, last_name, email, username, password],
+        [randomId, first_name, middle_name, last_name, email, username, password, designation],
         (err, results) => {
           if (err) {
             reject(err);

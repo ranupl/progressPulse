@@ -7,7 +7,14 @@ const jwt = require('jsonwebtoken');
 
 async function createEmployee(req, res) {
   try {
-    const { id, first_name, middle_name, last_name, email, username, password } = req.body;
+    const { id, first_name, middle_name, last_name, email, username, password, designation } = req.body;
+
+    const user = await employeeService.verifyEmail(email);
+    if(user)
+    {
+       res.status(200).json({ message: 'User already exist' });
+    }
+
     const employee = await employeeService.createEmployee({
       id,
       first_name,
@@ -16,11 +23,12 @@ async function createEmployee(req, res) {
       email,
       username,
       password,
+      designation
     });
-    res.status(200).json({ message: 'Registered successful', employee });
+     res.status(200).json({ message: 'Registered successful', employee });
   } catch (error) {
     console.error("Error creating employee:", error);
-    res
+     res
       .status(500)
       .json({ error: "An error occurred while creating the employee" });
   }
@@ -79,6 +87,9 @@ async function verifyEmail(req, res) {
 
   try {
     const employee = await employeeService.verifyEmail(email);
+    if(employee.length < 1) {
+      res.status(400).json({message: "invalid email"});
+    }
     if (employee) {
       const otp = otpGenerator.generate(6, { upperCaseAlphabets: false, specialChars: false });
       const html = `<pre>Otp ${otp}</pre>`;
@@ -92,7 +103,7 @@ async function verifyEmail(req, res) {
       }
     } else {
       const message = "Invalid email address";
-      res.status(400).json({ status: 400, status: "failed", message: message });
+      res.send(400).json({ status: 400, status: "failed", message: message });
     }
   } catch (error) {
     console.error(error);
@@ -123,7 +134,7 @@ async function resetPassword(req, res) {
   try {
     const user = await employeeService.verifyEmail(email);
     if (!user) {
-      return res.status(400).json({ message: "User not found" });
+      return res.send(400).json({ message: "User not found" });
     }
 
     const employeeId = user[0].id;

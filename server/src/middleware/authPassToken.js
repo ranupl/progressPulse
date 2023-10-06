@@ -11,7 +11,6 @@ async function authenticateToken (req, res, next) {
         req.session.user = user;
         next();
     });
-    
 }
 
 module.exports = authenticateToken;
