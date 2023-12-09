@@ -9,36 +9,39 @@ const leaveController = require("./src/controllers/leave/leave");
 const leaveApplyController = require("./src/controllers/leaveApply/leaveApply");
 const authController = require("./src/controllers/auth/auth");
 const mappingController = require("./src/controllers/mappings/teamMapping");
-const authenticateToken = require('./src/middleware/authToken');
-const authenticatePassword = require('./src/middleware/authPassToken');
-const cors = require('cors');
+const authenticateToken = require("./src/middleware/authToken");
+const authenticatePassword = require("./src/middleware/authPassToken");
+const cors = require("cors");
 const app = express();
 require("./src/store/db");
-const session = require('express-session');
+const session = require("express-session");
 
-app.use(session({
-  secret: 'progressPulse',
-  resave: false,
-  saveUninitialized: true
-}));
+app.use(
+  session({
+    secret: "progressPulse",
+    resave: false,
+    saveUninitialized: true,
+  })
+);
 
 const PORT = process.env.PORT || 3000;
 app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-
 app.post("/verifyEmail", employeeController.verifyEmail);
 // forgot-password
-app.post("/verifyOtp",authenticatePassword, employeeController.verifyOtp);
-app.post("/resetPassword",authenticatePassword, employeeController.resetPassword);
+app.post("/verifyOtp", authenticatePassword, employeeController.verifyOtp);
+app.post(
+  "/resetPassword",
+  authenticatePassword,
+  employeeController.resetPassword
+);
 
 // auth
 app.post("/login", authController.userLogin);
 app.use(authenticateToken);
 app.post("/adminLogin", authController.adminLogin);
-
-
 
 // admin
 app.get("/getAdminById/:id", adminController.getAdminById);
@@ -82,14 +85,19 @@ app.put("/updateLeaveApply/:id", leaveApplyController.updateLeaveApply);
 
 // teamEmployee map
 app.post("/teamEmployeeMap", mappingController.teamEmployeeMap);
-app.get("/getTeamEmployeeMapById/:id", mappingController.getTeamEmployeeMapById);
-app.delete("/deleteTeamEmployeeMap/:id", mappingController.deleteTeamEmployeeMap);
+app.get(
+  "/getTeamEmployeeMapById/:id",
+  mappingController.getTeamEmployeeMapById
+);
+app.delete(
+  "/deleteTeamEmployeeMap/:id",
+  mappingController.deleteTeamEmployeeMap
+);
 
 app.get("/", (req, res) => {
-    res.send("progress pulse");
-})
+  res.send("progress pulse");
+});
 
 app.listen(PORT, () => {
-    console.log(`server is running at :- http://localhost:${PORT}`);
-})
-
+  console.log(`server is running at :- http://localhost:${PORT}`);
+});

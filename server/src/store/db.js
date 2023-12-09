@@ -9,10 +9,10 @@ const util = require("util"); // Import the util module
 // });
 
 const db = mysql.createConnection({
-  host: "sql12.freesqldatabase.com",
-  user: "sql12668686",
-  password: "lPFwGM8SVP",
-  database: "sql12668686",
+  host: process.env.HOST,
+  user: process.env.USER,
+  password: process.env.PASSWORD,
+  database: process.env.DATABASE,
 });
 
 db.connect((err) => {
