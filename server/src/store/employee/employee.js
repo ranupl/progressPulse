@@ -13,7 +13,7 @@ function generateRandomId(length) {
 async function createEmployee(employeeData) {
   const randomId = generateRandomId(5);
   const { id, first_name, middle_name, last_name, email, username, password, designation: inputDesignation } = employeeData;
-  let designation; // Create a new variable
+  let designation;
 
   if (inputDesignation === '1') {
     designation = 'employee';
@@ -22,7 +22,7 @@ async function createEmployee(employeeData) {
   } else {
     designation = 'hr';
   }
-  
+
   const query =
     "INSERT INTO employee (id,first_name, middle_name, last_name, email, username, password, designation) VALUES ( ?,?, ?, ?, ?, ?,?, ?)";
 
